@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BotFlow — Enterprise AI Chatbot & Voice Agent Platform</title>
+<title>BartaFlow — Enterprise AI Chatbot & Voice Agent Platform</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -605,6 +605,68 @@ footer{background:var(--navy2);padding:64px 64px 36px;position:relative;z-index:
 .mq-item:hover{border-color:var(--border2);box-shadow:var(--sh)}
 .mq-logo{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
 .mq-name{font-size:13px;font-weight:600;color:var(--text2);letter-spacing:-.2px}
+/* ════════════════════════════════════════
+   FAQ SECTION
+════════════════════════════════════════ */
+.faq-section{padding:100px 64px;background:var(--white);position:relative;z-index:10}
+[data-theme="dark"] .faq-section{background:var(--smoke)}
+.faq-layout{display:grid;grid-template-columns:360px 1fr;gap:80px;align-items:start;margin-top:56px}
+/* Left — brand story card */
+.faq-brand-card{background:var(--navy);border-radius:20px;padding:36px;position:sticky;top:88px}
+.faq-brand-label{font-size:9px;font-family:'DM Mono',monospace;color:var(--gold);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:20px;display:block}
+.faq-brand-name{font-family:'Playfair Display',serif;font-size:38px;font-weight:800;color:var(--white);letter-spacing:-1.5px;line-height:1;margin-bottom:6px}
+.faq-brand-name em{color:var(--gold);font-style:italic}
+.faq-brand-divider{width:40px;height:2px;background:var(--gold);border-radius:2px;margin:16px 0}
+.faq-brand-meaning{display:flex;flex-direction:column;gap:12px;margin-bottom:24px}
+.fbm-row{display:flex;gap:12px;align-items:flex-start}
+.fbm-tag{font-size:9px;font-family:'DM Mono',monospace;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.25);color:var(--gold);padding:4px 9px;border-radius:4px;letter-spacing:1px;flex-shrink:0;margin-top:2px;white-space:nowrap}
+.fbm-text{font-size:13px;color:rgba(255,255,255,.6);line-height:1.6;font-weight:300}
+.fbm-text strong{color:rgba(255,255,255,.9);font-weight:600}
+.faq-brand-origin{font-size:11px;font-family:'DM Mono',monospace;color:rgba(255,255,255,.3);line-height:1.7;padding-top:18px;border-top:1px solid rgba(255,255,255,.08)}
+.faq-brand-origin span{color:var(--gold)}
+/* Right — accordion */
+.faq-list{display:flex;flex-direction:column;gap:0}
+.faq-item{border-bottom:1px solid var(--border);overflow:hidden}
+[data-theme="dark"] .faq-item{border-bottom-color:var(--border)}
+.faq-item:first-child{border-top:1px solid var(--border)}
+[data-theme="dark"] .faq-item:first-child{border-top-color:var(--border)}
+.faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 4px;background:transparent;border:none;cursor:pointer;text-align:left;transition:all .2s}
+.faq-q:hover .faq-q-text{color:var(--navy)}
+[data-theme="dark"] .faq-q:hover .faq-q-text{color:var(--gold)}
+.faq-q-left{display:flex;align-items:center;gap:14px;flex:1;min-width:0}
+.faq-q-icon{width:36px;height:36px;border-radius:9px;background:var(--smoke2);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;transition:all .3s}
+[data-theme="dark"] .faq-q-icon{background:var(--smoke2)}
+.faq-item.open .faq-q-icon{background:var(--navy);transform:scale(1.05)}
+[data-theme="dark"] .faq-item.open .faq-q-icon{background:rgba(201,168,76,.15)}
+.faq-q-text{font-size:15px;font-weight:600;color:var(--text);letter-spacing:-.2px;line-height:1.35;transition:color .2s}
+[data-theme="dark"] .faq-q-text{color:var(--text)}
+.faq-item.open .faq-q-text{color:var(--navy)}
+[data-theme="dark"] .faq-item.open .faq-q-text{color:var(--gold)}
+.faq-chevron{width:28px;height:28px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .35s;color:var(--text3)}
+[data-theme="dark"] .faq-chevron{border-color:var(--border2);color:var(--text3)}
+.faq-item.open .faq-chevron{background:var(--navy);border-color:var(--navy);color:var(--white);transform:rotate(180deg)}
+[data-theme="dark"] .faq-item.open .faq-chevron{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.faq-chevron svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5;transition:stroke .2s}
+.faq-a-wrap{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1),padding .35s ease}
+.faq-item.open .faq-a-wrap{max-height:400px}
+.faq-a{padding:0 4px 20px 50px;font-size:14px;color:var(--text2);line-height:1.8;font-weight:300}
+[data-theme="dark"] .faq-a{color:var(--text2)}
+.faq-a strong{color:var(--navy);font-weight:600}
+[data-theme="dark"] .faq-a strong{color:var(--gold)}
+.faq-a-highlight{display:inline-flex;align-items:center;gap:6px;background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.18);color:#065f46;font-size:12px;font-family:'DM Mono',monospace;padding:5px 12px;border-radius:6px;margin-top:10px;letter-spacing:.3px}
+[data-theme="dark"] .faq-a-highlight{background:rgba(16,185,129,.1);color:#6ee7b7;border-color:rgba(16,185,129,.2)}
+.faq-cta-row{margin-top:36px;padding:24px;background:linear-gradient(135deg,var(--navy),var(--navy3));border-radius:14px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.faq-cta-text{font-size:14px;color:rgba(255,255,255,.7);font-weight:300;line-height:1.5}
+.faq-cta-text strong{color:var(--white);font-weight:600;display:block;font-size:15px;margin-bottom:2px}
+.faq-cta-btn{background:var(--gold);color:var(--navy);padding:11px 22px;border-radius:9px;font-size:13px;font-weight:700;white-space:nowrap;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;flex-shrink:0}
+.faq-cta-btn:hover{background:var(--gold2);transform:translateY(-1px);box-shadow:0 6px 20px rgba(201,168,76,.35)}
+@media(max-width:768px){
+  .faq-section{padding:64px 24px}
+  .faq-layout{grid-template-columns:1fr;gap:40px}
+  .faq-brand-card{position:static}
+  .faq-brand-name{font-size:30px}
+  .faq-a{padding-left:14px}
+}
 </style>
 </head>
 <body>
@@ -613,7 +675,7 @@ footer{background:var(--navy2);padding:64px 64px 36px;position:relative;z-index:
 <div id="preloader">
   <div class="pl-logo">
     <div class="pl-logo-box"><svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.418A9.966 9.966 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg></div>
-    <span class="pl-logo-name">BotFlow</span>
+    <span class="pl-logo-name">BartaFlow</span>
   </div>
   <div class="pl-bar-wrap"><div class="pl-bar"></div></div>
   <div class="pl-text">Loading Platform...</div>
@@ -623,13 +685,14 @@ footer{background:var(--navy2);padding:64px 64px 36px;position:relative;z-index:
 <nav id="nav">
   <a href="#home" class="nav-logo">
     <div class="logo-box"><svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.418A9.966 9.966 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg></div>
-    <span class="logo-name">BotFlow<sup class="logo-v">PRO</sup></span>
+    <span class="logo-name">BartaFlow<sup class="logo-v">PRO</sup></span>
   </a>
   <div class="nav-links">
     <a href="#home">Home</a>
     <a href="#bots">AI Chatbots</a>
     <a href="#voice">Voice Agent</a>
     <a href="#features">Features</a>
+    <a href="#faq">FAQ</a>
     <a href="#cta">Pricing</a>
   </div>
   <div class="nav-right">
@@ -653,6 +716,7 @@ footer{background:var(--navy2);padding:64px 64px 36px;position:relative;z-index:
   <a href="#bots" class="mm-link" onclick="closeMobileMenu()"><span class="mm-link-icon">🤖</span> AI Chatbots</a>
   <a href="#voice" class="mm-link" onclick="closeMobileMenu()"><span class="mm-link-icon">📞</span> Voice Agent</a>
   <a href="#features" class="mm-link" onclick="closeMobileMenu()"><span class="mm-link-icon">⚡</span> Features</a>
+  <a href="#faq" class="mm-link" onclick="closeMobileMenu()"><span class="mm-link-icon">💬</span> FAQ</a>
   <a href="#cta" class="mm-link" onclick="closeMobileMenu()"><span class="mm-link-icon">💰</span> Pricing</a>
   <div class="mm-divider"></div>
   <div class="mm-ctas">
@@ -671,7 +735,7 @@ footer{background:var(--navy2);padding:64px 64px 36px;position:relative;z-index:
   <div class="hero-left">
     <div class="hero-badge"><div class="live-dot"></div>Now Live — 500+ Businesses Automated</div>
     <h1>Automate Your<br>Business <em>24/7</em><br>with AI</h1>
-    <p class="hero-sub">Zero missed leads. Instant replies. Sales on autopilot. BotFlow's AI chatbots and voice agents handle everything — while you sleep.</p>
+    <p class="hero-sub">Zero missed leads. Instant replies. Sales on autopilot. BartaFlow's AI chatbots and voice agents handle everything — while you sleep.</p>
     <div class="hero-bullets">
       <div class="hb"><span class="hb-check">✓</span>Instant AI replies — response time under 2 seconds</div>
       <div class="hb"><span class="hb-check">✓</span>Zero missed leads — 24/7 automated qualification</div>
@@ -700,7 +764,7 @@ footer{background:var(--navy2);padding:64px 64px 36px;position:relative;z-index:
     <div class="hero-chat-float">
       <div class="fc-header">
         <div class="fc-av">BF</div>
-        <div><div class="fc-name">BotFlow AI</div><div class="fc-st">● Online · GPT-4o</div></div>
+        <div><div class="fc-name">BartaFlow AI</div><div class="fc-st">● Online · GPT-4o</div></div>
       </div>
       <div class="fc-msg fc-in">I want to book a Bali trip for 2 people</div>
       <div class="fc-msg fc-out">
@@ -1142,17 +1206,215 @@ footer{background:var(--navy2);padding:64px 64px 36px;position:relative;z-index:
 </section>
 
 <!-- ══════════════════════════════════════
-     SIGN IN / SIGN UP MODAL
+     FAQ SECTION
 ══════════════════════════════════════ -->
+<section class="faq-section" id="faq">
+  <div class="section-label" style="text-align:center">Got Questions?</div>
+  <div class="section-h" style="text-align:center;margin-bottom:0">Everything you need to know<br>about <em style="font-style:italic;color:var(--gold)">BartaFlow</em></div>
+
+  <div class="faq-layout">
+
+    <!-- ── LEFT: Brand Story Card ── -->
+    <div class="faq-brand-card reveal">
+      <span class="faq-brand-label">The Name & The Mission</span>
+      <div class="faq-brand-name"><em>Barta</em>Flow</div>
+      <div class="faq-brand-divider"></div>
+
+      <div class="faq-brand-meaning">
+        <div class="fbm-row">
+          <span class="fbm-tag">BARTA</span>
+          <div class="fbm-text"><strong>বার্তা</strong> — Bengali & Hindi for <strong>"message" or "news"</strong>. It's the heart of every conversation, every inquiry, every sale.</div>
+        </div>
+        <div class="fbm-row">
+          <span class="fbm-tag">FLOW</span>
+          <div class="fbm-text">Seamless, <strong>uninterrupted automation</strong> — leads flow in, replies flow out, revenue flows continuously. 24/7, without pause.</div>
+        </div>
+        <div class="fbm-row">
+          <span class="fbm-tag">TOGETHER</span>
+          <div class="fbm-text"><strong>BartaFlow</strong> means <em>"the flow of meaningful messages"</em> — AI-powered conversations that turn every chat into a business outcome.</div>
+        </div>
+      </div>
+
+      <div class="faq-brand-origin">
+        Rooted in <span>Indian language & culture</span>, built for<br>
+        global enterprise. From Kolkata to the world — <span>বার্তা</span> flows.
+      </div>
+    </div>
+
+    <!-- ── RIGHT: Accordion FAQ ── -->
+    <div class="faq-right">
+      <div class="faq-list" id="faq-list">
+
+        <div class="faq-item" data-index="0">
+          <button class="faq-q" onclick="toggleFaq(0)">
+            <div class="faq-q-left">
+              <div class="faq-q-icon">💡</div>
+              <span class="faq-q-text">What does "BartaFlow" mean and why that name?</span>
+            </div>
+            <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="faq-a-wrap">
+            <div class="faq-a">
+              <strong>BartaFlow</strong> is inspired by the Bengali and Hindi word <strong>"বার্তা" (Barta)</strong>, meaning <em>message</em> or <em>news</em>. Combined with <strong>Flow</strong> — representing seamless, unstoppable automation — the name captures our core promise: <em>making every business message flow intelligently and automatically.</em>
+              <br><br>
+              It's a name rooted in Indian culture, built for a global platform. Every WhatsApp message your customers send is a <em>barta</em> — and BartaFlow makes sure it's answered perfectly, every time.
+              <div class="faq-a-highlight">🌏 বার্তা (Barta) = Message · Flow = Automation · Together = BartaFlow</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-index="1">
+          <button class="faq-q" onclick="toggleFaq(1)">
+            <div class="faq-q-left">
+              <div class="faq-q-icon">🚀</div>
+              <span class="faq-q-text">How quickly can I get my chatbot live?</span>
+            </div>
+            <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="faq-a-wrap">
+            <div class="faq-a">
+              Most clients go live within <strong>48 hours</strong>. After signing up, our onboarding team connects your WhatsApp Business number via Meta's official Cloud API, loads your product/service data into the AI, and runs a test session with you. Day 1: setup. Day 2: live.
+              <div class="faq-a-highlight">⚡ Average onboarding time: 48 hours</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-index="2">
+          <button class="faq-q" onclick="toggleFaq(2)">
+            <div class="faq-q-left">
+              <div class="faq-q-icon">🔒</div>
+              <span class="faq-q-text">Is this the official WhatsApp Business API?</span>
+            </div>
+            <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="faq-a-wrap">
+            <div class="faq-a">
+              Yes — BartaFlow uses <strong>Meta's official WhatsApp Cloud API</strong> exclusively. We never use unofficial or grey-market tools. This means your account is fully compliant, protected from bans, and eligible for the WhatsApp Business verification tick. Your messages are encrypted end-to-end.
+              <div class="faq-a-highlight">✓ Meta Official Partner · 100% Policy Compliant</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-index="3">
+          <button class="faq-q" onclick="toggleFaq(3)">
+            <div class="faq-q-left">
+              <div class="faq-q-icon">🤖</div>
+              <span class="faq-q-text">What AI model powers the chatbot?</span>
+            </div>
+            <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="faq-a-wrap">
+            <div class="faq-a">
+              BartaFlow is powered by <strong>OpenAI's GPT-4o</strong> on Professional and Enterprise plans, and GPT-3.5 Turbo on the Starter plan. The AI is fine-tuned with your business data — products, pricing, FAQs, tone of voice — so it responds as if it were a trained employee of your company, not a generic chatbot.
+              <div class="faq-a-highlight">🧠 GPT-4o · Custom fine-tuning · Context memory up to 20 messages</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-index="4">
+          <button class="faq-q" onclick="toggleFaq(4)">
+            <div class="faq-q-left">
+              <div class="faq-q-icon">💰</div>
+              <span class="faq-q-text">Can I resell BartaFlow to my own clients?</span>
+            </div>
+            <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="faq-a-wrap">
+            <div class="faq-a">
+              Absolutely. Our <strong>Enterprise plan</strong> includes full white-label rights — your logo, your brand colors, your domain. You can onboard unlimited clients and charge them whatever you like. Many of our partners charge <strong>₹999–₹4,999/month</strong> per client, running 50–200 client accounts simultaneously as a profitable SaaS business.
+              <div class="faq-a-highlight">💼 White-label · Unlimited clients · Your pricing · Your brand</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-index="5">
+          <button class="faq-q" onclick="toggleFaq(5)">
+            <div class="faq-q-left">
+              <div class="faq-q-icon">🌍</div>
+              <span class="faq-q-text">Which languages does BartaFlow support?</span>
+            </div>
+            <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="faq-a-wrap">
+            <div class="faq-a">
+              BartaFlow supports <strong>12+ languages</strong> with automatic detection. The AI reads the user's first message, identifies the language, and responds natively — no setup needed. Supported: <strong>English, Hindi, Bengali, Tamil, Telugu, Marathi, Gujarati, Punjabi, Kannada, Malayalam, Odia,</strong> and more.
+              <div class="faq-a-highlight">🗣️ 12+ languages · Auto-detected · Zero manual configuration</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-index="6">
+          <button class="faq-q" onclick="toggleFaq(6)">
+            <div class="faq-q-left">
+              <div class="faq-q-icon">📊</div>
+              <span class="faq-q-text">How do I see the leads and data from my chatbot?</span>
+            </div>
+            <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="faq-a-wrap">
+            <div class="faq-a">
+              Every lead captured by your chatbot — name, email, phone, industry, goal — is stored in your <strong>BartaFlow admin dashboard</strong> in real time. You can search, filter by source, view AI lead scores, export as CSV, copy emails/phones with one click, or open WhatsApp directly from each lead card. Sign in above to see it live.
+              <div class="faq-a-highlight">📋 Real-time capture · CSV export · Direct WhatsApp follow-up</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-index="7">
+          <button class="faq-q" onclick="toggleFaq(7)">
+            <div class="faq-q-left">
+              <div class="faq-q-icon">🛡️</div>
+              <span class="faq-q-text">Is my customer data secure and private?</span>
+            </div>
+            <div class="faq-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+          </button>
+          <div class="faq-a-wrap">
+            <div class="faq-a">
+              Security is our top priority. All data is stored on <strong>AWS servers in India</strong>, encrypted at rest and in transit. We are fully <strong>GDPR compliant</strong> and follow India's DPDP Act guidelines. We never sell your customer data to third parties, and each client's data is fully isolated in its own database partition.
+              <div class="faq-a-highlight">🔐 AES-256 encryption · AWS India · GDPR & DPDP compliant</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /faq-list -->
+
+      <div class="faq-cta-row">
+        <div class="faq-cta-text">
+          <strong>Still have questions?</strong>
+          Our team replies within 2 hours on business days.
+        </div>
+        <button class="faq-cta-btn" onclick="openDemoSched()">Book a Free Call →</button>
+      </div>
+
+    </div><!-- /faq-right -->
+  </div><!-- /faq-layout -->
+</section>
+
+<!-- ══════════════════════════════════════
+     CTA
+══════════════════════════════════════ -->
+<section class="cta-section" id="cta">
+  <div class="cta-inner">
+    <div class="cta-dots"></div>
+    <div class="cta-glow"></div>
+    <div class="section-label">Start Today</div>
+    <div class="section-h" style="color:var(--white);text-align:center;margin-bottom:14px">Ready to automate your<br>business 24/7?</div>
+    <p class="cta-sub">14-day free trial. No credit card. Go live in 48 hours. White-label ready from day one — resell to unlimited clients.</p>
+    <div class="cta-btns">
+      <a href="#" class="btn-gold-lg" onclick="openAuth('signup');return false">Start Free Trial →</a>
+      <a href="#" class="btn-outline-white" onclick="openDemoSched();return false">Schedule a Demo</a>
+    </div>
+    <div class="cta-trust">✓ Meta Official API &nbsp;·&nbsp; ✓ GDPR Compliant &nbsp;·&nbsp; ✓ 99.9% Uptime &nbsp;·&nbsp; ✓ Indian Support Team</div>
+  </div>
+</section>
 <div class="auth-overlay" id="auth-overlay" onclick="handleAuthOverlayClick(event)">
   <div class="auth-box">
     <div class="auth-header">
       <div class="auth-logo">
         <div class="auth-logo-box"><svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.418A9.966 9.966 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg></div>
-        <span class="auth-logo-name">BotFlow</span>
+        <span class="auth-logo-name">BartaFlow</span>
       </div>
       <div class="auth-title" id="auth-title">Welcome back</div>
-      <div class="auth-sub" id="auth-sub">Sign in to your BotFlow dashboard</div>
+      <div class="auth-sub" id="auth-sub">Sign in to your BartaFlow dashboard</div>
       <button class="auth-close-btn" onclick="closeAuth()">✕</button>
     </div>
     <div class="auth-body">
@@ -1231,7 +1493,7 @@ footer{background:var(--navy2);padding:64px 64px 36px;position:relative;z-index:
         </div>
         <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:18px">
           <input type="checkbox" id="agree-terms" style="accent-color:var(--navy);width:14px;height:14px;cursor:pointer;margin-top:2px;flex-shrink:0">
-          <label for="agree-terms" style="font-size:12px;color:var(--text2);cursor:pointer;font-weight:300;line-height:1.5">I agree to BotFlow's <a href="#" style="color:var(--navy);font-weight:600">Terms of Service</a> and <a href="#" style="color:var(--navy);font-weight:600">Privacy Policy</a></label>
+          <label for="agree-terms" style="font-size:12px;color:var(--text2);cursor:pointer;font-weight:300;line-height:1.5">I agree to BartaFlow's <a href="#" style="color:var(--navy);font-weight:600">Terms of Service</a> and <a href="#" style="color:var(--navy);font-weight:600">Privacy Policy</a></label>
         </div>
         <button class="auth-submit-btn" id="signup-btn" onclick="doSignUp()">
           <span id="signup-btn-text">Create Free Account</span>
@@ -1244,7 +1506,7 @@ footer{background:var(--navy2);padding:64px 64px 36px;position:relative;z-index:
       <div class="auth-panel" id="panel-success">
         <div class="auth-success">
           <div class="auth-success-icon">✓</div>
-          <div class="auth-success-title" id="auth-success-title">Welcome to BotFlow!</div>
+          <div class="auth-success-title" id="auth-success-title">Welcome to BartaFlow!</div>
           <div class="auth-success-sub" id="auth-success-sub">Redirecting you to your dashboard...</div>
         </div>
       </div>
@@ -1275,10 +1537,10 @@ footer{background:var(--navy2);padding:64px 64px 36px;position:relative;z-index:
     <div class="ds-left">
       <div class="ds-brand">
         <div class="ds-brand-box"><svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.418A9.966 9.966 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg></div>
-        <span class="ds-brand-name">BotFlow</span>
+        <span class="ds-brand-name">BartaFlow</span>
       </div>
       <div class="ds-meeting-title">30-Minute Product Demo</div>
-      <div class="ds-meeting-sub">See BotFlow in action. Our team will walk you through setup, features, and answer every question.</div>
+      <div class="ds-meeting-sub">See BartaFlow in action. Our team will walk you through setup, features, and answer every question.</div>
       <div class="ds-details">
         <div class="ds-detail">
           <div class="ds-det-icon">🕐</div>
@@ -1313,7 +1575,7 @@ footer{background:var(--navy2);padding:64px 64px 36px;position:relative;z-index:
         <div class="ds-av">RK</div>
         <div class="ds-av" style="background:rgba(201,168,76,.3);color:var(--gold)">PV</div>
         <div class="ds-av" style="background:rgba(59,130,246,.3);color:#93c5fd">AM</div>
-        <span class="ds-av-text">Meet the BotFlow team</span>
+        <span class="ds-av-text">Meet the BartaFlow team</span>
       </div>
     </div>
 
@@ -1426,7 +1688,7 @@ footer{background:var(--navy2);padding:64px 64px 36px;position:relative;z-index:
         <div class="ds-success">
           <div class="ds-success-icon">✓</div>
           <div class="ds-success-title">Demo Booked!</div>
-          <div class="ds-success-sub">Your 30-minute BotFlow demo is confirmed. Check your inbox for the calendar invite and Google Meet link.</div>
+          <div class="ds-success-sub">Your 30-minute BartaFlow demo is confirmed. Check your inbox for the calendar invite and Google Meet link.</div>
           <div class="ds-success-detail" id="ds-success-detail">
             📅 Loading your booking details...
           </div>
@@ -1480,7 +1742,7 @@ footer{background:var(--navy2);padding:64px 64px 36px;position:relative;z-index:
     <div class="fch-header">
       <div class="fch-av">BF</div>
       <div class="fch-info">
-        <div class="fch-name">BotFlow Support</div>
+        <div class="fch-name">BartaFlow Support</div>
         <div class="fch-status"><span class="fch-online-dot"></span>Online — replies in seconds</div>
       </div>
       <button class="fch-close-x" onclick="toggleFloatChat()" aria-label="Close chat">✕</button>
@@ -1488,7 +1750,7 @@ footer{background:var(--navy2);padding:64px 64px 36px;position:relative;z-index:
     <div class="fch-body" id="fch-body">
       <div class="fch-msg fch-msg-in">
         <span class="fch-msg-ai-tag">BOTFLOW AI</span>
-        👋 Hi there! I'm BotFlow's AI assistant. How can I help you today?
+        👋 Hi there! I'm BartaFlow's AI assistant. How can I help you today?
       </div>
       <div class="fch-msg fch-msg-in">
         <span class="fch-msg-ai-tag">BOTFLOW AI</span>
@@ -1529,7 +1791,7 @@ footer{background:var(--navy2);padding:64px 64px 36px;position:relative;z-index:
     <div>
       <a href="#" class="nav-logo" style="text-decoration:none">
         <div class="logo-box"><svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.418A9.966 9.966 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg></div>
-        <span class="logo-name" style="color:rgba(255,255,255,.8)">BotFlow</span>
+        <span class="logo-name" style="color:rgba(255,255,255,.8)">BartaFlow</span>
       </a>
       <div class="footer-desc">Enterprise AI chatbot & voice agent platform. Automate sales, bookings, and support — then resell as your white-label SaaS.</div>
     </div>
@@ -1547,7 +1809,7 @@ footer{background:var(--navy2);padding:64px 64px 36px;position:relative;z-index:
     </div>
   </div>
   <div class="footer-bottom">
-    <span class="footer-copy">© 2025 BotFlow Technologies Pvt. Ltd. All rights reserved.</span>
+    <span class="footer-copy">© 2025 BartaFlow Technologies Pvt. Ltd. All rights reserved.</span>
     <div class="footer-sys"><span class="sys-dot"></span>All systems operational</div>
   </div>
 </footer>
@@ -1781,8 +2043,8 @@ function closeModalDirect(){ document.getElementById('modal').classList.remove('
 // AUTH MODAL
 // ════════════════════════════════════════
 const DEMO_USERS = [
-  {email:'demo@botflow.in', password:'botflow123', name:'Demo User'},
-  {email:'admin@botflow.in', password:'admin123', name:'Admin'},
+  {email:'demo@bartaflow.in', password:'bartaflow123', name:'Demo User'},
+  {email:'admin@bartaflow.in', password:'admin123', name:'Admin'},
   {email:'test@test.com', password:'test123', name:'Test User'},
 ];
 function openAuth(tab='signin'){
@@ -1804,7 +2066,7 @@ function switchAuthTab(tab){
   const panelEl = document.getElementById('panel-'+tab);
   if(tabEl) tabEl.classList.add('active');
   if(panelEl) panelEl.classList.add('active');
-  if(tab==='signin'){ document.getElementById('auth-title').textContent='Welcome back'; document.getElementById('auth-sub').textContent='Sign in to your BotFlow dashboard'; }
+  if(tab==='signin'){ document.getElementById('auth-title').textContent='Welcome back'; document.getElementById('auth-sub').textContent='Sign in to your BartaFlow dashboard'; }
   else { document.getElementById('auth-title').textContent='Create your account'; document.getElementById('auth-sub').textContent='Start your 14-day free trial today'; }
 }
 function togglePw(inputId,btn){ const inp=document.getElementById(inputId); inp.type=inp.type==='password'?'text':'password'; btn.textContent=inp.type==='password'?'👁':'🙈'; }
@@ -1834,7 +2096,7 @@ function doSignIn(){
     const user=DEMO_USERS.find(u=>u.email===email&&u.password===pwd);
     setAuthLoading('signin-btn','signin-btn-text',false,'Sign In to Dashboard');
     if(user){ showAuthSuccess('Welcome back, '+user.name+'!','You are signed in. Redirecting to your dashboard...'); }
-    else { errEl.textContent='Incorrect credentials. Try: demo@botflow.in / botflow123'; errEl.classList.add('show'); document.getElementById('si-password').value=''; }
+    else { errEl.textContent='Incorrect credentials. Try: demo@bartaflow.in / bartaflow123'; errEl.classList.add('show'); document.getElementById('si-password').value=''; }
   },1400);
 }
 function doSignUp(){
@@ -1857,7 +2119,7 @@ function doSignUp(){
     showAuthSuccess('Welcome, '+fname+'!','Your 14-day free trial is active. A welcome email has been sent to '+email);
   },1600);
 }
-function socialLogin(provider){ setAuthLoading('signin-btn','signin-btn-text',true,'Sign In'); setTimeout(()=>{ setAuthLoading('signin-btn','signin-btn-text',false,'Sign In to Dashboard'); showAuthSuccess('Signed in via '+provider+'!','Welcome to BotFlow. Redirecting to your dashboard...'); },1200); }
+function socialLogin(provider){ setAuthLoading('signin-btn','signin-btn-text',true,'Sign In'); setTimeout(()=>{ setAuthLoading('signin-btn','signin-btn-text',false,'Sign In to Dashboard'); showAuthSuccess('Signed in via '+provider+'!','Welcome to BartaFlow. Redirecting to your dashboard...'); },1200); }
 function showForgotPassword(e){ e.preventDefault(); document.querySelectorAll('.auth-panel').forEach(p=>p.classList.remove('active')); document.querySelectorAll('.auth-tab').forEach(t=>t.classList.remove('active')); document.getElementById('panel-forgot').classList.add('active'); }
 function doForgotPassword(){ const email=document.getElementById('fp-email').value.trim(); if(!email){return;} showAuthSuccess('Reset link sent!','Check your inbox at '+email+' within 2 minutes.'); }
 // Password strength
@@ -1980,7 +2242,7 @@ function confirmDemo(){
       demoDate: dateStr,
       demoTime: dsSelectedTime+' IST'
     });
-    document.getElementById('ds-success-detail').innerHTML='📅 '+dateStr+'\n🕐 '+dsSelectedTime+' IST · 30 minutes\n📧 Invite sent to: '+email+'\n🔗 Google Meet link included\n👤 Host: Rahul · BotFlow Team';
+    document.getElementById('ds-success-detail').innerHTML='📅 '+dateStr+'\n🕐 '+dsSelectedTime+' IST · 30 minutes\n📧 Invite sent to: '+email+'\n🔗 Google Meet link included\n👤 Host: Rahul · BartaFlow Team';
     document.querySelectorAll('.ds-panel').forEach(p=>p.classList.remove('active'));
     document.getElementById('ds-panel-success').classList.add('active');
     const si=document.querySelector('.ds-step-indicator'); if(si) si.style.display='none';
@@ -2117,7 +2379,7 @@ function copyPhone(phone){
 function whatsappLead(phone, name){
   if(!phone){ showToast('⚠️','No phone number for '+name); return; }
   const cleaned = phone.replace(/\D/g,'');
-  const msg = encodeURIComponent('Hi '+name+', this is the BotFlow team following up on your interest. How can we help?');
+  const msg = encodeURIComponent('Hi '+name+', this is the BartaFlow team following up on your interest. How can we help?');
   window.open('https://wa.me/'+cleaned+'?text='+msg,'_blank');
 }
 function deleteLead(id){
@@ -2135,7 +2397,7 @@ function exportLeadsCSV(){
   const csv = [headers.join(','),...rows].join('\n');
   const blob = new Blob([csv],{type:'text/csv'});
   const url = URL.createObjectURL(blob);
-  const a = document.createElement('a'); a.href=url; a.download='botflow-leads-'+new Date().toISOString().slice(0,10)+'.csv'; a.click();
+  const a = document.createElement('a'); a.href=url; a.download='bartaflow-leads-'+new Date().toISOString().slice(0,10)+'.csv'; a.click();
   URL.revokeObjectURL(url);
   showToast('⬇','Exported '+LEADS.length+' leads as CSV');
 }
@@ -2207,8 +2469,70 @@ document.querySelectorAll('.bot-card').forEach((card, i) => {
 document.addEventListener('keydown', e=>{ if(e.key==='Escape'){closeAuth();closeDemoSched();closeModalDirect();closeLeadsPanel();} });
 
 // ════════════════════════════════════════
-// FEATURE 1 · PRELOADER
+// FAQ ACCORDION
 // ════════════════════════════════════════
+(function(){
+  let openIndex = null;
+
+  window.toggleFaq = function(index){
+    const items = document.querySelectorAll('.faq-item');
+    items.forEach((item, i) => {
+      const isTarget = i === index;
+      const isCurrentlyOpen = item.classList.contains('open');
+      if(isTarget){
+        if(isCurrentlyOpen){
+          // Close it
+          item.classList.remove('open');
+          openIndex = null;
+        } else {
+          // Close any other open item first
+          items.forEach(it => it.classList.remove('open'));
+          item.classList.add('open');
+          openIndex = index;
+          // Smooth scroll into view if needed
+          setTimeout(() => {
+            const rect = item.getBoundingClientRect();
+            if(rect.top < 80 || rect.bottom > window.innerHeight - 40){
+              item.scrollIntoView({behavior:'smooth', block:'nearest'});
+            }
+          }, 80);
+        }
+      }
+    });
+  };
+
+  // Open first item by default after a short delay for elegance
+  setTimeout(() => {
+    const first = document.querySelector('.faq-item[data-index="0"]');
+    if(first && !first.classList.contains('open')){
+      first.classList.add('open');
+      openIndex = 0;
+    }
+  }, 800);
+
+  // Scroll-reveal for FAQ items with stagger
+  const faqObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        const items = e.target.querySelectorAll('.faq-item');
+        items.forEach((item, i) => {
+          item.style.opacity = '0';
+          item.style.transform = 'translateY(16px)';
+          item.style.transition = `opacity .5s ease ${i * 0.06}s, transform .5s ease ${i * 0.06}s`;
+          setTimeout(() => {
+            item.style.opacity = '1';
+            item.style.transform = 'translateY(0)';
+          }, i * 60 + 100);
+        });
+        faqObserver.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.1});
+
+  const faqList = document.getElementById('faq-list');
+  if(faqList) faqObserver.observe(faqList);
+})();
+
 (function(){
   const pl = document.getElementById('preloader');
   if(!pl) return;
@@ -2280,7 +2604,7 @@ document.addEventListener('click', e => {
   const AI_REPLIES = {
     "What's the pricing?": "We have 3 plans: Starter ₹999/mo, Professional ₹2,499/mo, and Enterprise ₹4,999/mo. All include a 14-day free trial! Want me to open the pricing section?",
     "Book a demo": "I'll open our demo scheduler for you right now! You can pick a date and time that works. 📅",
-    "How does it work?": "BotFlow connects to your WhatsApp Business number via Meta's official API. You configure the AI with your products/services, and it handles all customer conversations 24/7 — leads, bookings, sales, support. Setup takes 48 hours!",
+    "How does it work?": "BartaFlow connects to your WhatsApp Business number via Meta's official API. You configure the AI with your products/services, and it handles all customer conversations 24/7 — leads, bookings, sales, support. Setup takes 48 hours!",
   };
   const DEFAULT_REPLIES = [
     "Great question! Our team would love to help. Would you like to schedule a quick 30-min demo?",
