@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BartaFlow — Enterprise AI Chatbot & Voice Agent Platform</title>
+<!-- CRITICAL: Restore scroll immediately — prevents stuck page if previous session left overflow:hidden -->
+<script>document.documentElement.style.overflow='';document.addEventListener('DOMContentLoaded',function(){document.body.style.overflow='';document.documentElement.style.overflow='';})</script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -16,7 +18,7 @@
   --green:#10b981;--blue:#3b82f6;--rose:#f43f5e;--amber:#f59e0b;--purple:#8b5cf6;--teal:#06b6d4;
   --sh:0 4px 24px rgba(10,22,40,0.09);--sh-lg:0 16px 56px rgba(10,22,40,0.14);
 }
-html{scroll-behavior:smooth}
+html{scroll-behavior:auto}/* smooth scroll applied via JS only for anchor clicks, not on reload */
 body{background:var(--white);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
 
 /* ── NAV ─────────────────────────────── */
@@ -333,7 +335,7 @@ nav.scrolled{box-shadow:var(--sh)}
 .password-wrap .form-input{padding-right:44px}
 .pw-toggle{position:absolute;right:13px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text3);font-size:16px;padding:0;transition:color .2s}
 .pw-toggle:hover{color:var(--navy)}
-.forgot-link{margin-left:auto;font-size:11px;color:var(--gold);text-decoration:none;font-weight:500;transition:color .2s;margin-top:-4px;display:inline-block;margin-bottom:4px}
+.forgot-link{float:right;font-size:11px;color:var(--gold);text-decoration:none;font-weight:500;transition:color .2s;margin-top:-4px;display:inline-block;margin-bottom:4px}
 .forgot-link:hover{color:#92660a}
 .auth-submit-btn{width:100%;padding:13px;background:var(--navy);color:var(--white);border:none;border-radius:9px;font-size:15px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .25s;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:8px}
 .auth-submit-btn:hover{background:var(--navy3);box-shadow:0 6px 24px rgba(10,22,40,.25);transform:translateY(-1px)}
@@ -667,6 +669,404 @@ footer{background:var(--navy2);padding:64px 64px 36px;position:relative;z-index:
   .faq-brand-name{font-size:30px}
   .faq-a{padding-left:14px}
 }
+/* ════════════════════════════════════════
+   UPGRADE v2 · FORM INLINE VALIDATION
+════════════════════════════════════════ */
+/* Theme transition ONLY fires when user manually toggles — never on page load */
+.theme-ready *{transition:background-color .28s ease,color .28s ease,border-color .28s ease}
+/* These animations must always be instant */
+.pl-bar,.wbar,.fch-typing-dot,.td,.live-dot,.sys-dot,.va-bar,.pw-strength-fill{transition:none!important}
+
+.form-label{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--text);margin-bottom:7px;letter-spacing:.1px}
+.gmail-badge{font-size:9px;font-family:'DM Mono',monospace;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);color:#1d4ed8;padding:2px 7px;border-radius:3px;letter-spacing:.3px;font-weight:500;text-transform:uppercase}
+[data-theme="dark"] .gmail-badge{background:rgba(59,130,246,.15);color:#93c5fd;border-color:rgba(59,130,246,.3)}
+.field-hint{font-size:11px;margin-top:5px;min-height:16px;line-height:1.4;transition:color .2s}
+.field-hint.ok{color:var(--green)}
+.field-hint.err{color:var(--rose)}
+.field-hint.neutral{color:var(--text3)}
+.field-status-icon{position:absolute;right:13px;top:50%;transform:translateY(-50%);font-size:14px;pointer-events:none;transition:opacity .2s}
+.form-input.valid{border-color:var(--green)!important;background:rgba(16,185,129,.03)}
+.form-input.invalid{border-color:var(--rose)!important;background:rgba(244,63,94,.03)}
+/* Password strength bar */
+.pw-strength-bar{height:3px;background:var(--border);border-radius:2px;overflow:hidden;margin-top:6px}
+.pw-strength-fill{height:100%;border-radius:2px;width:0;transition:width .4s ease,background .4s ease}
+/* Forgot back button */
+.fp-back-btn{width:100%;padding:11px;background:transparent;color:var(--text2);border:1px solid var(--border);border-radius:9px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.fp-back-btn:hover{border-color:var(--border2);color:var(--navy)}
+[data-theme="dark"] .fp-back-btn{color:var(--text2);border-color:var(--border2)}
+[data-theme="dark"] .fp-back-btn:hover{color:var(--text)}
+/* OTP boxes */
+.otp-row{display:flex;gap:8px;margin-bottom:12px}
+.otp-box{flex:1;height:48px;border:1.5px solid var(--border);border-radius:9px;text-align:center;font-size:20px;font-family:'DM Mono',monospace;font-weight:700;color:var(--navy);background:var(--white);outline:none;transition:all .2s;caret-color:transparent}
+.otp-box:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(10,22,40,.07)}
+.otp-box.filled{border-color:var(--green);background:rgba(16,185,129,.04);color:var(--green)}
+[data-theme="dark"] .otp-box{background:var(--smoke2);color:var(--text);border-color:var(--border2)}
+[data-theme="dark"] .otp-box:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.1)}
+/* Loading spinner */
+.spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:var(--white);border-radius:50%;animation:spin .7s linear infinite;display:inline-block;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spinner-dark{border-color:rgba(10,22,40,.2);border-top-color:var(--navy)}
+
+/* ════════════════════════════════════════
+   UPGRADE v2 · DARK MODE — COMPREHENSIVE FIXES
+════════════════════════════════════════ */
+/* Global text on dark */
+[data-theme="dark"] .section-h{color:#e8ecf4}
+[data-theme="dark"] .section-sub{color:#8b9ab8}
+[data-theme="dark"] .section-label{color:var(--gold)}
+[data-theme="dark"] .reveal .section-h,[data-theme="dark"] .section-h{color:#e8ecf4}
+/* Nav */
+[data-theme="dark"] .logo-name{color:#e8ecf4}
+[data-theme="dark"] .nav-links a{color:#8b9ab8}
+[data-theme="dark"] .nav-links a:hover{color:#e8ecf4}
+[data-theme="dark"] .btn-ghost{color:#e8ecf4;border-color:var(--border2);background:transparent}
+[data-theme="dark"] .btn-ghost:hover{border-color:#8b9ab8;background:var(--smoke2)}
+/* Bot cards */
+[data-theme="dark"] .bot-name{color:#e8ecf4}
+[data-theme="dark"] .bf{color:#8b9ab8}
+[data-theme="dark"] .bot-demo-btn{color:#8b9ab8;border-color:var(--border2);background:transparent}
+[data-theme="dark"] .bot-demo-btn:hover{background:var(--navy);color:var(--white);border-color:var(--navy)}
+/* Features */
+[data-theme="dark"] .feat-title{color:#e8ecf4}
+[data-theme="dark"] .feat-desc{color:#8b9ab8}
+[data-theme="dark"] .feat-num{color:#4a5878}
+[data-theme="dark"] .feat-icon-wrap{background:#1e2a40}
+[data-theme="dark"] .ma-label{color:#4a5478}
+[data-theme="dark"] .ma-track{background:#253660}
+[data-theme="dark"] .ma-pct{color:#8b9ab8}
+[data-theme="dark"] .lang-pill{opacity:.85}
+[data-theme="dark"] .crm-step{background:#1e2a40;border-color:var(--border2);color:#8b9ab8}
+/* Industries */
+[data-theme="dark"] .ind-name{color:#e8ecf4}
+[data-theme="dark"] .ind-desc{color:#8b9ab8}
+[data-theme="dark"] .ind-feat{color:#4a5878}
+[data-theme="dark"] .ind-price{color:#4a5878;border-top-color:var(--border)}
+[data-theme="dark"] .ind-price strong{color:#e8ecf4}
+/* How it works */
+[data-theme="dark"] .step-title{color:#e8ecf4}
+[data-theme="dark"] .step-desc{color:#8b9ab8}
+[data-theme="dark"] .step-n{color:#4a5878}
+[data-theme="dark"] .dashboard-mock .dm-mv{color:#e8ecf4}
+[data-theme="dark"] .dashboard-mock .dm-ml{color:#4a5878!important}
+[data-theme="dark"] .dm-bar-label{color:#4a5878}
+[data-theme="dark"] .dm-bar-pct{color:#8b9ab8}
+[data-theme="dark"] .dm-title{color:rgba(255,255,255,.4)}
+/* Pricing */
+[data-theme="dark"] .price-tier{color:#8b9ab8}
+[data-theme="dark"] .price-amt{color:#e8ecf4}
+[data-theme="dark"] .price-per{color:#8b9ab8}
+[data-theme="dark"] .price-setup{color:#4a5878;border-bottom-color:var(--border)}
+[data-theme="dark"] .price-card.featured .price-tier{color:rgba(255,255,255,.5)!important}
+[data-theme="dark"] .pf{color:#8b9ab8}
+[data-theme="dark"] .pf.no{color:#4a5478}
+[data-theme="dark"] .price-btn{color:#e8ecf4;border-color:var(--border2);background:transparent}
+[data-theme="dark"] .price-btn:hover{border-color:#e8ecf4}
+/* Testimonials */
+[data-theme="dark"] .test-quote{color:#e8ecf4}
+[data-theme="dark"] .test-name{color:#e8ecf4}
+[data-theme="dark"] .test-role{color:#4a5878}
+[data-theme="dark"] .test-author{border-top-color:var(--border)}
+/* Auth modal */
+[data-theme="dark"] .auth-box{background:#111827}
+[data-theme="dark"] .auth-body{background:#111827}
+[data-theme="dark"] .form-label{color:#e8ecf4}
+[data-theme="dark"] .form-input{background:#1a2235;border-color:var(--border2);color:#e8ecf4}
+[data-theme="dark"] .form-input::placeholder{color:#4a5878}
+[data-theme="dark"] .form-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.1)}
+[data-theme="dark"] .form-input.valid{border-color:var(--green)!important;background:rgba(16,185,129,.06)}
+[data-theme="dark"] .form-input.invalid{border-color:var(--rose)!important;background:rgba(244,63,94,.06)}
+[data-theme="dark"] .auth-tab{color:#8b9ab8}
+[data-theme="dark"] .auth-tab.active{background:#253660;color:#e8ecf4}
+[data-theme="dark"] .auth-divider{color:#4a5878}
+[data-theme="dark"] .auth-divider::before,[data-theme="dark"] .auth-divider::after{background:var(--border2)}
+[data-theme="dark"] .social-btn{background:#1a2235;border-color:var(--border2);color:#e8ecf4}
+[data-theme="dark"] .social-btn:hover{background:#1e2a40;border-color:var(--border)}
+[data-theme="dark"] .auth-footer-note{color:#4a5878}
+[data-theme="dark"] .auth-footer-note a{color:var(--gold)}
+[data-theme="dark"] .forgot-link{color:var(--gold)}
+[data-theme="dark"] .pw-strength-bar{background:#1e2a40}
+[data-theme="dark"] .field-hint.neutral{color:#4a5878}
+[data-theme="dark"] .fp-step-title{color:#e8ecf4}
+[data-theme="dark"] .auth-success-title{color:#e8ecf4}
+[data-theme="dark"] .auth-success-sub{color:#8b9ab8}
+[data-theme="dark"] #panel-forgot div[style*="font-family"]{color:#e8ecf4!important}
+[data-theme="dark"] #panel-forgot div[style*="color:var(--text3)"]{color:#4a5878!important}
+/* Demo scheduler */
+[data-theme="dark"] .ds-right{background:#111827}
+[data-theme="dark"] .ds-panel-title{color:#e8ecf4}
+[data-theme="dark"] .ds-panel-sub{color:#4a5878}
+[data-theme="dark"] .ds-step-indicator .ds-step{border-color:var(--border2);color:#4a5878}
+[data-theme="dark"] .ds-step-line{background:var(--border)}
+[data-theme="dark"] .time-slot{background:#1a2235;border-color:var(--border2);color:#8b9ab8}
+[data-theme="dark"] .time-slot:hover:not(.unavailable){border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.08)}
+[data-theme="dark"] .time-slot.selected{background:var(--navy3);border-color:var(--gold);color:var(--gold)}
+[data-theme="dark"] .cal-month{color:#e8ecf4}
+[data-theme="dark"] .cal-nav-btn{background:#1a2235;border-color:var(--border2);color:#8b9ab8}
+[data-theme="dark"] .cal-day{color:#8b9ab8}
+[data-theme="dark"] .cal-day:hover:not(.past):not(.empty){background:#1e2a40;color:#e8ecf4}
+[data-theme="dark"] .cal-day.today{color:var(--gold)}
+[data-theme="dark"] .confirm-card{background:#1e2a40;border-color:var(--border)}
+[data-theme="dark"] .confirm-label{color:#4a5878}
+[data-theme="dark"] .confirm-val{color:#e8ecf4}
+[data-theme="dark"] .confirm-row{border-bottom-color:var(--border)}
+[data-theme="dark"] .ds-back-btn{color:#8b9ab8;border-color:var(--border2);background:transparent}
+[data-theme="dark"] .ds-back-btn:hover{color:#e8ecf4;border-color:var(--border)}
+[data-theme="dark"] .ds-success-title{color:#e8ecf4}
+[data-theme="dark"] .ds-success-sub{color:#8b9ab8}
+[data-theme="dark"] .ds-success-detail{color:#6ee7b7;background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.2)}
+/* FAQ dark */
+[data-theme="dark"] .faq-q-text{color:#e8ecf4}
+[data-theme="dark"] .faq-q:hover .faq-q-text{color:var(--gold)}
+[data-theme="dark"] .faq-item.open .faq-q-text{color:var(--gold)}
+[data-theme="dark"] .faq-item{border-bottom-color:var(--border)}
+[data-theme="dark"] .faq-item:first-child{border-top-color:var(--border)}
+[data-theme="dark"] .faq-a{color:#8b9ab8}
+[data-theme="dark"] .faq-a strong{color:var(--gold)}
+[data-theme="dark"] .faq-q-icon{background:#1e2a40}
+[data-theme="dark"] .faq-item.open .faq-q-icon{background:rgba(201,168,76,.15)}
+[data-theme="dark"] .faq-chevron{border-color:var(--border2);color:#4a5878}
+[data-theme="dark"] .faq-item.open .faq-chevron{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+[data-theme="dark"] .faq-a-highlight{background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.2);color:#6ee7b7}
+[data-theme="dark"] .faq-cta-row{background:linear-gradient(135deg,#0f2040,#162a52)}
+[data-theme="dark"] .faq-cta-text{color:rgba(255,255,255,.6)}
+[data-theme="dark"] .faq-cta-text strong{color:var(--white)}
+/* Leads panel */
+[data-theme="dark"] .leads-panel{background:#111827}
+[data-theme="dark"] .lp-toolbar{background:#111827;border-bottom-color:var(--border)}
+[data-theme="dark"] .lp-search{background:#1a2235;border-color:var(--border2);color:#e8ecf4}
+[data-theme="dark"] .lp-search::placeholder{color:#4a5878}
+[data-theme="dark"] .lp-filter-sel{background:#1a2235;border-color:var(--border2);color:#e8ecf4}
+[data-theme="dark"] .lead-name{color:#e8ecf4}
+[data-theme="dark"] .lead-email{color:#4a5878}
+[data-theme="dark"] .lead-meta-label{color:#4a5878}
+[data-theme="dark"] .lead-meta-val{color:#8b9ab8}
+[data-theme="dark"] .lead-act-btn{color:#8b9ab8;border-color:var(--border2);background:transparent}
+[data-theme="dark"] .lead-act-btn:hover{border-color:var(--gold);color:var(--gold);background:transparent}
+[data-theme="dark"] .lead-act-btn.primary{background:var(--navy3);color:#e8ecf4;border-color:var(--navy3)}
+/* Float chat dark */
+[data-theme="dark"] .fch-msg-in{background:#1a2235;border-color:var(--border);color:#e8ecf4}
+[data-theme="dark"] .fch-quick-replies{background:#1a2235;border-top-color:var(--border)}
+[data-theme="dark"] .fch-qr{background:#1e2a40;border-color:var(--border2);color:#8b9ab8}
+[data-theme="dark"] .fch-qr:hover{border-color:var(--gold);color:var(--gold);background:transparent}
+[data-theme="dark"] .fch-input-row{background:#1a2235;border-top-color:var(--border)}
+[data-theme="dark"] .fch-input{color:#e8ecf4}
+[data-theme="dark"] .fch-input::placeholder{color:#4a5878}
+/* Marquee dark */
+[data-theme="dark"] .mq-item{background:var(--smoke2);border-color:var(--border)}
+[data-theme="dark"] .mq-name{color:#8b9ab8}
+/* Mobile menu dark */
+[data-theme="dark"] .mm-link{color:#8b9ab8}
+[data-theme="dark"] .mm-link:hover{background:var(--smoke2);color:var(--gold)}
+[data-theme="dark"] .mm-divider{background:var(--border)}
+[data-theme="dark"] .mm-btn-ghost{color:#e8ecf4;border-color:var(--border2);background:transparent}
+[data-theme="dark"] .mm-btn-ghost:hover{border-color:#e8ecf4}
+
+/* ════════════════════════════════════════
+   UPGRADE v2 · DATA.CSV VIEWER MODAL
+════════════════════════════════════════ */
+.csv-overlay{position:fixed;inset:0;background:rgba(10,22,40,.8);backdrop-filter:blur(12px);z-index:3000;display:none;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto}
+.csv-overlay.open{display:flex;animation:fadeIn .2s ease}
+.csv-modal{background:var(--white);border-radius:20px;width:100%;max-width:900px;margin:auto;overflow:hidden;box-shadow:0 40px 100px rgba(10,22,40,.35);animation:slideUp .3s ease}
+[data-theme="dark"] .csv-modal{background:#111827}
+.csv-header{background:var(--navy);padding:20px 24px;display:flex;align-items:center;justify-content:space-between}
+.csv-title-group{display:flex;align-items:center;gap:12px}
+.csv-icon{width:36px;height:36px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.csv-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--white)}
+.csv-subtitle{font-size:10px;font-family:'DM Mono',monospace;color:rgba(255,255,255,.4);margin-top:1px}
+.csv-close{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.08);border:none;cursor:pointer;color:rgba(255,255,255,.7);font-size:14px;display:flex;align-items:center;justify-content:center}
+.csv-close:hover{background:rgba(255,255,255,.18)}
+.csv-toolbar{padding:14px 20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);background:var(--smoke);flex-wrap:wrap}
+[data-theme="dark"] .csv-toolbar{background:var(--smoke2);border-bottom-color:var(--border)}
+.csv-search-box{flex:1;min-width:160px;border:1px solid var(--border);border-radius:7px;padding:8px 12px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);background:var(--white);outline:none;transition:border-color .2s}
+.csv-search-box:focus{border-color:var(--navy)}
+[data-theme="dark"] .csv-search-box{background:#1a2235;border-color:var(--border2);color:#e8ecf4}
+.csv-info-pill{font-size:10px;font-family:'DM Mono',monospace;color:var(--text3);background:var(--smoke2);border:1px solid var(--border);padding:5px 12px;border-radius:20px;white-space:nowrap}
+[data-theme="dark"] .csv-info-pill{background:#1e2a40;border-color:var(--border2);color:#4a5878}
+.csv-export-btn{padding:8px 14px;background:var(--navy);color:var(--white);border:none;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:5px;transition:background .2s;white-space:nowrap}
+.csv-export-btn:hover{background:var(--navy3)}
+.csv-body{padding:0;max-height:420px;overflow:auto}
+.csv-body::-webkit-scrollbar{width:4px;height:4px}.csv-body::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+.csv-table{width:100%;border-collapse:collapse;font-size:13px}
+.csv-table th{background:var(--smoke2);padding:11px 14px;text-align:left;font-size:10px;font-family:'DM Mono',monospace;color:var(--text3);letter-spacing:.8px;text-transform:uppercase;border-bottom:2px solid var(--border);position:sticky;top:0;cursor:pointer;white-space:nowrap;user-select:none;transition:background .2s}
+.csv-table th:hover{background:var(--border)}
+[data-theme="dark"] .csv-table th{background:#1e2a40;color:#4a5878;border-bottom-color:var(--border2)}
+[data-theme="dark"] .csv-table th:hover{background:#253660}
+.csv-table th .sort-arrow{margin-left:4px;opacity:.4;font-size:10px}
+.csv-table th.sorted .sort-arrow{opacity:1;color:var(--gold)}
+.csv-table td{padding:11px 14px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:middle;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+[data-theme="dark"] .csv-table td{border-bottom-color:var(--border);color:#8b9ab8}
+.csv-table tr:hover td{background:var(--smoke)}
+[data-theme="dark"] .csv-table tr:hover td{background:#1a2235}
+.csv-table tr:last-child td{border-bottom:none}
+.csv-empty{text-align:center;padding:48px 20px;color:var(--text3)}
+.csv-empty-icon{font-size:36px;margin-bottom:10px}
+.csv-error-box{margin:16px 20px;background:rgba(244,63,94,.06);border:1px solid rgba(244,63,94,.2);border-radius:10px;padding:14px 16px;font-size:13px;color:#e11d48;display:flex;align-items:flex-start;gap:10px}
+[data-theme="dark"] .csv-error-box{background:rgba(244,63,94,.1);color:#fca5a5}
+.csv-upload-area{margin:20px;border:2px dashed var(--border2);border-radius:14px;padding:36px;text-align:center;cursor:pointer;transition:all .2s}
+.csv-upload-area:hover,.csv-upload-area.drag{border-color:var(--navy);background:var(--smoke)}
+[data-theme="dark"] .csv-upload-area{border-color:var(--border2)}
+[data-theme="dark"] .csv-upload-area:hover{border-color:var(--gold);background:rgba(201,168,76,.05)}
+.csv-upload-icon{font-size:36px;margin-bottom:12px}
+.csv-upload-title{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:6px}
+[data-theme="dark"] .csv-upload-title{color:#e8ecf4}
+.csv-upload-sub{font-size:12px;color:var(--text3);margin-bottom:16px;line-height:1.6}
+.csv-upload-btn{background:var(--navy);color:var(--white);border:none;padding:10px 22px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s}
+.csv-upload-btn:hover{background:var(--navy3)}
+.csv-sample-btn{background:transparent;color:var(--text3);border:1px solid var(--border);padding:9px 18px;border-radius:8px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;margin-left:8px}
+.csv-sample-btn:hover{border-color:var(--navy);color:var(--navy)}
+[data-theme="dark"] .csv-sample-btn{border-color:var(--border2);color:#4a5878}
+[data-theme="dark"] .csv-sample-btn:hover{border-color:var(--gold);color:var(--gold)}
+/* ════════════════════════════════════════
+   REAL AI VOICE AGENT — MODAL & UI
+════════════════════════════════════════ */
+/* Launch button on voice section */
+.va-launch-btn{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--navy);padding:14px 28px;border-radius:10px;font-size:15px;font-weight:700;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .25s;margin-top:24px;letter-spacing:.1px}
+.va-launch-btn:hover{background:var(--gold2);box-shadow:0 8px 32px rgba(201,168,76,.45);transform:translateY(-2px)}
+.va-launch-btn svg{width:20px;height:20px;fill:var(--navy);flex-shrink:0}
+
+/* Full-screen modal */
+.va-overlay{position:fixed;inset:0;background:rgba(5,8,18,.96);backdrop-filter:blur(20px);z-index:9000;display:none;align-items:center;justify-content:center;padding:16px}
+.va-overlay.open{display:flex;animation:vaFadeIn .3s ease}
+@keyframes vaFadeIn{from{opacity:0}to{opacity:1}}
+.va-modal{background:#0d1a30;border:1px solid rgba(255,255,255,.07);border-radius:24px;width:100%;max-width:540px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.7);animation:vaSlideUp .35s cubic-bezier(.34,1.3,.64,1)}
+@keyframes vaSlideUp{from{opacity:0;transform:translateY(40px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+/* ── STEP 0: Language & Voice Selection ── */
+.va-setup{padding:32px}
+.va-setup-logo{display:flex;align-items:center;gap:10px;margin-bottom:28px}
+.va-setup-logobox{width:34px;height:34px;background:var(--gold);border-radius:9px;display:flex;align-items:center;justify-content:center}
+.va-setup-logobox svg{width:18px;height:18px;fill:#0d1a30}
+.va-setup-name{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#e8ecf4}
+.va-setup-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#e8ecf4;letter-spacing:-.5px;margin-bottom:6px}
+.va-setup-sub{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:28px;line-height:1.6}
+
+/* Language grid */
+.va-lang-label{font-size:10px;font-family:'DM Mono',monospace;color:rgba(255,255,255,.35);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px}
+.va-lang-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:24px}
+.va-lang-btn{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:10px 8px;cursor:pointer;transition:all .2s;text-align:center;font-family:'DM Sans',sans-serif}
+.va-lang-btn:hover{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.25)}
+.va-lang-btn.selected{background:rgba(201,168,76,.12);border-color:rgba(201,168,76,.45);box-shadow:0 0 0 1px rgba(201,168,76,.2)}
+.va-lang-flag{font-size:22px;display:block;margin-bottom:5px}
+.va-lang-name{font-size:12px;font-weight:600;color:#e8ecf4;display:block}
+.va-lang-native{font-size:10px;color:rgba(255,255,255,.4);display:block;margin-top:1px}
+
+/* Voice gender selection */
+.va-voice-label{font-size:10px;font-family:'DM Mono',monospace;color:rgba(255,255,255,.35);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px}
+.va-voice-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:28px}
+.va-voice-card{background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 16px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:12px}
+.va-voice-card:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.15)}
+.va-voice-card.selected.male{background:rgba(59,130,246,.1);border-color:rgba(59,130,246,.4)}
+.va-voice-card.selected.female{background:rgba(236,72,153,.1);border-color:rgba(236,72,153,.4)}
+.va-voice-icon{font-size:24px;flex-shrink:0}
+.va-voice-info{}
+.va-voice-gender{font-size:13px;font-weight:700;color:#e8ecf4}
+.va-voice-desc{font-size:11px;color:rgba(255,255,255,.4);margin-top:1px}
+.va-voice-check{width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;margin-left:auto;flex-shrink:0;font-size:10px;transition:all .2s}
+.va-voice-card.selected.male .va-voice-check{background:#3b82f6;border-color:#3b82f6;color:white}
+.va-voice-card.selected.female .va-voice-check{background:#ec4899;border-color:#ec4899;color:white}
+
+.va-start-btn{width:100%;padding:15px;background:var(--gold);color:#0d1a30;border:none;border-radius:11px;font-size:16px;font-weight:800;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:10px;letter-spacing:.1px}
+.va-start-btn:hover{background:var(--gold2);box-shadow:0 8px 28px rgba(201,168,76,.4);transform:translateY(-1px)}
+.va-start-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.va-start-btn svg{width:18px;height:18px;fill:#0d1a30}
+
+/* ── STEP 1: Topic Selection ── */
+.va-topic{padding:32px;display:none}
+.va-topic-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#e8ecf4;margin-bottom:6px;letter-spacing:-.3px}
+.va-topic-sub{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:22px;line-height:1.6}
+.va-topic-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
+.va-topic-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:14px 16px;cursor:pointer;transition:all .2s;display:flex;align-items:flex-start;gap:12px}
+.va-topic-card:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);transform:translateY(-1px)}
+.va-topic-card.selected{background:rgba(201,168,76,.1);border-color:rgba(201,168,76,.4)}
+.va-topic-icon{font-size:22px;flex-shrink:0;margin-top:1px}
+.va-topic-name{font-size:13px;font-weight:600;color:#e8ecf4;margin-bottom:3px}
+.va-topic-desc{font-size:11px;color:rgba(255,255,255,.4);line-height:1.5}
+
+.va-back-btn{background:transparent;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);padding:10px 18px;border-radius:8px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;margin-right:10px}
+.va-back-btn:hover{border-color:rgba(255,255,255,.25);color:rgba(255,255,255,.8)}
+.va-row-btns{display:flex;align-items:center;gap:0}
+.va-row-btns .va-start-btn{flex:1}
+
+/* ── STEP 2: Active Call UI ── */
+.va-call{padding:0;display:none}
+/* Call header */
+.va-call-header{padding:24px 28px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.06)}
+.va-call-agent{display:flex;align-items:center;gap:12px}
+.va-agent-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;position:relative}
+.va-agent-av.male{background:linear-gradient(135deg,#1d4ed8,#3b82f6)}
+.va-agent-av.female{background:linear-gradient(135deg,#9d174d,#ec4899)}
+.va-agent-av-ring{position:absolute;inset:-3px;border-radius:50%;border:2px solid;opacity:0;animation:agentRing 2s ease-in-out infinite}
+.va-agent-av.male .va-agent-av-ring{border-color:#3b82f6}
+.va-agent-av.female .va-agent-av-ring{border-color:#ec4899}
+.va-agent-av.speaking .va-agent-av-ring{opacity:.6}
+@keyframes agentRing{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.15);opacity:0}}
+.va-agent-name{font-size:15px;font-weight:700;color:#e8ecf4}
+.va-agent-lang{font-size:10px;font-family:'DM Mono',monospace;color:rgba(255,255,255,.4);margin-top:2px}
+.va-call-status-pill{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:20px;font-size:11px;font-family:'DM Mono',monospace;letter-spacing:.5px}
+.va-call-status-pill.connecting{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25);color:#fbbf24}
+.va-call-status-pill.active{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);color:#6ee7b7}
+.va-call-status-pill.ended{background:rgba(244,63,94,.1);border:1px solid rgba(244,63,94,.2);color:#fca5a5}
+.va-status-dot{width:6px;height:6px;border-radius:50%;background:currentColor;animation:blink 1.5s infinite}
+
+/* Waveform visualizer */
+.va-wave-area{padding:20px 28px 12px;display:flex;align-items:center;gap:12px}
+.va-wave-label{font-size:10px;font-family:'DM Mono',monospace;color:rgba(255,255,255,.3);letter-spacing:1px;width:40px;flex-shrink:0}
+.va-wave-bars{display:flex;align-items:center;gap:2.5px;height:48px;flex:1}
+.va-bar{border-radius:3px;transition:height .1s ease}
+.va-bar.agent-bar{background:var(--gold);opacity:.8}
+.va-bar.user-bar{background:#60a5fa;opacity:.8}
+.va-wave-timer{font-size:13px;font-family:'DM Mono',monospace;color:rgba(255,255,255,.5);width:44px;text-align:right;flex-shrink:0}
+
+/* Transcript */
+.va-transcript{margin:0 20px;height:200px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:4px 0 8px}
+.va-transcript::-webkit-scrollbar{width:3px}.va-transcript::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px}
+.va-msg{padding:10px 14px;border-radius:10px;font-size:13px;line-height:1.6;max-width:88%;position:relative;animation:vaMsgIn .3s ease}
+@keyframes vaMsgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.va-msg.agent{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.15);align-self:flex-start;border-radius:3px 10px 10px 10px}
+.va-msg.user{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);align-self:flex-end;border-radius:10px 3px 10px 10px}
+.va-msg-role{font-size:9px;font-family:'DM Mono',monospace;color:rgba(255,255,255,.3);margin-bottom:3px;letter-spacing:.5px;text-transform:uppercase}
+.va-msg.agent .va-msg-role{color:var(--gold)}
+.va-msg-text{color:#e8ecf4}
+.va-typing-msg{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:3px 10px 10px 10px;padding:10px 14px;align-self:flex-start;display:flex;gap:5px;align-items:center}
+.va-typing-dot{width:5px;height:5px;background:rgba(255,255,255,.3);border-radius:50%;animation:tdot 1.3s infinite}
+.va-typing-dot:nth-child(2){animation-delay:.2s}.va-typing-dot:nth-child(3){animation-delay:.4s}
+
+/* Mic input area */
+.va-input-area{padding:16px 20px;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:10px}
+.va-mic-btn{width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;transition:all .2s;flex-shrink:0}
+.va-mic-btn:hover{background:rgba(255,255,255,.12)}
+.va-mic-btn.listening{background:rgba(244,63,94,.15);border-color:rgba(244,63,94,.4);animation:micPulse 1.5s ease-in-out infinite}
+@keyframes micPulse{0%,100%{box-shadow:0 0 0 0 rgba(244,63,94,.3)}50%{box-shadow:0 0 0 8px rgba(244,63,94,0)}}
+.va-text-input{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:24px;padding:11px 16px;font-size:13px;color:#e8ecf4;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s}
+.va-text-input:focus{border-color:rgba(255,255,255,.2)}
+.va-text-input::placeholder{color:rgba(255,255,255,.2)}
+.va-send-btn{width:42px;height:42px;border-radius:50%;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.va-send-btn:hover{background:var(--gold2);transform:scale(1.07)}
+.va-send-btn svg{width:16px;height:16px;fill:#0d1a30}
+
+/* Call controls bottom */
+.va-call-controls{padding:14px 28px 24px;display:flex;align-items:center;justify-content:center;gap:14px}
+.va-ctrl-btn{display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .2s}
+.va-ctrl-btn:hover{opacity:.8}
+.va-ctrl-circle{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;transition:all .2s}
+.va-ctrl-circle.mute-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12)}
+.va-ctrl-circle.mute-btn.active{background:rgba(244,63,94,.15);border-color:rgba(244,63,94,.3)}
+.va-ctrl-circle.spk-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12)}
+.va-ctrl-circle.end-btn{background:#ef4444;border:1px solid rgba(239,68,68,.5);width:60px;height:60px;font-size:22px;box-shadow:0 4px 20px rgba(239,68,68,.35)}
+.va-ctrl-circle.end-btn:hover{background:#dc2626;box-shadow:0 6px 28px rgba(239,68,68,.5)}
+.va-ctrl-label{font-size:10px;font-family:'DM Mono',monospace;color:rgba(255,255,255,.35);letter-spacing:.5px}
+.va-ctrl-label.end-lbl{color:rgba(239,68,68,.7)}
+
+/* ── Dark mode ── */
+[data-theme="dark"] .va-modal{background:#0a1020;border-color:rgba(255,255,255,.06)}
+[data-theme="dark"] .va-lang-btn{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.07)}
+[data-theme="dark"] .va-voice-card{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.06)}
+[data-theme="dark"] .va-topic-card{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.06)}
+
+/* ── "Try AI Call" button floating on voice section ── */
+.va-try-strip{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:14px;padding:16px 20px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.va-try-text{font-size:13px;color:rgba(255,255,255,.65);line-height:1.5}
+.va-try-text strong{color:var(--gold);display:block;font-size:14px;margin-bottom:2px}
 </style>
 </head>
 <body>
@@ -697,6 +1097,7 @@ footer{background:var(--navy2);padding:64px 64px 36px;position:relative;z-index:
   </div>
   <div class="nav-right">
     <button class="admin-pill" id="admin-pill" onclick="openLeadsPanel()">📊 View Leads <span id="leads-count-badge" style="background:var(--gold);color:var(--navy);border-radius:10px;padding:1px 7px;font-size:10px;font-weight:700">0</span></button>
+    <button class="admin-pill show" onclick="openCsvViewer()" style="background:rgba(59,130,246,.08);border-color:rgba(59,130,246,.2);color:#1d4ed8" title="Load data.csv">📁 Data</button>
     <a href="#" class="btn-ghost" onclick="openAuth('signin');return false">Sign In</a>
     <a href="#" class="btn-solid" onclick="openDemoSched();return false">Request Demo</a>
     <!-- ════ FEATURE 2 · DARK TOGGLE ════ -->
@@ -1058,6 +1459,7 @@ footer{background:var(--navy2);padding:64px 64px 36px;position:relative;z-index:
     </div>
 
     <div class="voice-right reveal">
+      <!-- Static demo call (kept) -->
       <div class="call-sim">
         <div class="cs-header">
           <div class="cs-caller">
@@ -1084,6 +1486,18 @@ footer{background:var(--navy2);padding:64px 64px 36px;position:relative;z-index:
           <button class="cs-btn add" title="Transfer">👤</button>
         </div>
         <div class="cs-timer" id="cs-timer">02:34 · AI handling call</div>
+      </div>
+
+      <!-- Try Real AI Agent strip -->
+      <div class="va-try-strip">
+        <div class="va-try-text">
+          <strong>🎙️ Talk to our Real AI Agent</strong>
+          Choose your language, pick male or female voice — have a live conversation with BartaFlow's AI.
+        </div>
+        <button class="va-launch-btn" onclick="openVoiceAgent()">
+          <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3zm-1 13.93A7.001 7.001 0 0 1 5 8H3a9.001 9.001 0 0 0 8 8.94V20H8v2h8v-2h-3v-3.07A9.001 9.001 0 0 0 21 8h-2a7 7 0 0 1-6 6.93z"/></svg>
+          Start AI Call
+        </button>
       </div>
 
       <div class="voice-stats">
@@ -1462,34 +1876,59 @@ footer{background:var(--navy2);padding:64px 64px 36px;position:relative;z-index:
         <div class="auth-footer-note">Don't have an account? <a href="#" onclick="switchAuthTab('signup');return false">Create one free →</a></div>
       </div>
 
-      <!-- SIGN UP PANEL -->
+      <!-- SIGN UP PANEL — UPGRADED v2 -->
       <div class="auth-panel" id="panel-signup">
         <div class="form-error" id="signup-error">Please fill in all required fields correctly.</div>
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label">First Name</label>
-            <input class="form-input" id="su-fname" type="text" placeholder="Rahul">
+            <label class="form-label">First Name *</label>
+            <input class="form-input" id="su-fname" type="text" placeholder="Rahul"
+              oninput="validateField(this,'name')" autocomplete="given-name">
+            <div class="field-hint" id="hint-su-fname"></div>
           </div>
           <div class="form-group">
             <label class="form-label">Last Name</label>
-            <input class="form-input" id="su-lname" type="text" placeholder="Sharma">
+            <input class="form-input" id="su-lname" type="text" placeholder="Sharma" autocomplete="family-name">
           </div>
         </div>
         <div class="form-group">
-          <label class="form-label">Work Email</label>
-          <input class="form-input" id="su-email" type="email" placeholder="rahul@company.com">
+          <label class="form-label">Gmail Address *
+            <span class="gmail-badge">Gmail only</span>
+          </label>
+          <div style="position:relative">
+            <input class="form-input" id="su-email" type="email"
+              placeholder="yourname@gmail.com"
+              oninput="validateField(this,'gmail')"
+              autocomplete="email">
+            <span class="field-status-icon" id="icon-su-email"></span>
+          </div>
+          <div class="field-hint" id="hint-su-email">Must be a valid Gmail address (@gmail.com)</div>
         </div>
         <div class="form-group">
-          <label class="form-label">Company / Business Name</label>
-          <input class="form-input" id="su-company" type="text" placeholder="Acme Pvt. Ltd.">
+          <label class="form-label">Company / Business Name *</label>
+          <input class="form-input" id="su-company" type="text" placeholder="Acme Pvt. Ltd."
+            oninput="validateField(this,'required')" autocomplete="organization">
+          <div class="field-hint" id="hint-su-company"></div>
         </div>
         <div class="form-group">
-          <label class="form-label">Password</label>
+          <label class="form-label">Password *</label>
           <div class="password-wrap">
-            <input class="form-input" id="su-password" type="password" placeholder="Min. 8 characters">
+            <input class="form-input" id="su-password" type="password" placeholder="Min. 8 chars + number"
+              oninput="validateField(this,'password');checkConfirmPw()">
             <button class="pw-toggle" onclick="togglePw('su-password',this)" tabindex="-1" type="button">👁</button>
           </div>
-          <div class="form-hint" id="pw-strength-hint">Use 8+ characters with letters and numbers</div>
+          <!-- Strength bar -->
+          <div class="pw-strength-bar"><div class="pw-strength-fill" id="pw-strength-fill"></div></div>
+          <div class="field-hint" id="pw-strength-hint">Use 8+ characters with at least one number</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Confirm Password *</label>
+          <div class="password-wrap">
+            <input class="form-input" id="su-confirm-pw" type="password" placeholder="Re-enter your password"
+              oninput="checkConfirmPw()">
+            <button class="pw-toggle" onclick="togglePw('su-confirm-pw',this)" tabindex="-1" type="button">👁</button>
+          </div>
+          <div class="field-hint" id="hint-su-confirm-pw"></div>
         </div>
         <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:18px">
           <input type="checkbox" id="agree-terms" style="accent-color:var(--navy);width:14px;height:14px;cursor:pointer;margin-top:2px;flex-shrink:0">
@@ -1511,18 +1950,78 @@ footer{background:var(--navy2);padding:64px 64px 36px;position:relative;z-index:
         </div>
       </div>
 
-      <!-- FORGOT PASSWORD -->
+      <!-- FORGOT PASSWORD — UPGRADED v2 -->
       <div class="auth-panel" id="panel-forgot">
-        <div style="margin-bottom:20px">
-          <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy);margin-bottom:6px">Reset your password</div>
-          <div style="font-size:13px;color:var(--text3);font-weight:300;line-height:1.6">Enter your email and we'll send a reset link within 2 minutes.</div>
+        <!-- Step A: Enter Gmail -->
+        <div id="fp-step-a">
+          <div style="margin-bottom:20px">
+            <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy);margin-bottom:6px">Reset your password</div>
+            <div style="font-size:13px;color:var(--text3);font-weight:300;line-height:1.6">Enter your Gmail address and we'll send a 6-digit OTP within 2 minutes.</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Gmail Address
+              <span class="gmail-badge">Gmail only</span>
+            </label>
+            <div style="position:relative">
+              <input class="form-input" id="fp-email" type="email" placeholder="yourname@gmail.com"
+                oninput="validateField(this,'gmail')">
+              <span class="field-status-icon" id="icon-fp-email"></span>
+            </div>
+            <div class="field-hint" id="hint-fp-email">Must be your registered Gmail address</div>
+          </div>
+          <button class="auth-submit-btn" id="fp-send-btn" onclick="doForgotPassword()" style="margin-bottom:12px">
+            <span id="fp-send-text">Send Reset OTP</span>
+          </button>
+          <button onclick="switchAuthTab('signin')" class="fp-back-btn">← Back to Sign In</button>
         </div>
-        <div class="form-group">
-          <label class="form-label">Email Address</label>
-          <input class="form-input" id="fp-email" type="email" placeholder="you@company.com">
+        <!-- Step B: Enter OTP -->
+        <div id="fp-step-b" style="display:none">
+          <div style="margin-bottom:20px">
+            <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy);margin-bottom:6px">Enter OTP</div>
+            <div style="font-size:13px;color:var(--text3);font-weight:300;line-height:1.6">A 6-digit code was sent to <strong id="fp-email-display" style="color:var(--navy)"></strong></div>
+          </div>
+          <div class="form-error" id="otp-error"></div>
+          <div class="otp-row" id="otp-inputs">
+            <input class="otp-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]*" oninput="otpNext(this,0)">
+            <input class="otp-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]*" oninput="otpNext(this,1)">
+            <input class="otp-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]*" oninput="otpNext(this,2)">
+            <input class="otp-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]*" oninput="otpNext(this,3)">
+            <input class="otp-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]*" oninput="otpNext(this,4)">
+            <input class="otp-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]*" oninput="otpNext(this,5)">
+          </div>
+          <div style="font-size:11px;font-family:'DM Mono',monospace;color:var(--text3);margin-bottom:16px">
+            Demo OTP: <strong style="color:var(--navy);letter-spacing:2px" id="demo-otp-hint"></strong>
+          </div>
+          <button class="auth-submit-btn" onclick="verifyOtp()" style="margin-bottom:12px">Verify OTP →</button>
+          <button onclick="document.getElementById('fp-step-b').style.display='none';document.getElementById('fp-step-a').style.display='block'" class="fp-back-btn">← Resend / Change email</button>
         </div>
-        <button class="auth-submit-btn" onclick="doForgotPassword()" style="margin-bottom:12px">Send Reset Link</button>
-        <button onclick="switchAuthTab('signin')" style="width:100%;padding:11px;background:transparent;color:var(--text2);border:1px solid var(--border);border-radius:9px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s" onmouseover="this.style.borderColor='var(--border2)'" onmouseout="this.style.borderColor='var(--border)'">← Back to Sign In</button>
+        <!-- Step C: Set New Password -->
+        <div id="fp-step-c" style="display:none">
+          <div style="margin-bottom:20px">
+            <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy);margin-bottom:6px">Set New Password</div>
+            <div style="font-size:13px;color:var(--text3);font-weight:300;line-height:1.6">Choose a strong new password for your account.</div>
+          </div>
+          <div class="form-error" id="newpw-error"></div>
+          <div class="form-group">
+            <label class="form-label">New Password</label>
+            <div class="password-wrap">
+              <input class="form-input" id="fp-newpw" type="password" placeholder="Min. 8 chars + number"
+                oninput="validateField(this,'password');checkFpConfirm()">
+              <button class="pw-toggle" onclick="togglePw('fp-newpw',this)" tabindex="-1" type="button">👁</button>
+            </div>
+            <div class="pw-strength-bar"><div class="pw-strength-fill" id="fp-pw-fill"></div></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Confirm New Password</label>
+            <div class="password-wrap">
+              <input class="form-input" id="fp-confirmpw" type="password" placeholder="Re-enter new password"
+                oninput="checkFpConfirm()">
+              <button class="pw-toggle" onclick="togglePw('fp-confirmpw',this)" tabindex="-1" type="button">👁</button>
+            </div>
+            <div class="field-hint" id="hint-fp-confirmpw"></div>
+          </div>
+          <button class="auth-submit-btn" onclick="doSetNewPassword()">Update Password →</button>
+        </div>
       </div>
     </div>
   </div>
@@ -1699,6 +2198,246 @@ footer{background:var(--navy2);padding:64px 64px 36px;position:relative;z-index:
   </div>
 </div>
 
+<!-- ════════════════════════════════════════
+     REAL AI VOICE AGENT MODAL
+════════════════════════════════════════ -->
+<div class="va-overlay" id="va-overlay" onclick="if(event.target.id==='va-overlay')closeVoiceAgent()">
+  <div class="va-modal" id="va-modal">
+
+    <!-- STEP 0: Setup (Language + Voice) -->
+    <div class="va-setup" id="va-step-setup">
+      <div class="va-setup-logo">
+        <div class="va-setup-logobox"><svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.418A9.966 9.966 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg></div>
+        <span class="va-setup-name">BartaFlow AI Agent</span>
+      </div>
+      <div class="va-setup-title">Choose Your Language &amp; Voice</div>
+      <div class="va-setup-sub">Select the language you'd like to speak in, then pick male or female voice for your AI agent.</div>
+
+      <!-- Language Selection -->
+      <div class="va-lang-label">Select Language</div>
+      <div class="va-lang-grid" id="va-lang-grid">
+        <button class="va-lang-btn selected" data-lang="en-IN" data-name="English" onclick="selectLang(this)">
+          <span class="va-lang-flag">🇬🇧</span>
+          <span class="va-lang-name">English</span>
+          <span class="va-lang-native">English</span>
+        </button>
+        <button class="va-lang-btn" data-lang="hi-IN" data-name="Hindi" onclick="selectLang(this)">
+          <span class="va-lang-flag">🇮🇳</span>
+          <span class="va-lang-name">Hindi</span>
+          <span class="va-lang-native">हिंदी</span>
+        </button>
+        <button class="va-lang-btn" data-lang="bn-IN" data-name="Bengali" onclick="selectLang(this)">
+          <span class="va-lang-flag">🇧🇩</span>
+          <span class="va-lang-name">Bengali</span>
+          <span class="va-lang-native">বাংলা</span>
+        </button>
+        <button class="va-lang-btn" data-lang="ta-IN" data-name="Tamil" onclick="selectLang(this)">
+          <span class="va-lang-flag">🌊</span>
+          <span class="va-lang-name">Tamil</span>
+          <span class="va-lang-native">தமிழ்</span>
+        </button>
+        <button class="va-lang-btn" data-lang="te-IN" data-name="Telugu" onclick="selectLang(this)">
+          <span class="va-lang-flag">🏔️</span>
+          <span class="va-lang-name">Telugu</span>
+          <span class="va-lang-native">తెలుగు</span>
+        </button>
+        <button class="va-lang-btn" data-lang="mr-IN" data-name="Marathi" onclick="selectLang(this)">
+          <span class="va-lang-flag">🎭</span>
+          <span class="va-lang-name">Marathi</span>
+          <span class="va-lang-native">मराठी</span>
+        </button>
+        <button class="va-lang-btn" data-lang="gu-IN" data-name="Gujarati" onclick="selectLang(this)">
+          <span class="va-lang-flag">💫</span>
+          <span class="va-lang-name">Gujarati</span>
+          <span class="va-lang-native">ગુજરાતી</span>
+        </button>
+        <button class="va-lang-btn" data-lang="kn-IN" data-name="Kannada" onclick="selectLang(this)">
+          <span class="va-lang-flag">🌿</span>
+          <span class="va-lang-name">Kannada</span>
+          <span class="va-lang-native">ಕನ್ನಡ</span>
+        </button>
+        <button class="va-lang-btn" data-lang="ar-SA" data-name="Arabic" onclick="selectLang(this)">
+          <span class="va-lang-flag">🌙</span>
+          <span class="va-lang-name">Arabic</span>
+          <span class="va-lang-native">العربية</span>
+        </button>
+      </div>
+
+      <!-- Voice Gender Selection -->
+      <div class="va-voice-label">Select Voice</div>
+      <div class="va-voice-row">
+        <div class="va-voice-card male selected" id="va-card-male" onclick="selectVoice('male')">
+          <div class="va-voice-icon">👨</div>
+          <div class="va-voice-info">
+            <div class="va-voice-gender">Male Voice</div>
+            <div class="va-voice-desc">Deep, professional tone</div>
+          </div>
+          <div class="va-voice-check">✓</div>
+        </div>
+        <div class="va-voice-card female" id="va-card-female" onclick="selectVoice('female')">
+          <div class="va-voice-icon">👩</div>
+          <div class="va-voice-info">
+            <div class="va-voice-gender">Female Voice</div>
+            <div class="va-voice-desc">Warm, friendly tone</div>
+          </div>
+          <div class="va-voice-check"></div>
+        </div>
+      </div>
+
+      <button class="va-start-btn" id="va-start-btn" onclick="goToTopicSelect()">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        Continue — Choose Topic
+      </button>
+    </div>
+
+    <!-- STEP 1: Topic Selection -->
+    <div class="va-topic" id="va-step-topic">
+      <div class="va-topic-title">What would you like to discuss?</div>
+      <div class="va-topic-sub">Pick a topic and our AI agent will begin a real conversation with you in your chosen language.</div>
+      <div class="va-topic-grid" id="va-topic-grid">
+        <div class="va-topic-card selected" data-topic="sales" onclick="selectTopic(this)">
+          <div class="va-topic-icon">🏠</div>
+          <div>
+            <div class="va-topic-name">Real Estate Sales</div>
+            <div class="va-topic-desc">Property inquiry, budget, site visit booking</div>
+          </div>
+        </div>
+        <div class="va-topic-card" data-topic="travel" onclick="selectTopic(this)">
+          <div class="va-topic-icon">✈️</div>
+          <div>
+            <div class="va-topic-name">Travel Booking</div>
+            <div class="va-topic-desc">Packages, itineraries, pricing</div>
+          </div>
+        </div>
+        <div class="va-topic-card" data-topic="health" onclick="selectTopic(this)">
+          <div class="va-topic-icon">🏥</div>
+          <div>
+            <div class="va-topic-name">Healthcare</div>
+            <div class="va-topic-desc">Doctor appointment, reports, queries</div>
+          </div>
+        </div>
+        <div class="va-topic-card" data-topic="ecom" onclick="selectTopic(this)">
+          <div class="va-topic-icon">🛍️</div>
+          <div>
+            <div class="va-topic-name">E-Commerce Support</div>
+            <div class="va-topic-desc">Orders, returns, product help</div>
+          </div>
+        </div>
+        <div class="va-topic-card" data-topic="edu" onclick="selectTopic(this)">
+          <div class="va-topic-icon">📚</div>
+          <div>
+            <div class="va-topic-name">Education Enquiry</div>
+            <div class="va-topic-desc">Course info, fee, enrollment</div>
+          </div>
+        </div>
+        <div class="va-topic-card" data-topic="bartaflow" onclick="selectTopic(this)">
+          <div class="va-topic-icon">🤖</div>
+          <div>
+            <div class="va-topic-name">About BartaFlow</div>
+            <div class="va-topic-desc">Platform features, pricing, demo</div>
+          </div>
+        </div>
+      </div>
+      <div class="va-row-btns">
+        <button class="va-back-btn" onclick="backToSetup()">← Back</button>
+        <button class="va-start-btn" id="va-call-btn" onclick="startAICall()">
+          <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3zm-1 13.93A7.001 7.001 0 0 1 5 8H3a9.001 9.001 0 0 0 8 8.94V20H8v2h8v-2h-3v-3.07A9.001 9.001 0 0 0 21 8h-2a7 7 0 0 1-6 6.93z"/></svg>
+          Start AI Call Now
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Active Call -->
+    <div class="va-call" id="va-step-call">
+      <div class="va-call-header">
+        <div class="va-call-agent">
+          <div class="va-agent-av male" id="va-agent-av">
+            <div class="va-agent-av-ring"></div>
+            <span id="va-agent-emoji">🤖</span>
+          </div>
+          <div>
+            <div class="va-agent-name" id="va-agent-name">BartaFlow AI Agent</div>
+            <div class="va-agent-lang" id="va-agent-lang-display">English · Professional Voice</div>
+          </div>
+        </div>
+        <div class="va-call-status-pill connecting" id="va-status-pill">
+          <span class="va-status-dot"></span>
+          <span id="va-status-text">CONNECTING</span>
+        </div>
+      </div>
+
+      <!-- Dual waveform (agent + user) -->
+      <div class="va-wave-area">
+        <span class="va-wave-label" style="color:var(--gold);font-size:9px">AGENT</span>
+        <div class="va-wave-bars" id="va-agent-wave"></div>
+        <div class="va-wave-timer" id="va-call-timer">00:00</div>
+      </div>
+      <div class="va-wave-area" style="padding-top:0">
+        <span class="va-wave-label" style="color:#60a5fa;font-size:9px">YOU</span>
+        <div class="va-wave-bars" id="va-user-wave"></div>
+      </div>
+
+      <!-- Transcript -->
+      <div class="va-transcript" id="va-transcript"></div>
+
+      <!-- Type or mic input -->
+      <div class="va-input-area">
+        <button class="va-mic-btn" id="va-mic-btn" onclick="toggleMic()" title="Hold to speak">🎙️</button>
+        <input class="va-text-input" id="va-text-input" placeholder="Type your message or click mic to speak..." onkeydown="if(event.key==='Enter')sendVoiceMsg()">
+        <button class="va-send-btn" onclick="sendVoiceMsg()">
+          <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+        </button>
+      </div>
+
+      <!-- Controls -->
+      <div class="va-call-controls">
+        <button class="va-ctrl-btn" onclick="toggleMute()">
+          <div class="va-ctrl-circle mute-btn" id="va-mute-circle">🔇</div>
+          <span class="va-ctrl-label">Mute</span>
+        </button>
+        <button class="va-ctrl-btn" onclick="endVoiceCall()">
+          <div class="va-ctrl-circle end-btn">📵</div>
+          <span class="va-ctrl-label end-lbl">End Call</span>
+        </button>
+        <button class="va-ctrl-btn" onclick="toggleSpeaker()">
+          <div class="va-ctrl-circle spk-btn" id="va-spk-circle">🔊</div>
+          <span class="va-ctrl-label">Speaker</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════ UPGRADE v2 · DATA.CSV VIEWER ════ -->
+<div class="csv-overlay" id="csv-overlay" onclick="if(event.target.id==='csv-overlay')closeCsvViewer()">
+  <div class="csv-modal">
+    <div class="csv-header">
+      <div class="csv-title-group">
+        <div class="csv-icon">📊</div>
+        <div>
+          <div class="csv-title">Data Viewer</div>
+          <div class="csv-subtitle" id="csv-subtitle">Upload or load data.csv</div>
+        </div>
+      </div>
+      <button class="csv-close" onclick="closeCsvViewer()">✕</button>
+    </div>
+    <div id="csv-main-content">
+      <div class="csv-upload-area" id="csv-upload-area"
+        ondragover="event.preventDefault();this.classList.add('drag')"
+        ondragleave="this.classList.remove('drag')"
+        ondrop="handleCsvDrop(event)">
+        <div class="csv-upload-icon">📁</div>
+        <div class="csv-upload-title">Load your data.csv file</div>
+        <div class="csv-upload-sub">Drag & drop a CSV file here, or click to browse.<br>Supports any CSV with headers in the first row.</div>
+        <input type="file" id="csv-file-input" accept=".csv,.txt" style="display:none" onchange="handleCsvFile(this.files[0])">
+        <button class="csv-upload-btn" onclick="document.getElementById('csv-file-input').click()">📂 Browse File</button>
+        <button class="csv-sample-btn" onclick="loadSampleCsv()">Load Sample Data</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ══════════════════════════════════════
      CUSTOMER LEADS ADMIN PANEL
 ══════════════════════════════════════ -->
@@ -1817,8 +2556,10 @@ footer{background:var(--navy2);padding:64px 64px 36px;position:relative;z-index:
 <!-- ── SCRIPTS ── -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-// ── THREE.JS HERO ─────────────────────────────────────────────────────
+// ── THREE.JS HERO — deferred so it never blocks initial page paint ─────
 (function(){
+  // Use requestIdleCallback if available, else short setTimeout
+  var initThree = function(){
   const c = document.getElementById('hero-canvas');
   if(!c || typeof THREE === 'undefined') return;
   const W = c.offsetWidth || 600, H = c.offsetHeight || 520;
@@ -1919,6 +2660,9 @@ footer{background:var(--navy2);padding:64px 64px 36px;position:relative;z-index:
     cam.updateProjectionMatrix();
     renderer.setSize(W2, H2);
   });
+  }; // end initThree
+  if(window.requestIdleCallback){ requestIdleCallback(initThree, {timeout:2000}); }
+  else { setTimeout(initThree, 200); }
 })();
 
 // ── COUNTERS ──────────────────────────────────────────────────────────
@@ -2040,37 +2784,170 @@ function closeModal(e){ if(e.target.id === 'modal') closeModalDirect(); }
 function closeModalDirect(){ document.getElementById('modal').classList.remove('open'); }
 
 // ════════════════════════════════════════
-// AUTH MODAL
+// UPGRADE v2 · AUTH SYSTEM (Gmail-only, confirm pw, OTP reset, auto-redirect)
 // ════════════════════════════════════════
-const DEMO_USERS = [
-  {email:'demo@bartaflow.in', password:'bartaflow123', name:'Demo User'},
-  {email:'admin@bartaflow.in', password:'admin123', name:'Admin'},
-  {email:'test@test.com', password:'test123', name:'Test User'},
-];
-function openAuth(tab='signin'){
+
+/* ── In-memory user store (localStorage persisted) ── */
+function getUsers(){ try{ return JSON.parse(localStorage.getItem('bf_users')||'[]'); }catch(e){ return []; } }
+function saveUsers(u){ localStorage.setItem('bf_users', JSON.stringify(u)); }
+
+/* Seed demo users if store empty */
+(function(){
+  if(getUsers().length === 0){
+    saveUsers([
+      {email:'demo@gmail.com', password:hashPw('Demo@1234'), name:'Demo User', company:'BartaFlow Demo'},
+      {email:'admin@gmail.com', password:hashPw('Admin@123'), name:'Admin', company:'BartaFlow'}
+    ]);
+  }
+})();
+
+/* Simple hash (XOR fold — not cryptographic, purely front-end simulation) */
+function hashPw(pw){
+  let h = 5381;
+  for(let i=0;i<pw.length;i++) h = (h*33)^pw.charCodeAt(i);
+  return (h>>>0).toString(16);
+}
+
+/* ── Validation helpers ── */
+const GMAIL_RE = /^[a-zA-Z0-9._%+\-]+@gmail\.com$/;
+const PW_STRONG_RE = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/;
+const PW_MIN_RE = /^.{6,}$/;
+
+function isGmail(email){ return GMAIL_RE.test(email.trim()); }
+function isPwStrong(pw){ return PW_STRONG_RE.test(pw); }
+
+/* Real-time field validator — called oninput */
+window.validateField = function(input, type){
+  const id = input.id;
+  const hint = document.getElementById('hint-'+id);
+  const icon = document.getElementById('icon-'+id);
+  const val = input.value.trim();
+
+  const setOk = (msg) => {
+    input.classList.remove('invalid'); input.classList.add('valid');
+    if(hint){ hint.textContent = msg||''; hint.className='field-hint ok'; }
+    if(icon) icon.textContent = '✓';
+  };
+  const setErr = (msg) => {
+    input.classList.remove('valid'); input.classList.add('invalid');
+    if(hint){ hint.textContent = msg; hint.className='field-hint err'; }
+    if(icon) icon.textContent = '✕';
+  };
+  const setNeutral = (msg) => {
+    input.classList.remove('valid','invalid');
+    if(hint){ hint.textContent = msg||''; hint.className='field-hint neutral'; }
+    if(icon) icon.textContent = '';
+  };
+
+  if(!val){ setNeutral(type==='gmail'?'Must be a valid Gmail address (@gmail.com)':''); return; }
+
+  if(type === 'gmail'){
+    if(!val.includes('@')){ setNeutral('Keep typing...'); }
+    else if(!isGmail(val)){ setErr('Please enter a valid Gmail address (must end in @gmail.com)'); }
+    else { setOk('Valid Gmail address ✓'); }
+  } else if(type === 'password'){
+    updatePwStrength(input, id);
+  } else if(type === 'required'){
+    if(val.length < 2) setErr('This field is required');
+    else setOk('');
+  } else if(type === 'name'){
+    if(val.length < 2) setErr('Enter at least 2 characters');
+    else setOk('');
+  }
+};
+
+function updatePwStrength(input, baseId){
+  const val = input.value;
+  const fillId = baseId === 'su-password' ? 'pw-strength-fill' : 'fp-pw-fill';
+  const hintId = baseId === 'su-password' ? 'pw-strength-hint' : null;
+  const fill = document.getElementById(fillId);
+  const hint = hintId ? document.getElementById(hintId) : null;
+  let score = 0, msg = '', color = '';
+  if(val.length >= 6) score++;
+  if(val.length >= 8) score++;
+  if(/[0-9]/.test(val)) score++;
+  if(/[A-Z]/.test(val)) score++;
+  if(/[^a-zA-Z0-9]/.test(val)) score++;
+  if(score <= 1){ color='#ef4444'; msg='Too weak — add more characters'; }
+  else if(score === 2){ color='#f97316'; msg='Weak — add a number'; }
+  else if(score === 3){ color='#eab308'; msg='Fair — add uppercase for more strength'; }
+  else if(score === 4){ color='#22c55e'; msg='Good password ✓'; }
+  else { color='#10b981'; msg='✓ Strong password!'; }
+  if(fill){ fill.style.width=(score/5*100)+'%'; fill.style.background=color; }
+  if(hint){ hint.textContent=msg; hint.style.color=color; }
+  if(val.length === 0){
+    if(fill){fill.style.width='0';} if(hint){hint.textContent='Use 8+ characters with at least one number';hint.style.color='';}
+    input.classList.remove('valid','invalid'); return;
+  }
+  if(score >= 3) input.classList.add('valid'), input.classList.remove('invalid');
+  else input.classList.add('invalid'), input.classList.remove('valid');
+}
+
+/* Confirm password live check */
+window.checkConfirmPw = function(){
+  const pw = document.getElementById('su-password');
+  const cpw = document.getElementById('su-confirm-pw');
+  const hint = document.getElementById('hint-su-confirm-pw');
+  if(!pw||!cpw||!hint) return;
+  if(!cpw.value){ hint.textContent=''; hint.className='field-hint'; cpw.classList.remove('valid','invalid'); return; }
+  if(pw.value === cpw.value){ hint.textContent='Passwords match ✓'; hint.className='field-hint ok'; cpw.classList.add('valid'); cpw.classList.remove('invalid'); }
+  else { hint.textContent='Passwords do not match'; hint.className='field-hint err'; cpw.classList.add('invalid'); cpw.classList.remove('valid'); }
+};
+
+window.checkFpConfirm = function(){
+  const pw = document.getElementById('fp-newpw');
+  const cpw = document.getElementById('fp-confirmpw');
+  const hint = document.getElementById('hint-fp-confirmpw');
+  if(!pw||!cpw||!hint) return;
+  if(!cpw.value){ hint.textContent=''; cpw.classList.remove('valid','invalid'); return; }
+  if(pw.value === cpw.value){ hint.textContent='Passwords match ✓'; hint.className='field-hint ok'; cpw.classList.add('valid'); cpw.classList.remove('invalid'); }
+  else { hint.textContent='Passwords do not match'; hint.className='field-hint err'; cpw.classList.add('invalid'); cpw.classList.remove('valid'); }
+};
+
+/* ── Modal open/close (unchanged API) ── */
+window.openAuth = function(tab='signin'){
   document.getElementById('auth-overlay').classList.add('open');
   switchAuthTab(tab);
   document.body.style.overflow='hidden';
-}
-function closeAuth(){
+};
+window.closeAuth = function(){
   document.getElementById('auth-overlay').classList.remove('open');
   document.body.style.overflow='';
   document.getElementById('signin-error').classList.remove('show');
   document.getElementById('signup-error').classList.remove('show');
-}
-function handleAuthOverlayClick(e){ if(e.target.id==='auth-overlay') closeAuth(); }
-function switchAuthTab(tab){
+};
+window.handleAuthOverlayClick = function(e){ if(e.target.id==='auth-overlay') closeAuth(); };
+
+window.switchAuthTab = function(tab){
   document.querySelectorAll('.auth-tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.auth-panel').forEach(p=>p.classList.remove('active'));
-  const tabEl = document.getElementById('tab-'+tab);
-  const panelEl = document.getElementById('panel-'+tab);
+  const tabEl=document.getElementById('tab-'+tab);
+  const panelEl=document.getElementById('panel-'+tab);
   if(tabEl) tabEl.classList.add('active');
   if(panelEl) panelEl.classList.add('active');
   if(tab==='signin'){ document.getElementById('auth-title').textContent='Welcome back'; document.getElementById('auth-sub').textContent='Sign in to your BartaFlow dashboard'; }
-  else { document.getElementById('auth-title').textContent='Create your account'; document.getElementById('auth-sub').textContent='Start your 14-day free trial today'; }
+  else { document.getElementById('auth-title').textContent='Create your account'; document.getElementById('auth-sub').textContent='Start your 14-day free trial — Gmail required'; }
+};
+
+window.togglePw = function(id,btn){
+  const inp=document.getElementById(id);
+  inp.type=inp.type==='password'?'text':'password';
+  btn.textContent=inp.type==='password'?'👁':'🙈';
+};
+
+function setAuthLoading(btnId,textId,loading,def,showSpinner){
+  const btn=document.getElementById(btnId); const txt=document.getElementById(textId);
+  if(!btn||!txt) return;
+  if(loading){
+    btn.classList.add('loading'); btn.disabled=true;
+    txt.innerHTML = showSpinner ? '<span class="spinner"></span> Please wait...' : 'Please wait...';
+  } else {
+    btn.classList.remove('loading'); btn.disabled=false;
+    txt.innerHTML = def;
+  }
 }
-function togglePw(inputId,btn){ const inp=document.getElementById(inputId); inp.type=inp.type==='password'?'text':'password'; btn.textContent=inp.type==='password'?'👁':'🙈'; }
-function setAuthLoading(btnId,textId,loading,def){ const btn=document.getElementById(btnId); const txt=document.getElementById(textId); if(!btn||!txt) return; if(loading){btn.classList.add('loading');btn.disabled=true;txt.textContent='Please wait...';}else{btn.classList.remove('loading');btn.disabled=false;txt.textContent=def;} }
+
+/* ── Sign In ── */
 function showAuthSuccess(title,sub){
   document.querySelectorAll('.auth-panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('auth-title').textContent='🎉 Success!';
@@ -2079,62 +2956,349 @@ function showAuthSuccess(title,sub){
   document.getElementById('auth-success-sub').textContent=sub;
   document.getElementById('panel-success').classList.add('active');
   document.querySelector('.auth-tabs').style.display='none';
-  // Show admin pill in nav
   const pill=document.getElementById('admin-pill');
   if(pill) pill.classList.add('show');
-  setTimeout(closeAuth,2600);
-  setTimeout(()=>{ document.querySelector('.auth-tabs').style.display=''; },2800);
+  setTimeout(closeAuth, 2600);
+  setTimeout(()=>{ document.querySelector('.auth-tabs').style.display=''; }, 2800);
 }
-function doSignIn(){
-  const email=document.getElementById('si-email').value.trim();
+
+window.doSignIn = function(){
+  const email=document.getElementById('si-email').value.trim().toLowerCase();
   const pwd=document.getElementById('si-password').value;
   const errEl=document.getElementById('signin-error');
   errEl.classList.remove('show');
-  if(!email||!pwd){errEl.textContent='Please enter your email and password.';errEl.classList.add('show');return;}
-  setAuthLoading('signin-btn','signin-btn-text',true,'Sign In to Dashboard');
+  if(!email||!pwd){ errEl.textContent='Please enter your email and password.'; errEl.classList.add('show'); return; }
+  setAuthLoading('signin-btn','signin-btn-text',true,'Sign In to Dashboard',true);
   setTimeout(()=>{
-    const user=DEMO_USERS.find(u=>u.email===email&&u.password===pwd);
+    const users = getUsers();
+    const user = users.find(u=>u.email===email && u.password===hashPw(pwd));
     setAuthLoading('signin-btn','signin-btn-text',false,'Sign In to Dashboard');
-    if(user){ showAuthSuccess('Welcome back, '+user.name+'!','You are signed in. Redirecting to your dashboard...'); }
-    else { errEl.textContent='Incorrect credentials. Try: demo@bartaflow.in / bartaflow123'; errEl.classList.add('show'); document.getElementById('si-password').value=''; }
-  },1400);
-}
-function doSignUp(){
+    if(user){
+      showAuthSuccess('Welcome back, '+user.name+'!','You are now signed in. Redirecting to your dashboard...');
+    } else {
+      errEl.textContent='Incorrect email or password. Try: demo@gmail.com / Demo@1234';
+      errEl.classList.add('show');
+      document.getElementById('si-password').value='';
+    }
+  }, 1200);
+};
+
+/* ── Sign Up (Gmail-only, confirm pw, auto-redirect to Sign In) ── */
+window.doSignUp = function(){
   const fname=document.getElementById('su-fname').value.trim();
-  const email=document.getElementById('su-email').value.trim();
+  const lname=document.getElementById('su-lname')?.value.trim()||'';
+  const email=document.getElementById('su-email').value.trim().toLowerCase();
   const company=document.getElementById('su-company').value.trim();
   const pwd=document.getElementById('su-password').value;
+  const cpwd=document.getElementById('su-confirm-pw').value;
   const agreed=document.getElementById('agree-terms').checked;
   const errEl=document.getElementById('signup-error');
   errEl.classList.remove('show');
-  if(!fname||!email||!company||!pwd){errEl.textContent='Please fill in all required fields.';errEl.classList.add('show');return;}
-  if(!/\S+@\S+\.\S+/.test(email)){errEl.textContent='Please enter a valid email address.';errEl.classList.add('show');return;}
-  if(pwd.length<8){errEl.textContent='Password must be at least 8 characters.';errEl.classList.add('show');return;}
-  if(!agreed){errEl.textContent='Please agree to the Terms of Service.';errEl.classList.add('show');return;}
-  setAuthLoading('signup-btn','signup-btn-text',true,'Create Free Account');
+
+  /* Validate all fields */
+  if(!fname){ errEl.textContent='Please enter your first name.'; errEl.classList.add('show'); return; }
+  if(!email){ errEl.textContent='Please enter your Gmail address.'; errEl.classList.add('show'); return; }
+  if(!isGmail(email)){ errEl.textContent='Please enter a valid Gmail address (must end in @gmail.com).'; errEl.classList.add('show'); return; }
+  if(!company){ errEl.textContent='Please enter your company name.'; errEl.classList.add('show'); return; }
+  if(!pwd){ errEl.textContent='Please choose a password.'; errEl.classList.add('show'); return; }
+  if(pwd.length < 6){ errEl.textContent='Password must be at least 6 characters.'; errEl.classList.add('show'); return; }
+  if(!PW_MIN_RE.test(pwd)){ errEl.textContent='Password too short — minimum 6 characters.'; errEl.classList.add('show'); return; }
+  if(!/[0-9]/.test(pwd)){ errEl.textContent='Password must contain at least one number (e.g. Password1).'; errEl.classList.add('show'); return; }
+  if(pwd !== cpwd){ errEl.textContent='Passwords do not match. Please re-enter.'; errEl.classList.add('show'); return; }
+  if(!agreed){ errEl.textContent='Please agree to the Terms of Service to continue.'; errEl.classList.add('show'); return; }
+
+  /* Check duplicate */
+  const users = getUsers();
+  if(users.find(u=>u.email===email)){ errEl.textContent='An account with this Gmail already exists. Please sign in.'; errEl.classList.add('show'); return; }
+
+  setAuthLoading('signup-btn','signup-btn-text',true,'Create Free Account',true);
   setTimeout(()=>{
+    /* Store user */
+    users.push({ email, password:hashPw(pwd), name:fname+(lname?' '+lname:''), company });
+    saveUsers(users);
+    saveLead({ name:fname+(lname?' '+lname:''), email, company, source:'signup' });
     setAuthLoading('signup-btn','signup-btn-text',false,'Create Free Account');
-    // SAVE LEAD
-    saveLead({name:fname+(document.getElementById('su-lname')?.value.trim()||''), email, company, source:'signup'});
-    showAuthSuccess('Welcome, '+fname+'!','Your 14-day free trial is active. A welcome email has been sent to '+email);
-  },1600);
+
+    /* Show success then AUTO-REDIRECT to Sign In (per spec: do NOT keep logged in) */
+    document.querySelectorAll('.auth-panel').forEach(p=>p.classList.remove('active'));
+    document.getElementById('auth-title').textContent='🎉 Account Created!';
+    document.getElementById('auth-sub').textContent='';
+    document.getElementById('auth-success-title').textContent='Account created successfully!';
+    document.getElementById('auth-success-sub').textContent='Please log in with your new credentials.';
+    document.getElementById('panel-success').classList.add('active');
+    document.querySelector('.auth-tabs').style.display='none';
+    showToast('✓','Account created! Please sign in to continue.');
+
+    /* After 2s → switch to Sign In tab */
+    setTimeout(()=>{
+      document.querySelector('.auth-tabs').style.display='';
+      switchAuthTab('signin');
+      document.getElementById('si-email').value = email;
+      document.getElementById('auth-title').textContent='Welcome back';
+      document.getElementById('auth-sub').textContent='Account created! Please sign in.';
+    }, 2200);
+  }, 1600);
+};
+
+/* Social login */
+window.socialLogin = function(provider){
+  setAuthLoading('signin-btn','signin-btn-text',true,'Sign In',true);
+  setTimeout(()=>{
+    setAuthLoading('signin-btn','signin-btn-text',false,'Sign In to Dashboard');
+    showAuthSuccess('Signed in via '+provider+'!','Welcome to BartaFlow. Redirecting to your dashboard...');
+  }, 1200);
+};
+
+/* ── Forgot Password (Gmail + OTP + new password) ── */
+let fpCurrentEmail = '';
+let fpGeneratedOtp = '';
+
+window.showForgotPassword = function(e){
+  e.preventDefault();
+  document.querySelectorAll('.auth-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.auth-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-forgot').classList.add('active');
+  document.getElementById('auth-title').textContent='Reset Password';
+  document.getElementById('auth-sub').textContent='Enter your Gmail to receive a reset code';
+  /* Reset steps */
+  document.getElementById('fp-step-a').style.display='block';
+  document.getElementById('fp-step-b').style.display='none';
+  document.getElementById('fp-step-c').style.display='none';
+};
+
+window.doForgotPassword = function(){
+  const emailEl=document.getElementById('fp-email');
+  const email=emailEl.value.trim().toLowerCase();
+  const hint=document.getElementById('hint-fp-email');
+  if(!email){ hint.textContent='Please enter your Gmail address'; hint.className='field-hint err'; return; }
+  if(!isGmail(email)){ hint.textContent='Please enter a valid Gmail address (@gmail.com)'; hint.className='field-hint err'; emailEl.classList.add('invalid'); return; }
+  const users=getUsers();
+  setAuthLoading('fp-send-btn','fp-send-text',true,'Send Reset OTP',true);
+  setTimeout(()=>{
+    setAuthLoading('fp-send-btn','fp-send-text',false,'Send Reset OTP');
+    const exists = users.find(u=>u.email===email);
+    if(!exists){
+      hint.textContent='No account found for this Gmail. Did you mean to sign up?';
+      hint.className='field-hint err'; emailEl.classList.add('invalid'); return;
+    }
+    fpCurrentEmail = email;
+    fpGeneratedOtp = String(Math.floor(100000+Math.random()*900000));
+    document.getElementById('fp-email-display').textContent = email;
+    document.getElementById('demo-otp-hint').textContent = fpGeneratedOtp;
+    document.getElementById('fp-step-a').style.display='none';
+    document.getElementById('fp-step-b').style.display='block';
+    /* Clear OTP boxes */
+    document.querySelectorAll('.otp-box').forEach(b=>{ b.value=''; b.classList.remove('filled'); });
+    setTimeout(()=>document.querySelector('.otp-box')?.focus(), 100);
+    showToast('📧','OTP sent to '+email+' (demo OTP shown below)');
+  }, 1400);
+};
+
+/* OTP auto-advance */
+window.otpNext = function(input, index){
+  input.value = input.value.replace(/[^0-9]/g,'').slice(-1);
+  if(input.value){ input.classList.add('filled'); }
+  else { input.classList.remove('filled'); }
+  const boxes=document.querySelectorAll('.otp-box');
+  if(input.value && index < 5) boxes[index+1].focus();
+  /* Backspace support via keydown */
+};
+document.addEventListener('keydown', e=>{
+  if(e.key==='Backspace' && e.target.classList.contains('otp-box')){
+    const boxes=[...document.querySelectorAll('.otp-box')];
+    const idx=boxes.indexOf(e.target);
+    if(!e.target.value && idx>0){ boxes[idx-1].focus(); boxes[idx-1].value=''; boxes[idx-1].classList.remove('filled'); }
+  }
+});
+
+window.verifyOtp = function(){
+  const boxes=document.querySelectorAll('.otp-box');
+  const entered=[...boxes].map(b=>b.value).join('');
+  const errEl=document.getElementById('otp-error');
+  errEl.classList.remove('show');
+  if(entered.length < 6){ errEl.textContent='Please enter all 6 digits.'; errEl.classList.add('show'); return; }
+  if(entered !== fpGeneratedOtp){ errEl.textContent='Incorrect OTP. Please check the code and try again.'; errEl.classList.add('show'); boxes.forEach(b=>b.classList.add('invalid')); return; }
+  boxes.forEach(b=>{ b.classList.remove('invalid'); b.classList.add('filled'); });
+  setTimeout(()=>{
+    document.getElementById('fp-step-b').style.display='none';
+    document.getElementById('fp-step-c').style.display='block';
+  }, 400);
+};
+
+window.doSetNewPassword = function(){
+  const pw=document.getElementById('fp-newpw').value;
+  const cpw=document.getElementById('fp-confirmpw').value;
+  const errEl=document.getElementById('newpw-error');
+  errEl.classList.remove('show');
+  if(!pw){ errEl.textContent='Please enter a new password.'; errEl.classList.add('show'); return; }
+  if(pw.length<6){ errEl.textContent='Password must be at least 6 characters.'; errEl.classList.add('show'); return; }
+  if(!/[0-9]/.test(pw)){ errEl.textContent='Password must contain at least one number.'; errEl.classList.add('show'); return; }
+  if(pw!==cpw){ errEl.textContent='Passwords do not match.'; errEl.classList.add('show'); return; }
+  const users=getUsers();
+  const idx=users.findIndex(u=>u.email===fpCurrentEmail);
+  if(idx>-1){ users[idx].password=hashPw(pw); saveUsers(users); }
+  showAuthSuccess('Password Updated!','Your password has been changed. Please sign in with your new password.');
+  setTimeout(()=> switchAuthTab('signin'), 2700);
+};
+
+// ════════════════════════════════════════
+// UPGRADE v2 · DATA.CSV VIEWER
+// ════════════════════════════════════════
+let csvData = { headers:[], rows:[], filename:'' };
+let csvSortCol = -1, csvSortAsc = true;
+
+window.openCsvViewer = function(){
+  document.getElementById('csv-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+};
+window.closeCsvViewer = function(){
+  document.getElementById('csv-overlay').classList.remove('open');
+  document.body.style.overflow='';
+};
+
+window.handleCsvDrop = function(e){
+  e.preventDefault();
+  document.getElementById('csv-upload-area').classList.remove('drag');
+  const file = e.dataTransfer.files[0];
+  if(file) handleCsvFile(file);
+};
+window.handleCsvFile = function(file){
+  if(!file){ showCsvError('No file selected.'); return; }
+  if(!file.name.match(/\.(csv|txt)$/i)){ showCsvError('Invalid file type. Please upload a .csv or .txt file.'); return; }
+  if(file.size === 0){ showCsvError('The file is empty. Please upload a CSV with data.'); return; }
+  if(file.size > 5*1024*1024){ showCsvError('File too large (max 5MB). Please upload a smaller CSV.'); return; }
+  const reader = new FileReader();
+  reader.onload = e => parseCsv(e.target.result, file.name);
+  reader.onerror = () => showCsvError('Could not read file. Please try again.');
+  reader.readAsText(file);
+};
+
+function parseCsv(text, filename){
+  try {
+    const lines = text.trim().split(/\r?\n/).filter(l=>l.trim());
+    if(!lines.length){ showCsvError('The file is empty or has no readable rows.'); return; }
+    /* Parse with quote handling */
+    const parseRow = row => {
+      const cells=[]; let cur='', inQ=false;
+      for(let i=0;i<row.length;i++){
+        const c=row[i];
+        if(c==='"'){ if(inQ && row[i+1]==='"'){ cur+='"'; i++; } else inQ=!inQ; }
+        else if(c===',' && !inQ){ cells.push(cur.trim()); cur=''; }
+        else cur+=c;
+      }
+      cells.push(cur.trim());
+      return cells;
+    };
+    const headers = parseRow(lines[0]);
+    if(headers.length < 1){ showCsvError('Could not detect column headers in the first row.'); return; }
+    const rows = lines.slice(1).map(l=>parseRow(l));
+    if(!rows.length){ showCsvError('The CSV has headers but no data rows.'); return; }
+    csvData = { headers, rows, filename: filename||'data.csv' };
+    renderCsvTable(csvData.rows);
+    showToast('📊','Loaded '+rows.length+' rows from '+csvData.filename);
+  } catch(err){
+    showCsvError('Invalid CSV format: '+err.message);
+  }
 }
-function socialLogin(provider){ setAuthLoading('signin-btn','signin-btn-text',true,'Sign In'); setTimeout(()=>{ setAuthLoading('signin-btn','signin-btn-text',false,'Sign In to Dashboard'); showAuthSuccess('Signed in via '+provider+'!','Welcome to BartaFlow. Redirecting to your dashboard...'); },1200); }
-function showForgotPassword(e){ e.preventDefault(); document.querySelectorAll('.auth-panel').forEach(p=>p.classList.remove('active')); document.querySelectorAll('.auth-tab').forEach(t=>t.classList.remove('active')); document.getElementById('panel-forgot').classList.add('active'); }
-function doForgotPassword(){ const email=document.getElementById('fp-email').value.trim(); if(!email){return;} showAuthSuccess('Reset link sent!','Check your inbox at '+email+' within 2 minutes.'); }
-// Password strength
+
+window.loadSampleCsv = function(){
+  const sample = `Name,Email,Company,Industry,Plan,Status,Revenue
+Priya Rathod,priya@gmail.com,TravelMate Agency,Travel & Tourism,Professional,Active,₹2499
+Arjun Mehta,arjun@gmail.com,FashionHub,E-Commerce,Enterprise,Active,₹4999
+Sunita Kapoor,sunita@gmail.com,CarePoint Clinics,Healthcare,Professional,Active,₹2499
+Raj Verma,raj@gmail.com,BrightMind Coaching,Education,Starter,Trial,₹999
+Meena Sharma,meena@gmail.com,SpiceRoute Restaurant,Restaurant,Starter,Active,₹999
+Karan Patel,karan@gmail.com,PropFirst Realty,Real Estate,Enterprise,Active,₹4999
+Divya Singh,divya@gmail.com,FinEdge Advisors,Finance,Professional,Active,₹2499
+Rohit Das,rohit@gmail.com,AutoDrive Motors,Automotive,Professional,Active,₹2499
+Neha Joshi,neha@gmail.com,TalentFlow HR,HR & Recruitment,Starter,Active,₹999
+Amit Kumar,amit@gmail.com,SwiftShip Logistics,Logistics,Enterprise,Paused,₹4999`;
+  parseCsv(sample, 'sample-data.csv');
+};
+
+function renderCsvTable(rows, filter=''){
+  const main = document.getElementById('csv-main-content');
+  if(!main) return;
+  const h = csvData.headers; const filename = csvData.filename;
+  let filtered = filter
+    ? rows.filter(r=>r.some(c=>(c||'').toLowerCase().includes(filter.toLowerCase())))
+    : rows;
+
+  /* Sort */
+  if(csvSortCol >= 0){
+    filtered = [...filtered].sort((a,b)=>{
+      const av=a[csvSortCol]||'', bv=b[csvSortCol]||'';
+      const n=parseFloat(av.replace(/[^0-9.]/g,'')), m=parseFloat(bv.replace(/[^0-9.]/g,''));
+      if(!isNaN(n)&&!isNaN(m)) return csvSortAsc ? n-m : m-n;
+      return csvSortAsc ? av.localeCompare(bv) : bv.localeCompare(av);
+    });
+  }
+
+  document.getElementById('csv-subtitle').textContent = filename+' · '+csvData.rows.length+' rows · '+h.length+' columns';
+  main.innerHTML = `
+    <div class="csv-toolbar">
+      <input class="csv-search-box" placeholder="🔍 Search in data..." oninput="renderCsvTable(csvData.rows,this.value)" value="${escHtml(filter)}">
+      <div class="csv-info-pill">${filtered.length} / ${csvData.rows.length} rows</div>
+      <button class="csv-export-btn" onclick="exportCsvData()">⬇ Export CSV</button>
+      <button class="csv-export-btn" style="background:var(--text3)" onclick="resetCsvViewer()">↺ Load New</button>
+    </div>
+    <div class="csv-body">
+      ${filtered.length === 0 ? `<div class="csv-empty"><div class="csv-empty-icon">🔍</div>No rows match your search.</div>` : `
+      <table class="csv-table">
+        <thead><tr>${h.map((col,i)=>`<th onclick="sortCsvCol(${i})" class="${csvSortCol===i?'sorted':''}">${escHtml(col)}<span class="sort-arrow">${csvSortCol===i?(csvSortAsc?'↑':'↓'):'↕'}</span></th>`).join('')}</tr></thead>
+        <tbody>${filtered.map(row=>`<tr>${h.map((_,i)=>`<td title="${escHtml(row[i]||'')}">${escHtml(row[i]||'—')}</td>`).join('')}</tr>`).join('')}</tbody>
+      </table>`}
+    </div>`;
+}
+
+window.sortCsvCol = function(col){
+  if(csvSortCol===col) csvSortAsc=!csvSortAsc;
+  else { csvSortCol=col; csvSortAsc=true; }
+  renderCsvTable(csvData.rows, document.querySelector('.csv-search-box')?.value||'');
+};
+window.exportCsvData = function(){
+  if(!csvData.rows.length){ showToast('⚠️','No data to export'); return; }
+  const lines=[csvData.headers.join(','),...csvData.rows.map(r=>r.map(c=>'"'+(c||'').replace(/"/g,'""')+'"').join(','))];
+  const blob=new Blob([lines.join('\n')],{type:'text/csv'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download='bartaflow-export-'+Date.now()+'.csv'; a.click();
+  URL.revokeObjectURL(url);
+  showToast('⬇','Exported '+csvData.rows.length+' rows');
+};
+window.resetCsvViewer = function(){
+  csvData={headers:[],rows:[],filename:''};
+  csvSortCol=-1; csvSortAsc=true;
+  document.getElementById('csv-subtitle').textContent='Upload or load data.csv';
+  const main=document.getElementById('csv-main-content');
+  main.innerHTML=`<div class="csv-upload-area" id="csv-upload-area" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="handleCsvDrop(event)">
+    <div class="csv-upload-icon">📁</div><div class="csv-upload-title">Load your data.csv file</div>
+    <div class="csv-upload-sub">Drag & drop a CSV file here, or click to browse.<br>Supports any CSV with headers in the first row.</div>
+    <input type="file" id="csv-file-input" accept=".csv,.txt" style="display:none" onchange="handleCsvFile(this.files[0])">
+    <button class="csv-upload-btn" onclick="document.getElementById('csv-file-input').click()">📂 Browse File</button>
+    <button class="csv-sample-btn" onclick="loadSampleCsv()">Load Sample Data</button>
+  </div>`;
+};
+function showCsvError(msg){
+  const main=document.getElementById('csv-main-content');
+  const esc=escHtml(msg);
+  main.innerHTML=`<div class="csv-error-box"><span style="font-size:18px;flex-shrink:0">⚠️</span><div><strong>Error loading file</strong><br>${esc}</div></div>
+    <div class="csv-upload-area" id="csv-upload-area" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="handleCsvDrop(event)">
+    <div class="csv-upload-icon">📁</div><div class="csv-upload-title">Try another file</div>
+    <div class="csv-upload-sub">Please check the file and try again, or load sample data.</div>
+    <input type="file" id="csv-file-input" accept=".csv,.txt" style="display:none" onchange="handleCsvFile(this.files[0])">
+    <button class="csv-upload-btn" onclick="document.getElementById('csv-file-input').click()">📂 Browse File</button>
+    <button class="csv-sample-btn" onclick="loadSampleCsv()">Load Sample Data</button>
+  </div>`;
+}
+
+// Keep old password strength listener for compatibility
 (function(){
   const pw=document.getElementById('su-password');
-  if(!pw) return;
-  pw.addEventListener('input',function(){
-    const hint=document.getElementById('pw-strength-hint'); const v=this.value;
-    if(!v.length){hint.textContent='Use 8+ characters with letters and numbers';hint.style.color='';return;}
-    if(v.length<6){hint.textContent='Too short — keep going';hint.style.color='#e11d48';}
-    else if(v.length<8){hint.textContent='Almost there';hint.style.color='#f59e0b';}
-    else if(!/(?=.*[a-zA-Z])(?=.*[0-9])/.test(v)){hint.textContent='Good — add a number for extra strength';hint.style.color='#f59e0b';}
-    else{hint.textContent='✓ Strong password';hint.style.color='#10b981';}
-  });
+  if(pw){
+    pw.addEventListener('input',function(){ updatePwStrength(this,'su-password'); checkConfirmPw(); });
+  }
 })();
+
 
 // ════════════════════════════════════════
 // SCHEDULE DEMO MODAL
@@ -2466,7 +3630,227 @@ document.querySelectorAll('.bot-card').forEach((card, i) => {
   cardObserver.observe(card);
 });
 
-document.addEventListener('keydown', e=>{ if(e.key==='Escape'){closeAuth();closeDemoSched();closeModalDirect();closeLeadsPanel();} });
+
+document.addEventListener('keydown', e=>{ if(e.key==='Escape'){closeAuth();closeDemoSched();closeModalDirect();closeLeadsPanel();closeCsvViewer();} });
+
+// ════════════════════════════════════════
+// GLOBAL OVERFLOW SAFETY NET
+// Guarantees body scroll is never permanently locked
+// ════════════════════════════════════════
+(function(){
+  // Unlock scroll whenever the tab becomes visible again
+  document.addEventListener('visibilitychange', function(){
+    if(document.visibilityState === 'visible'){
+      // Only unlock if no modal is currently open
+      var anyOpen = document.querySelector(
+        '.auth-overlay.open, .demo-sched-overlay.open, .leads-overlay.open, .csv-overlay.open, .va-overlay.open, .modal-overlay.open'
+      );
+      if(!anyOpen){
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+      }
+    }
+  });
+
+  // Unlock before page is hidden/refreshed
+  window.addEventListener('pagehide', function(){
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+  });
+
+  // Unlock on back/forward navigation
+  window.addEventListener('pageshow', function(){
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+  });
+
+  // Periodic check every 3s — catch any edge case
+  setInterval(function(){
+    var anyOpen = document.querySelector(
+      '.auth-overlay.open, .demo-sched-overlay.open, .leads-overlay.open, .csv-overlay.open, .va-overlay.open, .modal-overlay.open'
+    );
+    if(!anyOpen && document.body.style.overflow === 'hidden'){
+      document.body.style.overflow = '';
+    }
+  }, 3000);
+})();
+
+
+// ════════════════════════════════════════
+// REAL AI VOICE AGENT ENGINE
+// Uses: Web Speech API (SpeechSynthesis + SpeechRecognition)
+// ════════════════════════════════════════
+(function(){
+  let vaState={lang:'en-IN',langName:'English',gender:'male',topic:'sales',callActive:false,muted:false,speakerOn:true,callSeconds:0,callTimer:null,currentUtterance:null,recognition:null,agentSpeaking:false,userSpeaking:false};
+
+  const SCRIPTS={
+    'en-IN':{
+      greeting:"Hello! I'm Aria, your BartaFlow AI assistant. How can I help you today?",
+      sales:[["I'm interested in a 3BHK property.","Wonderful! May I know your preferred area — New Town, Salt Lake, or Rajarhat? And your budget range?"],["New Town, around 70 lakhs.","Perfect! We have a 1,380 sqft east-facing flat in New Town for ₹72 lakh — RERA approved, ready to move. Would you like a site visit?"],["Yes, book a site visit.","Excellent! Can I have your name and preferred day — Saturday or Sunday works best?"]],
+      travel:[["I want to book a Maldives trip.","Wonderful! Our 5 night 6 day Maldives package is ₹65,000 per person with flights and water villa. When would you like to travel?"],["December 15th, for 2 people.","Perfect! Total is ₹1,30,000 for 2. Shall I block the dates and send the itinerary on WhatsApp?"],["Yes please.","Done! You'll receive the itinerary and payment link within 10 minutes. Is there anything else?"]],
+      health:[["I need to see a cardiologist.","Of course. Dr. Sharma is available Monday at 10 AM or Wednesday at 3 PM. Which works for you?"],["Monday 10 AM.","Confirmed! Appointment booked for Monday at 10 AM. You'll receive a WhatsApp confirmation. Shall I share your previous reports with Dr. Sharma?"],["Yes please.","Done! Records shared securely. Please arrive 15 minutes early. Anything else I can help with?"]],
+      ecom:[["Where is my order?","Sure! Please share your order number and I'll track it right away."],["Order BF-2847.","Found it! Your order left our Delhi warehouse this morning and will be delivered by 6 PM today. Shall I send the live tracking link on WhatsApp?"],["Yes.","Sent! Your tracking link is on WhatsApp. Anything else I can help with?"]],
+      edu:[["Tell me about your UPSC coaching.","We offer a 12-month UPSC program with 200+ live class hours, weekly tests and personal mentorship for ₹35,000. Would you like a free demo class?"],["Yes, when is the next one?","This Saturday at 11 AM. May I have your name and mobile number to register you?"],["Arjun, 9876543210.","Registered! Reminder and joining link will be sent to 9876543210. Is there anything else?"]],
+      bartaflow:[["Tell me about BartaFlow.","BartaFlow automates your WhatsApp business with AI — handling leads, bookings, sales and support 24/7 in 12+ languages. What industry is your business in?"],["I run a travel agency.","Our travel package starts at ₹2,499/month — GPT-4 chatbot, automated booking, lead capture and broadcast. Live in 48 hours. Would you like a free demo?"],["Yes, book a demo.","Excellent! May I have your name and email? We'll send a Google Meet invite right away."]],
+    },
+    'hi-IN':{
+      greeting:"नमस्ते! मैं आरिया हूँ, BartaFlow की AI असिस्टेंट। आज मैं आपकी कैसे मदद कर सकती हूँ?",
+      sales:[["मुझे एक 3BHK फ्लैट चाहिए।","बहुत बढ़िया! आप किस इलाके में ढूंढ रहे हैं — न्यू टाउन, साल्ट लेक, या राजारहाट? बजट क्या है?"],["न्यू टाउन में, लगभग 70 लाख।","शानदार! न्यू टाउन में 1,380 वर्ग फुट का पूर्वमुखी फ्लैट है 72 लाख में। RERA अप्रूव्ड। साइट विजिट बुक करूँ?"],["हाँ।","बिल्कुल! आपका नाम और पसंदीदा दिन बताएं — शनिवार या रविवार?"]],
+      travel:[["मुझे मालदीव जाना है।","बहुत खूब! 5 रात 6 दिन का पैकेज ₹65,000 प्रति व्यक्ति है, फ्लाइट और वाटर विला सहित। कब जाना चाहते हैं?"],["15 दिसंबर, 2 लोगों के लिए।","बढ़िया! कुल ₹1,30,000। तारीखें ब्लॉक करूँ और WhatsApp पर itinerary भेजूँ?"],["हाँ।","हो गया! 10 मिनट में payment link और itinerary मिलेगा।"]],
+      health:[["कार्डियोलॉजिस्ट से मिलना है।","बिल्कुल। डॉ. शर्मा सोमवार 10 बजे या बुधवार 3 बजे उपलब्ध हैं।"],["सोमवार 10 बजे।","कन्फर्म! अपॉइंटमेंट बुक हो गई। WhatsApp पर पुष्टि आएगी।"],["धन्यवाद।","स्वागत है! 15 मिनट पहले पहुँचें।"]],
+      ecom:[["मेरा ऑर्डर कहाँ है?","ज़रूर! ऑर्डर नंबर बताएं।"],["BF-2847।","मिल गया! आज शाम 6 बजे तक डिलीवरी होगी। WhatsApp पर live tracking link भेजूँ?"],["हाँ।","भेज दिया!"]],
+      edu:[["UPSC कोचिंग के बारे में बताएं।","12 महीने का प्रोग्राम ₹35,000 में — 200+ घंटे live classes, weekly tests, mentorship। Free demo चाहिए?"],["हाँ।","शनिवार 11 बजे है। नाम और मोबाइल नंबर दें।"],["अर्जुन, 9876543210।","रजिस्टर हो गए! reminder और joining link 9876543210 पर जाएगा।"]],
+      bartaflow:[["BartaFlow क्या है?","BartaFlow एक AI platform है जो WhatsApp business को automate करता है। 24/7, 12+ भाषाओं में। आपका business किस industry में है?"],["Travel agency।","शानदार! ₹2,499/month से शुरू। GPT-4 chatbot, booking, leads सब। 48 घंटे में live। Free demo?"],["हाँ।","नाम और email दें, Google Meet invite भेजूँगी।"]],
+    },
+    'bn-IN':{
+      greeting:"নমস্কার! আমি আরিয়া, BartaFlow-এর AI সহকারী। আজ কীভাবে সাহায্য করতে পারি?",
+      sales:[["3BHK ফ্ল্যাট দরকার।","চমৎকার! কোন এলাকায়? বাজেট কত?"],["নিউ টাউন, ৭০ লাখে।","দারুণ! ৭২ লাখে RERA অনুমোদিত ফ্ল্যাট আছে। সাইট ভিজিট?"],["হ্যাঁ।","অবশ্যই! নাম ও দিন বলুন।"]],
+      travel:[["মালদ্বীপ যেতে চাই।","অসাধারণ! ৬৫,০০০/জন, ফ্লাইটসহ। কখন?"],["১৫ ডিসেম্বর, ২ জন।","মোট ১,৩০,০০০। তারিখ ব্লক করব?"],["হ্যাঁ।","হয়েছে! WhatsApp-এ itinerary যাবে।"]],
+      health:[["কার্ডিওলজিস্ট দরকার।","সোমবার ১০টা বা বুধবার ৩টা।"],["সোমবার।","বুক হয়েছে!"],["ধন্যবাদ।","স্বাগতম!"]],
+      ecom:[["অর্ডার কোথায়?","নম্বর বলুন।"],["BF-2847।","আজ ৬টায় ডেলিভারি। ট্র্যাকিং লিংক?"],["হ্যাঁ।","পাঠানো হলো!"]],
+      edu:[["কোচিং সম্পর্কে বলুন।","১২ মাস, ৩৫,০০০ টাকা। ডেমো?"],["হ্যাঁ।","শনিবার ১১টায়। নাম ও নম্বর?"],["অর্জুন, ৯৮৭৬৫৪৩২১০।","নিবন্ধন হলো!"]],
+      bartaflow:[["BartaFlow কী?","WhatsApp AI platform — ২৪/৭, ১২+ ভাষায়। কোন শিল্পে?"],["ট্র্যাভেল এজেন্সি।","২,৪৯৯ টাকা/মাস। ৪৮ ঘণ্টায় লাইভ। ডেমো?"],["হ্যাঁ।","নাম ও ইমেইল দিন।"]],
+    },
+  };
+
+  const getGreeting=(lang)=>(SCRIPTS[lang]?.greeting)||SCRIPTS['en-IN'].greeting;
+  const getScript=(lang,topic)=>(SCRIPTS[lang]?.[topic])||SCRIPTS['en-IN'][topic]||SCRIPTS['en-IN'].bartaflow;
+
+  const synth=window.speechSynthesis;
+  let voices=[];
+  const loadVoices=()=>{ voices=synth?synth.getVoices():[]; };
+  if(synth){ loadVoices(); if(speechSynthesis.onvoiceschanged!==undefined) speechSynthesis.onvoiceschanged=loadVoices; }
+
+  function pickVoice(lang,gender){
+    if(!voices.length) loadVoices();
+    let pool=voices.filter(v=>v.lang.startsWith(lang.split('-')[0]));
+    if(!pool.length) pool=voices.filter(v=>v.lang.startsWith('en'));
+    if(!pool.length) return null;
+    const fKeys=['female','woman','girl','zira','susan','karen','samantha','victoria','moira','fiona','tessa','veena','heera','lekha','raveena'];
+    const mKeys=['male','man','david','mark','daniel','alex','fred','rishi','google','thomas'];
+    if(gender==='female'){ const f=pool.find(v=>fKeys.some(k=>v.name.toLowerCase().includes(k))); if(f) return f; return pool[pool.length-1]; }
+    const m=pool.find(v=>mKeys.some(k=>v.name.toLowerCase().includes(k)));
+    return m||pool[0];
+  }
+
+  function speak(text,onEnd){
+    if(!synth){ if(onEnd) onEnd(); return; }
+    synth.cancel();
+    const u=new SpeechSynthesisUtterance(text);
+    u.lang=vaState.lang; u.rate=0.93; u.pitch=vaState.gender==='female'?1.12:0.87;
+    u.volume=vaState.speakerOn&&!vaState.muted?1:0;
+    const v=pickVoice(vaState.lang,vaState.gender); if(v) u.voice=v;
+    u.onstart=()=>{ vaState.agentSpeaking=true; document.getElementById('va-agent-av')?.classList.add('speaking'); };
+    u.onend=u.onerror=()=>{ vaState.agentSpeaking=false; document.getElementById('va-agent-av')?.classList.remove('speaking'); if(onEnd) onEnd(); };
+    synth.speak(u); vaState.currentUtterance=u;
+  }
+
+  function buildWave(id,color,n){
+    const c=document.getElementById(id); if(!c) return; c.innerHTML='';
+    for(var i=0;i<n;i++){var b=document.createElement('div');b.className='va-bar';b.style.background=color;b.style.width='3px';b.style.height='4px';b.style.borderRadius='3px';c.appendChild(b);}
+  }
+  function animateWave(id,active,max){
+    document.querySelectorAll('#'+id+' .va-bar').forEach(function(b){ b.style.height = active ? (4+Math.random()*(max||32))+'px' : '4px'; });
+  }
+  function addMsg(role,text){
+    const tr=document.getElementById('va-transcript'); if(!tr) return;
+    const d=document.createElement('div'); d.className='va-msg '+(role==='agent'?'agent':'user');
+    d.innerHTML='<div class="va-msg-role">'+(role==='agent'?'AI AGENT':'YOU')+'</div><div class="va-msg-text">'+text+'</div>';
+    tr.appendChild(d); tr.scrollTop=tr.scrollHeight;
+  }
+  function showTyping(){ const tr=document.getElementById('va-transcript'); if(!tr) return; const d=document.createElement('div'); d.className='va-typing-msg'; d.id='va-typing'; d.innerHTML='<div class="va-typing-dot"></div><div class="va-typing-dot"></div><div class="va-typing-dot"></div>'; tr.appendChild(d); tr.scrollTop=tr.scrollHeight; }
+  function hideTyping(){ document.getElementById('va-typing')?.remove(); }
+  function setStatus(s){ const p=document.getElementById('va-status-pill'),t=document.getElementById('va-status-text'); if(!p||!t) return; p.className='va-call-status-pill '+s; t.textContent=s.toUpperCase(); }
+  function showStep(s){ ['setup','topic','call'].forEach(n=>{ document.getElementById('va-step-'+n).style.display=n===s?'block':'none'; }); }
+
+  window.openVoiceAgent=()=>{ document.getElementById('va-overlay').classList.add('open'); document.body.style.overflow='hidden'; showStep('setup'); loadVoices(); };
+  window.closeVoiceAgent=()=>{ endVoiceCall(); document.getElementById('va-overlay').classList.remove('open'); document.body.style.overflow=''; };
+  window.backToSetup=()=>showStep('setup');
+  window.goToTopicSelect=()=>showStep('topic');
+
+  window.selectLang=function(btn){ document.querySelectorAll('.va-lang-btn').forEach(b=>b.classList.remove('selected')); btn.classList.add('selected'); vaState.lang=btn.dataset.lang; vaState.langName=btn.dataset.name; };
+  window.selectVoice=function(g){
+    vaState.gender=g;
+    const mc=document.getElementById('va-card-male'),fc=document.getElementById('va-card-female');
+    mc.className='va-voice-card male'+(g==='male'?' selected':'');
+    fc.className='va-voice-card female'+(g==='female'?' selected':'');
+    const mck=mc.querySelector('.va-voice-check'),fck=fc.querySelector('.va-voice-check');
+    if(mck) mck.textContent=g==='male'?'✓':'';
+    if(fck) fck.textContent=g==='female'?'✓':'';
+  };
+  window.selectTopic=function(card){ document.querySelectorAll('.va-topic-card').forEach(c=>c.classList.remove('selected')); card.classList.add('selected'); vaState.topic=card.dataset.topic; };
+
+  let convStep=0,convScript=[];
+  window.startAICall=function(){
+    showStep('call'); convStep=0; convScript=getScript(vaState.lang,vaState.topic);
+    const av=document.getElementById('va-agent-av');
+    av.className='va-agent-av '+vaState.gender;
+    document.getElementById('va-agent-emoji').textContent=vaState.gender==='female'?'👩':'👨';
+    document.getElementById('va-agent-name').textContent=vaState.gender==='female'?'Aria (BartaFlow AI)':'Aryan (BartaFlow AI)';
+    document.getElementById('va-agent-lang-display').textContent=vaState.langName+' · '+(vaState.gender==='female'?'Female':'Male')+' Voice';
+    buildWave('va-agent-wave','var(--gold)',36); buildWave('va-user-wave','#60a5fa',36);
+    vaState.callActive=true; vaState.callSeconds=0;
+    document.getElementById('va-transcript').innerHTML='';
+    setStatus('connecting');
+    vaState.callTimer=setInterval(()=>{
+      vaState.callSeconds++;
+      const m=String(Math.floor(vaState.callSeconds/60)).padStart(2,'0'),s=String(vaState.callSeconds%60).padStart(2,'0');
+      const el=document.getElementById('va-call-timer'); if(el) el.textContent=m+':'+s;
+      if(vaState.agentSpeaking) animateWave('va-agent-wave',true,36); else animateWave('va-agent-wave',false);
+      if(vaState.userSpeaking) animateWave('va-user-wave',true,28); else animateWave('va-user-wave',false);
+    },100);
+    setTimeout(()=>{
+      setStatus('active');
+      const greeting=getGreeting(vaState.lang);
+      showTyping();
+      setTimeout(()=>{ hideTyping(); addMsg('agent',greeting); speak(greeting); },800);
+    },1200);
+  };
+
+  function processInput(text){
+    if(!text.trim()||!vaState.callActive) return;
+    vaState.userSpeaking=true; addMsg('user',text); setTimeout(()=>vaState.userSpeaking=false,600);
+    const step=convScript[convStep];
+    const reply=step?step[1]:(vaState.lang==='hi-IN'?'मैं समझ गई। क्या और कुछ जानना चाहते हैं?':vaState.lang==='bn-IN'?'বুঝেছি। আর কিছু জানতে চান?':'I understand. Is there anything else I can help you with?');
+    if(step) convStep++;
+    showTyping(); setTimeout(()=>{ hideTyping(); addMsg('agent',reply); speak(reply); },900+Math.random()*400);
+  }
+
+  window.sendVoiceMsg=function(){ const inp=document.getElementById('va-text-input'); if(!inp||!inp.value.trim()) return; const t=inp.value.trim(); inp.value=''; processInput(t); };
+
+  let micOn=false;
+  window.toggleMic=function(){
+    if(!vaState.callActive) return;
+    const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+    if(!SR){ showToast('⚠️','Speech recognition not supported. Please type your message.'); return; }
+    const btn=document.getElementById('va-mic-btn');
+    if(micOn){ vaState.recognition?.stop(); micOn=false; btn.classList.remove('listening'); btn.textContent='🎙️'; return; }
+    micOn=true; btn.classList.add('listening'); btn.textContent='🔴';
+    const rec=new SR(); vaState.recognition=rec; rec.lang=vaState.lang; rec.interimResults=false;
+    rec.onresult=e=>{ const t=e.results[0][0].transcript; document.getElementById('va-text-input').value=t; micOn=false; btn.classList.remove('listening'); btn.textContent='🎙️'; vaState.userSpeaking=true; setTimeout(()=>{ sendVoiceMsg(); vaState.userSpeaking=false; },200); };
+    rec.onerror=rec.onend=()=>{ micOn=false; btn.classList.remove('listening'); btn.textContent='🎙️'; };
+    rec.start(); showToast('🎙️','Listening... speak now');
+  };
+
+  window.toggleMute=function(){ vaState.muted=!vaState.muted; const c=document.getElementById('va-mute-circle'); if(c){c.textContent=vaState.muted?'🔕':'🔇';c.classList.toggle('active',vaState.muted);} showToast(vaState.muted?'🔕':'🔇',vaState.muted?'Microphone muted':'Microphone unmuted'); };
+  window.toggleSpeaker=function(){ vaState.speakerOn=!vaState.speakerOn; const c=document.getElementById('va-spk-circle'); if(c) c.textContent=vaState.speakerOn?'🔊':'🔈'; showToast(vaState.speakerOn?'🔊':'🔈',vaState.speakerOn?'Speaker on':'Speaker off'); };
+
+  window.endVoiceCall=function(){
+    synth?.cancel(); vaState.recognition?.stop();
+    if(vaState.callTimer) clearInterval(vaState.callTimer);
+    vaState.callActive=vaState.agentSpeaking=vaState.userSpeaking=false; micOn=false;
+    setStatus('ended');
+    const bye=vaState.lang==='hi-IN'?'धन्यवाद! BartaFlow को call करने के लिए शुक्रिया। आपका दिन शुभ हो!':vaState.lang==='bn-IN'?'ধন্যবাদ! BartaFlow-কে call করার জন্য কৃতজ্ঞ। শুভ দিন!':'Thank you for calling BartaFlow! Have a wonderful day. Goodbye!';
+    addMsg('agent',bye);
+    animateWave('va-agent-wave',false); animateWave('va-user-wave',false);
+    const mic=document.getElementById('va-mic-btn'); if(mic){mic.classList.remove('listening');mic.textContent='🎙️';}
+    setTimeout(()=>{ closeVoiceAgent(); showStep('setup'); convStep=0; },2200);
+    showToast('📵','Call ended. Thank you!');
+  };
+
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&document.getElementById('va-overlay')?.classList.contains('open')) closeVoiceAgent(); });
+  selectVoice('male');
+})();
 
 // ════════════════════════════════════════
 // FAQ ACCORDION
@@ -2533,38 +3917,90 @@ document.addEventListener('keydown', e=>{ if(e.key==='Escape'){closeAuth();close
   if(faqList) faqObserver.observe(faqList);
 })();
 
+// ── Smooth scroll for anchor clicks only (not on reload) ──────────────
+document.addEventListener('click', function(e){
+  var a = e.target.closest('a[href^="#"]');
+  if(!a) return;
+  var id = a.getAttribute('href');
+  if(!id || id === '#' || id.length < 2) return;
+  var target = document.querySelector(id);
+  if(!target) return;
+  e.preventDefault();
+  target.scrollIntoView({behavior:'smooth', block:'start'});
+  if(typeof closeMobileMenu === 'function') closeMobileMenu();
+});
+
+/* ══ PRELOADER — bulletproof, never hangs ══ */
 (function(){
+  // Immediately ensure body is scrollable (in case previous session left it locked)
+  document.body.style.overflow = '';
+  document.documentElement.style.overflow = '';
+
   const pl = document.getElementById('preloader');
-  if(!pl) return;
-  // Hide after page load (minimum 1.1s for bar animation to complete)
-  const hide = () => { pl.classList.add('hidden'); document.body.style.overflow = ''; };
+  if(!pl){ return; }
+
+  let hidden = false;
+  const hide = function(){
+    if(hidden) return;
+    hidden = true;
+    pl.classList.add('hidden');
+    // Guarantee body scroll is restored
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+    // Remove from DOM completely after fade-out to free memory
+    setTimeout(function(){ if(pl.parentNode) pl.parentNode.removeChild(pl); }, 600);
+  };
+
+  // Hide after 1.15s minimum (animation duration) once page is ready
   if(document.readyState === 'complete'){
     setTimeout(hide, 1150);
   } else {
-    window.addEventListener('load', () => setTimeout(hide, 1150));
+    window.addEventListener('load', function(){ setTimeout(hide, 1150); }, {once:true});
   }
-  // Fallback: always hide after 2.5s
-  setTimeout(hide, 2500);
+
+  // Hard failsafe: always hide by 2s no matter what
+  setTimeout(hide, 2000);
+
+  // Extra failsafe: hide if user interacts (scroll/click/key)
+  var earlyHide = function(){ if(!hidden) setTimeout(hide, 100); };
+  document.addEventListener('scroll', earlyHide, {once:true, passive:true});
+  document.addEventListener('keydown', earlyHide, {once:true});
+  document.addEventListener('pointerdown', earlyHide, {once:true});
 })();
 
+
 // ════════════════════════════════════════
-// FEATURE 2 · DARK THEME TOGGLE
+// FEATURE 2 · DARK THEME TOGGLE (safe — no flash, no load block)
 // ════════════════════════════════════════
 (function(){
   const btn = document.getElementById('theme-toggle');
+
+  // Restore saved theme instantly — NO transition class yet (prevents flash on load)
   const saved = localStorage.getItem('bf-theme');
-  if(saved === 'dark'){ document.body.setAttribute('data-theme','dark'); if(btn) btn.textContent='🌙'; }
+  if(saved === 'dark'){
+    document.body.setAttribute('data-theme','dark');
+    if(btn) btn.textContent = '🌙';
+  } else {
+    if(btn) btn.textContent = '☀️';
+  }
+
+  // Enable smooth transitions AFTER initial render (next frame)
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      document.body.classList.add('theme-ready');
+    });
+  });
 
   window.toggleTheme = function(){
     const isDark = document.body.getAttribute('data-theme') === 'dark';
     if(isDark){
       document.body.removeAttribute('data-theme');
       localStorage.setItem('bf-theme','light');
-      if(btn) btn.textContent='☀️';
+      if(btn) btn.textContent = '☀️';
     } else {
       document.body.setAttribute('data-theme','dark');
       localStorage.setItem('bf-theme','dark');
-      if(btn) btn.textContent='🌙';
+      if(btn) btn.textContent = '🌙';
     }
   };
 })();
