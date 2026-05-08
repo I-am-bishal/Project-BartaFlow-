@@ -3296,12 +3296,34 @@
       --smoke: #1a2235;
       --smoke2: #1e2a40;
       --text: #e8ecf4;
-      --text2: #8b9ab8;
-      --text3: #4a5878;
+      --text2: #a5b4cc; /* Lighter than #8b9ab8 for better contrast */
+      --text3: #718096; /* Lighter than #4a5878 for better contrast */
       --border: #1e2d4a;
       --border2: #253660;
       --sh: 0 4px 24px rgba(0, 0, 0, .4);
       --sh-lg: 0 16px 56px rgba(0, 0, 0, .5);
+    }
+
+    [data-theme="dark"] .section-h,
+    [data-theme="dark"] .logo-name,
+    [data-theme="dark"] .bot-name,
+    [data-theme="dark"] .feat-title,
+    [data-theme="dark"] .ind-name,
+    [data-theme="dark"] .test-name,
+    [data-theme="dark"] .price-amt,
+    [data-theme="dark"] .lead-name,
+    [data-theme="dark"] .faq-brand-name,
+    [data-theme="dark"] .btn-ghost,
+    [data-theme="dark"] .bot-demo-btn,
+    [data-theme="dark"] .nav-links a:hover,
+    [data-theme="dark"] .auth-tab.active {
+      color: var(--text) !important;
+    }
+
+    [data-theme="dark"] .section-sub,
+    [data-theme="dark"] .bot-features,
+    [data-theme="dark"] .footer-desc {
+      color: var(--text2) !important;
     }
 
     [data-theme="dark"] nav {
@@ -4830,11 +4852,11 @@
     }
 
     [data-theme="dark"] .feat-desc {
-      color: #8b9ab8
+      color: var(--text2)
     }
 
     [data-theme="dark"] .feat-num {
-      color: #4a5878
+      color: var(--text3)
     }
 
     [data-theme="dark"] .feat-icon-wrap {
@@ -4842,7 +4864,7 @@
     }
 
     [data-theme="dark"] .ma-label {
-      color: #4a5478
+      color: var(--text3)
     }
 
     [data-theme="dark"] .ma-track {
@@ -4850,7 +4872,7 @@
     }
 
     [data-theme="dark"] .ma-pct {
-      color: #8b9ab8
+      color: var(--text2)
     }
 
     [data-theme="dark"] .lang-pill {
@@ -4869,15 +4891,15 @@
     }
 
     [data-theme="dark"] .ind-desc {
-      color: #8b9ab8
+      color: var(--text2)
     }
 
     [data-theme="dark"] .ind-feat {
-      color: #4a5878
+      color: var(--text3)
     }
 
     [data-theme="dark"] .ind-price {
-      color: #4a5878;
+      color: var(--text3);
       border-top-color: var(--border)
     }
 
@@ -4891,11 +4913,11 @@
     }
 
     [data-theme="dark"] .step-desc {
-      color: #8b9ab8
+      color: var(--text2)
     }
 
     [data-theme="dark"] .step-n {
-      color: #4a5878
+      color: var(--text3)
     }
 
     [data-theme="dark"] .dashboard-mock .dm-mv {
@@ -4903,15 +4925,15 @@
     }
 
     [data-theme="dark"] .dashboard-mock .dm-ml {
-      color: #4a5878 !important
+      color: var(--text3) !important
     }
 
     [data-theme="dark"] .dm-bar-label {
-      color: #4a5878
+      color: var(--text3)
     }
 
     [data-theme="dark"] .dm-bar-pct {
-      color: #8b9ab8
+      color: var(--text2)
     }
 
     [data-theme="dark"] .dm-title {
@@ -4920,7 +4942,7 @@
 
     /* Pricing */
     [data-theme="dark"] .price-tier {
-      color: #8b9ab8
+      color: var(--text2)
     }
 
     [data-theme="dark"] .price-amt {
@@ -4928,11 +4950,11 @@
     }
 
     [data-theme="dark"] .price-per {
-      color: #8b9ab8
+      color: var(--text2)
     }
 
     [data-theme="dark"] .price-setup {
-      color: #4a5878;
+      color: var(--text3);
       border-bottom-color: var(--border)
     }
 
@@ -4941,11 +4963,11 @@
     }
 
     [data-theme="dark"] .pf {
-      color: #8b9ab8
+      color: var(--text2)
     }
 
     [data-theme="dark"] .pf.no {
-      color: #4a5478
+      color: var(--text3)
     }
 
     [data-theme="dark"] .price-btn {
