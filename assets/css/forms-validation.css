@@ -1,0 +1,160 @@
+/* ── FORM VALIDATION & OTP ─────────── */
+.theme-ready * {
+  transition: background-color .28s ease, color .28s ease, border-color .28s ease;
+}
+
+.pl-bar, .wbar, .fch-typing-dot, .td, .live-dot, .sys-dot, .va-bar, .pw-strength-fill {
+  transition: none !important;
+}
+
+.gmail-badge {
+  font-size: 9px;
+  font-family: 'DM Mono', monospace;
+  background: rgba(59, 130, 246, .1);
+  border: 1px solid rgba(59, 130, 246, .2);
+  color: #1d4ed8;
+  padding: 2px 7px;
+  border-radius: 3px;
+  letter-spacing: .3px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+[data-theme="dark"] .gmail-badge {
+  background: rgba(59, 130, 246, .15);
+  color: #93c5fd;
+  border-color: rgba(59, 130, 246, .3);
+}
+
+.field-hint {
+  font-size: 11px;
+  margin-top: 5px;
+  min-height: 16px;
+  line-height: 1.4;
+  transition: color .2s;
+}
+
+.field-hint.ok { color: var(--green); }
+.field-hint.err { color: var(--rose); }
+.field-hint.neutral { color: var(--text3); }
+
+.field-status-icon {
+  position: absolute;
+  right: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  pointer-events: none;
+  transition: opacity .2s;
+}
+
+.form-input.valid {
+  border-color: var(--green) !important;
+  background: rgba(16, 185, 129, .03);
+}
+
+.form-input.invalid {
+  border-color: var(--rose) !important;
+  background: rgba(244, 63, 94, .03);
+}
+
+.pw-strength-bar {
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 6px;
+}
+
+.pw-strength-fill {
+  height: 100%;
+  border-radius: 2px;
+  width: 0;
+  transition: width .4s ease, background .4s ease;
+}
+
+.fp-back-btn {
+  width: 100%;
+  padding: 11px;
+  background: transparent;
+  color: var(--text2);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all .2s;
+}
+
+.fp-back-btn:hover {
+  border-color: var(--border2);
+  color: var(--navy);
+}
+
+[data-theme="dark"] .fp-back-btn {
+  color: var(--text2);
+  border-color: var(--border2);
+}
+
+[data-theme="dark"] .fp-back-btn:hover {
+  color: var(--text);
+}
+
+.otp-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.otp-box {
+  flex: 1;
+  height: 48px;
+  border: 1.5px solid var(--border);
+  border-radius: 9px;
+  text-align: center;
+  font-size: 20px;
+  font-family: 'DM Mono', monospace;
+  font-weight: 700;
+  color: var(--navy);
+  background: var(--white);
+  outline: none;
+  transition: all .2s;
+  caret-color: transparent;
+}
+
+.otp-box:focus {
+  border-color: var(--navy);
+  box-shadow: 0 0 0 3px rgba(10, 22, 40, .07);
+}
+
+.otp-box.filled {
+  border-color: var(--green);
+  background: rgba(16, 185, 129, .04);
+  color: var(--green);
+}
+
+[data-theme="dark"] .otp-box {
+  background: var(--smoke2);
+  color: var(--text);
+  border-color: var(--border2);
+}
+
+[data-theme="dark"] .otp-box:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, .1);
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, .3);
+  border-top-color: var(--white);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
