@@ -1,0 +1,95 @@
+/* ── PRELOADER ───────────────────────── */
+#preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: var(--navy);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  transition: opacity .5s ease, visibility .5s ease;
+}
+
+#preloader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.pl-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: plPulse 1s ease infinite alternate;
+}
+
+@keyframes plPulse {
+  from {
+    opacity: .7;
+    transform: scale(.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.pl-logo-box {
+  width: 44px;
+  height: 44px;
+  background: var(--gold);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 30px rgba(201, 168, 76, .3);
+}
+
+.pl-logo-box svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--navy);
+}
+
+.pl-logo-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -1px;
+}
+
+.pl-bar {
+  width: 140px;
+  height: 2px;
+  background: rgba(255, 255, 255, .05);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.pl-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 40%;
+  background: var(--gold);
+  border-radius: 2px;
+  animation: plProgress 2s ease infinite;
+}
+
+@keyframes plProgress {
+  0% { left: -40%; }
+  100% { left: 100%; }
+}
+
+.pl-status {
+  font-size: 10px;
+  font-family: 'DM Mono', monospace;
+  color: rgba(255, 255, 255, .3);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}

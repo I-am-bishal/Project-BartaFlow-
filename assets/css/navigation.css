@@ -1,0 +1,117 @@
+/* ── NAV ─────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  padding: 0 64px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow .3s;
+}
+
+nav.scrolled {
+  box-shadow: var(--sh);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logo-box {
+  width: 36px;
+  height: 36px;
+  background: var(--navy);
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-box svg {
+  width: 19px;
+  height: 19px;
+  fill: var(--gold);
+}
+
+.logo-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.logo-v {
+  font-size: 9px;
+  font-family: 'DM Mono', monospace;
+  color: var(--gold);
+  margin-left: 2px;
+  vertical-align: super;
+  letter-spacing: .5px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  margin: 0 auto;
+}
+
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text2);
+  text-decoration: none;
+  transition: color .2s;
+  letter-spacing: .1px;
+}
+
+.nav-links a:hover {
+  color: var(--navy);
+}
+
+.nav-right {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.btn-ghost {
+  padding: 8px 18px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--navy);
+  text-decoration: none;
+  border: 1px solid var(--border2);
+  transition: all .2s;
+}
+
+.btn-ghost:hover {
+  border-color: var(--navy);
+}
+
+.btn-solid {
+  padding: 8px 20px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--white);
+  background: var(--navy);
+  text-decoration: none;
+  transition: all .2s;
+}
+
+.btn-solid:hover {
+  background: var(--navy3);
+  box-shadow: 0 4px 18px rgba(10, 22, 40, .25);
+}

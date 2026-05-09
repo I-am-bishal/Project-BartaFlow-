@@ -1,0 +1,197 @@
+/* ── TOP 10 BOTS ─────────────────────── */
+.bots-section {
+  padding: 100px 64px;
+  background: var(--smoke);
+  position: relative;
+  z-index: 10;
+}
+
+.bots-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 56px;
+}
+
+.bots-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.bot-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 20px;
+  transition: all .3s;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.bot-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: 16px 16px 0 0;
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+.bot-card:hover {
+  box-shadow: var(--sh-lg);
+  transform: translateY(-6px) rotateX(2deg);
+  border-color: transparent;
+}
+
+.bot-card:hover::before {
+  opacity: 1;
+}
+
+.bot-rank {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 9px;
+  font-family: 'DM Mono', monospace;
+  color: var(--text3);
+  letter-spacing: .5px;
+}
+
+.bot-icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.bot-industry {
+  font-size: 9px;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 8px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.bot-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px;
+  letter-spacing: -.3px;
+  line-height: 1.2;
+}
+
+.bot-features {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 14px;
+  flex: 1;
+}
+
+.bf {
+  font-size: 10px;
+  font-family: 'DM Mono', monospace;
+  color: var(--text2);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.bf::before {
+  content: '✓';
+  color: var(--gold);
+  font-size: 9px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.bot-demo-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 8px;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  color: var(--navy);
+  background: transparent;
+  cursor: pointer;
+  transition: all .2s;
+  font-family: 'DM Sans', sans-serif;
+  margin-top: auto;
+}
+
+.bot-demo-btn:hover {
+  background: var(--navy);
+  color: var(--white);
+  border-color: var(--navy);
+}
+
+/* second row: bots 6-10 */
+.bots-row2 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-top: 16px;
+}
+
+/* Bot color variants */
+.bc-re .bot-card::before,
+.bc-re .bot-industry {
+  background: rgba(244, 63, 94, .08);
+  color: #f43f5e;
+}
+
+.bc-re .bot-card::before {
+  background: var(--rose);
+}
+
+.bc-ec .bot-card::before {
+  background: var(--green);
+}
+
+.bc-ec .bot-industry {
+  background: rgba(16, 185, 129, .08);
+  color: var(--green);
+}
+
+.bc-hc .bot-card::before {
+  background: var(--blue);
+}
+
+.bc-hc .bot-industry {
+  background: rgba(59, 130, 246, .08);
+  color: var(--blue);
+}
+
+.bc-ed .bot-card::before {
+  background: var(--amber);
+}
+
+.bc-ed .bot-industry {
+  background: rgba(245, 158, 11, .08);
+  color: var(--amber);
+}
+
+.bc-rs .bot-card::before {
+  background: var(--purple);
+}
+
+.bc-rs .bot-industry {
+  background: rgba(139, 92, 246, .08);
+  color: var(--purple);
+}

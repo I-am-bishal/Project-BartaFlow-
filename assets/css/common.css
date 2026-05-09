@@ -1,0 +1,81 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --navy: #0a1628;
+  --navy2: #0f2040;
+  --navy3: #162a52;
+  --gold: #c9a84c;
+  --gold2: #e8c96a;
+  --gold-light: #f5e8c2;
+  --white: #ffffff;
+  --smoke: #f6f8fc;
+  --smoke2: #edf0f7;
+  --text: #0a1628;
+  --text2: #4a5878;
+  --text3: #8a96b0;
+  --border: #dde2ee;
+  --border2: #c8d0e0;
+  --green: #10b981;
+  --blue: #3b82f6;
+  --rose: #f43f5e;
+  --amber: #f59e0b;
+  --purple: #8b5cf6;
+  --teal: #06b6d4;
+  --sh: 0 4px 24px rgba(10, 22, 40, 0.09);
+  --sh-lg: 0 16px 56px rgba(10, 22, 40, 0.14);
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  background: var(--white);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Section Commons */
+.section-label {
+  font-size: 10px;
+  font-family: 'DM Mono', monospace;
+  color: var(--gold);
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.section-h {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 2.8vw, 44px);
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -1.2px;
+  line-height: 1.12;
+  margin-bottom: 12px;
+}
+
+.section-sub {
+  font-size: 15px;
+  color: var(--text2);
+  font-weight: 300;
+  line-height: 1.75;
+  max-width: 540px;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .65s ease, transform .65s ease;
+}
+
+.reveal.up {
+  opacity: 1;
+  transform: translateY(0);
+}
