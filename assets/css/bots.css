@@ -3,20 +3,20 @@
   padding: 100px 64px;
   background: var(--smoke);
   position: relative;
-  z-index: 10;
+  z-index: 10
 }
 
 .bots-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 56px;
+  margin-bottom: 56px
 }
 
 .bots-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
+  gap: 16px
 }
 
 .bot-card {
@@ -29,7 +29,7 @@
   position: relative;
   overflow: hidden;
   display: flex;
-  flex-direction: column;
+  flex-direction: column
 }
 
 .bot-card::before {
@@ -41,17 +41,17 @@
   height: 3px;
   border-radius: 16px 16px 0 0;
   opacity: 0;
-  transition: opacity .3s;
+  transition: opacity .3s
 }
 
 .bot-card:hover {
   box-shadow: var(--sh-lg);
   transform: translateY(-6px) rotateX(2deg);
-  border-color: transparent;
+  border-color: transparent
 }
 
 .bot-card:hover::before {
-  opacity: 1;
+  opacity: 1
 }
 
 .bot-rank {
@@ -61,13 +61,13 @@
   font-size: 9px;
   font-family: 'DM Mono', monospace;
   color: var(--text3);
-  letter-spacing: .5px;
+  letter-spacing: .5px
 }
 
 .bot-icon {
   font-size: 28px;
   margin-bottom: 12px;
-  display: block;
+  display: block
 }
 
 .bot-industry {
@@ -79,7 +79,7 @@
   margin-bottom: 8px;
   padding: 3px 8px;
   border-radius: 4px;
-  display: inline-block;
+  display: inline-block
 }
 
 .bot-name {
@@ -89,7 +89,7 @@
   color: var(--navy);
   margin-bottom: 8px;
   letter-spacing: -.3px;
-  line-height: 1.2;
+  line-height: 1.2
 }
 
 .bot-features {
@@ -97,7 +97,7 @@
   flex-direction: column;
   gap: 4px;
   margin-bottom: 14px;
-  flex: 1;
+  flex: 1
 }
 
 .bf {
@@ -106,7 +106,7 @@
   color: var(--text2);
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 5px
 }
 
 .bf::before {
@@ -114,7 +114,7 @@
   color: var(--gold);
   font-size: 9px;
   font-weight: 700;
-  flex-shrink: 0;
+  flex-shrink: 0
 }
 
 .bot-demo-btn {
@@ -132,66 +132,225 @@
   cursor: pointer;
   transition: all .2s;
   font-family: 'DM Sans', sans-serif;
-  margin-top: auto;
+  margin-top: auto
 }
 
 .bot-demo-btn:hover {
   background: var(--navy);
   color: var(--white);
-  border-color: var(--navy);
+  border-color: var(--navy)
 }
 
-/* second row: bots 6-10 */
+/* Second row: bots 6-10 */
 .bots-row2 {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 16px;
-  margin-top: 16px;
+  margin-top: 16px
 }
 
 /* Bot color variants */
 .bc-re .bot-card::before,
 .bc-re .bot-industry {
   background: rgba(244, 63, 94, .08);
-  color: #f43f5e;
+  color: #f43f5e
 }
 
-.bc-re .bot-card::before {
-  background: var(--rose);
+.bc-re .bot-card::before { background: var(--rose) }
+
+.bc-ec .bot-card::before { background: var(--green) }
+.bc-ec .bot-industry { background: rgba(16, 185, 129, .08); color: var(--green) }
+
+.bc-hc .bot-card::before { background: var(--blue) }
+.bc-hc .bot-industry { background: rgba(59, 130, 246, .08); color: var(--blue) }
+
+.bc-ed .bot-card::before { background: var(--amber) }
+.bc-ed .bot-industry { background: rgba(245, 158, 11, .08); color: var(--amber) }
+
+.bc-rs .bot-card::before { background: var(--purple) }
+.bc-rs .bot-industry { background: rgba(139, 92, 246, .08); color: var(--purple) }
+
+.bc-tr .bot-card::before { background: var(--teal) }
+.bc-tr .bot-industry { background: rgba(6, 182, 212, .08); color: var(--teal) }
+
+.bc-fn .bot-card::before { background: #10b981 }
+.bc-fn .bot-industry { background: rgba(16, 185, 129, .08); color: #10b981 }
+
+.bc-au .bot-card::before { background: #6366f1 }
+.bc-au .bot-industry { background: rgba(99, 102, 241, .08); color: #6366f1 }
+
+.bc-hr .bot-card::before { background: #ec4899 }
+.bc-hr .bot-industry { background: rgba(236, 72, 153, .08); color: #ec4899 }
+
+.bc-lo .bot-card::before { background: #f97316 }
+.bc-lo .bot-industry { background: rgba(249, 115, 22, .08); color: #f97316 }
+
+/* ── DEMO MODAL ──────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 22, 40, .75);
+  backdrop-filter: blur(8px);
+  z-index: 900;
+  display: none;
+  align-items: center;
+  justify-content: center
 }
 
-.bc-ec .bot-card::before {
-  background: var(--green);
+.modal-overlay.open {
+  display: flex
 }
 
-.bc-ec .bot-industry {
-  background: rgba(16, 185, 129, .08);
-  color: var(--green);
+.demo-modal {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 32px;
+  max-width: 440px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 32px 80px rgba(10, 22, 40, .3);
+  animation: modalIn .3s ease
 }
 
-.bc-hc .bot-card::before {
-  background: var(--blue);
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(.94) }
+  to   { opacity: 1; transform: scale(1) }
 }
 
-.bc-hc .bot-industry {
-  background: rgba(59, 130, 246, .08);
-  color: var(--blue);
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--smoke2);
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text2);
+  display: flex;
+  align-items: center;
+  justify-content: center
 }
 
-.bc-ed .bot-card::before {
-  background: var(--amber);
+.modal-bot-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px
 }
 
-.bc-ed .bot-industry {
-  background: rgba(245, 158, 11, .08);
-  color: var(--amber);
+.modal-bot-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  background: var(--smoke2)
 }
 
-.bc-rs .bot-card::before {
-  background: var(--purple);
+.modal-bot-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy)
 }
 
-.bc-rs .bot-industry {
-  background: rgba(139, 92, 246, .08);
-  color: var(--purple);
+.modal-bot-industry {
+  font-size: 10px;
+  font-family: 'DM Mono', monospace;
+  color: var(--text3);
+  letter-spacing: .8px;
+  margin-top: 2px
+}
+
+.demo-chat {
+  background: var(--smoke);
+  border-radius: 12px;
+  padding: 14px;
+  height: 260px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px
+}
+
+.demo-chat::-webkit-scrollbar { width: 3px }
+.demo-chat::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px }
+
+.dc-msg {
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.55;
+  max-width: 85%
+}
+
+.dc-in {
+  background: var(--white);
+  border: 1px solid var(--border);
+  color: var(--text);
+  align-self: flex-start
+}
+
+.dc-out {
+  background: var(--navy);
+  color: rgba(255, 255, 255, .9);
+  align-self: flex-end;
+  text-align: right
+}
+
+.dc-ai {
+  font-size: 9px;
+  font-family: 'DM Mono', monospace;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 2px
+}
+
+.demo-input-row {
+  display: flex;
+  gap: 8px
+}
+
+.demo-input {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  outline: none;
+  background: var(--white);
+  transition: border-color .2s
+}
+
+.demo-input:focus { border-color: var(--navy) }
+
+.demo-send-btn {
+  background: var(--navy);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  padding: 9px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: background .2s;
+  white-space: nowrap
+}
+
+.demo-send-btn:hover { background: var(--navy3) }
+
+@media(max-width:768px) {
+  .bots-grid,
+  .bots-row2 { grid-template-columns: repeat(2, 1fr) }
+  .bots-header { flex-direction: column; gap: 16px; align-items: flex-start }
+  .bots-section { padding: 64px 24px }
 }

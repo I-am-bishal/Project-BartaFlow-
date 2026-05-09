@@ -1,0 +1,38 @@
+/* ── ADMIN BASE ─────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --navy: #0a1628;
+  --navy2: #0f2040;
+  --navy3: #162a52;
+  --gold: #c9a84c;
+  --gold2: #e8c96a;
+  --white: #ffffff;
+  --smoke: #f6f8fc;
+  --smoke2: #edf0f7;
+  --text: #0a1628;
+  --text2: #4a5878;
+  --text3: #8a96b0;
+  --border: #dde2ee;
+  --border2: #c8d0e0;
+  --green: #10b981;
+  --rose: #f43f5e;
+  --amber: #f59e0b;
+  --blue: #3b82f6;
+  --purple: #8b5cf6;
+  --sh: 0 2px 12px rgba(10, 22, 40, .07);
+  --sh-md: 0 4px 24px rgba(10, 22, 40, .10);
+  --sidebar-w: 240px;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'DM Sans', sans-serif;
+  background: var(--smoke);
+  color: var(--text);
+  overflow-x: hidden;
+}

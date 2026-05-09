@@ -4,14 +4,14 @@ footer {
   padding: 64px 64px 36px;
   position: relative;
   z-index: 10;
-  border-top: 1px solid rgba(255, 255, 255, .06);
+  border-top: 1px solid rgba(255, 255, 255, .06)
 }
 
 .footer-top {
   display: grid;
   grid-template-columns: 2.5fr 1fr 1fr 1fr;
   gap: 60px;
-  margin-bottom: 56px;
+  margin-bottom: 56px
 }
 
 .footer-desc {
@@ -20,7 +20,7 @@ footer {
   line-height: 1.75;
   font-weight: 300;
   margin-top: 14px;
-  max-width: 270px;
+  max-width: 270px
 }
 
 .footer-col h4 {
@@ -29,7 +29,7 @@ footer {
   color: rgba(255, 255, 255, .25);
   text-transform: uppercase;
   letter-spacing: 2px;
-  margin-bottom: 16px;
+  margin-bottom: 16px
 }
 
 .footer-col a {
@@ -39,25 +39,23 @@ footer {
   text-decoration: none;
   margin-bottom: 10px;
   transition: color .2s;
-  font-weight: 300;
+  font-weight: 300
 }
 
-.footer-col a:hover {
-  color: var(--gold);
-}
+.footer-col a:hover { color: var(--gold) }
 
 .footer-bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-top: 28px;
-  border-top: 1px solid rgba(255, 255, 255, .06);
+  border-top: 1px solid rgba(255, 255, 255, .06)
 }
 
 .footer-copy {
   font-size: 11px;
   font-family: 'DM Mono', monospace;
-  color: rgba(255, 255, 255, .2);
+  color: rgba(255, 255, 255, .2)
 }
 
 .footer-sys {
@@ -66,7 +64,7 @@ footer {
   gap: 6px;
   font-size: 11px;
   font-family: 'DM Mono', monospace;
-  color: rgba(255, 255, 255, .25);
+  color: rgba(255, 255, 255, .25)
 }
 
 .sys-dot {
@@ -74,5 +72,103 @@ footer {
   height: 6px;
   background: var(--green);
   border-radius: 50%;
-  animation: blink 3s infinite;
+  animation: blink 3s infinite
+}
+
+/* Cookie consent banner */
+#cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 8500;
+  background: var(--navy2);
+  border-top: 1px solid rgba(255, 255, 255, .08);
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  transform: translateY(100%);
+  transition: transform .4s cubic-bezier(.4, 0, .2, 1);
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, .3)
+}
+
+#cookie-banner.show { transform: translateY(0) }
+
+.ck-text {
+  flex: 1;
+  min-width: 260px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, .65);
+  line-height: 1.6;
+  font-weight: 300
+}
+
+.ck-text strong { color: var(--white); font-weight: 600 }
+.ck-text a { color: var(--gold); text-decoration: none }
+.ck-text a:hover { text-decoration: underline }
+
+.ck-btns {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+  flex-wrap: wrap
+}
+
+.ck-accept {
+  background: var(--gold);
+  color: var(--navy);
+  padding: 9px 20px;
+  border: none;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all .2s;
+  white-space: nowrap
+}
+
+.ck-accept:hover {
+  background: var(--gold2);
+  transform: translateY(-1px)
+}
+
+.ck-decline {
+  background: transparent;
+  color: rgba(255, 255, 255, .5);
+  padding: 9px 16px;
+  border: 1px solid rgba(255, 255, 255, .15);
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 400;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all .2s;
+  white-space: nowrap
+}
+
+.ck-decline:hover {
+  border-color: rgba(255, 255, 255, .3);
+  color: rgba(255, 255, 255, .8)
+}
+
+.ck-prefs {
+  background: transparent;
+  color: var(--gold);
+  padding: 9px 12px;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: 'DM Mono', monospace;
+  text-decoration: underline;
+  white-space: nowrap
+}
+
+[data-theme="dark"] #cookie-banner { background: #070e1c }
+
+@media(max-width:768px) {
+  footer { padding: 48px 24px 28px }
+  .footer-top { grid-template-columns: 1fr }
 }

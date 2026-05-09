@@ -8,17 +8,12 @@
   display: none;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 20px
 }
 
 .auth-overlay.open {
   display: flex;
-  animation: fadeIn .2s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  animation: fadeIn .2s ease
 }
 
 .auth-box {
@@ -28,31 +23,20 @@
   max-width: 440px;
   overflow: hidden;
   box-shadow: 0 40px 100px rgba(10, 22, 40, .35);
-  animation: slideUp .3s ease;
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(28px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  animation: slideUp .3s ease
 }
 
 .auth-header {
   background: var(--navy);
   padding: 32px 36px 28px;
-  position: relative;
+  position: relative
 }
 
 .auth-logo {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 20px
 }
 
 .auth-logo-box {
@@ -62,20 +46,20 @@
   border-radius: 8px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center
 }
 
 .auth-logo-box svg {
   width: 17px;
   height: 17px;
-  fill: var(--navy);
+  fill: var(--navy)
 }
 
 .auth-logo-name {
   font-family: 'Playfair Display', serif;
   font-size: 17px;
   font-weight: 700;
-  color: var(--white);
+  color: var(--white)
 }
 
 .auth-title {
@@ -84,13 +68,13 @@
   font-weight: 700;
   color: var(--white);
   letter-spacing: -.5px;
-  margin-bottom: 6px;
+  margin-bottom: 6px
 }
 
 .auth-sub {
   font-size: 13px;
   color: rgba(255, 255, 255, .45);
-  font-weight: 300;
+  font-weight: 300
 }
 
 .auth-close-btn {
@@ -108,15 +92,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background .2s;
+  transition: background .2s
 }
 
 .auth-close-btn:hover {
-  background: rgba(255, 255, 255, .15);
+  background: rgba(255, 255, 255, .15)
 }
 
 .auth-body {
-  padding: 28px 36px 32px;
+  padding: 28px 36px 32px
 }
 
 .auth-tabs {
@@ -124,7 +108,7 @@
   background: var(--smoke2);
   border-radius: 9px;
   padding: 3px;
-  margin-bottom: 24px;
+  margin-bottom: 24px
 }
 
 .auth-tab {
@@ -138,131 +122,142 @@
   color: var(--text3);
   cursor: pointer;
   transition: all .2s;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'DM Sans', sans-serif
 }
 
 .auth-tab.active {
   background: var(--white);
   color: var(--navy);
-  box-shadow: 0 2px 8px rgba(10, 22, 40, .1);
+  box-shadow: 0 2px 8px rgba(10, 22, 40, .1)
 }
 
 .auth-panel {
-  display: none;
+  display: none
 }
 
 .auth-panel.active {
-  display: block;
+  display: block
 }
 
-.form-group {
-  margin-bottom: 16px;
-}
-
-.form-label {
-  display: block;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 7px;
-  letter-spacing: .1px;
-}
-
-.form-input {
-  width: 100%;
-  border: 1.5px solid var(--border);
-  border-radius: 9px;
-  padding: 11px 14px;
-  font-size: 14px;
-  font-family: 'DM Sans', sans-serif;
-  color: var(--text);
-  background: var(--white);
-  transition: border-color .2s, box-shadow .2s;
-  outline: none;
-}
-
-.form-input:focus {
-  border-color: var(--navy);
-  box-shadow: 0 0 0 3px rgba(10, 22, 40, .07);
-}
-
-.form-input::placeholder {
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
   color: var(--text3);
+  font-size: 12px
 }
 
-.form-row {
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border)
+}
+
+.social-btns {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 10px
 }
 
-.form-hint {
-  font-size: 11px;
-  color: var(--text3);
-  margin-top: 5px;
-  font-weight: 300;
-}
-
-.password-wrap {
-  position: relative;
-}
-
-.password-wrap .form-input {
-  padding-right: 44px;
-}
-
-.pw-toggle {
-  position: absolute;
-  right: 13px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--text3);
-  font-size: 16px;
-  padding: 0;
-  transition: color .2s;
-}
-
-.pw-toggle:hover {
-  color: var(--navy);
-}
-
-.forgot-link {
-  float: right;
-  font-size: 11px;
-  color: var(--gold);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color .2s;
-  margin-top: -4px;
-  margin-bottom: 4px;
-}
-
-.forgot-link:hover {
-  color: #92660a;
-}
-
-.auth-submit-btn {
-  width: 100%;
-  padding: 13px;
-  background: var(--navy);
-  color: var(--white);
-  border: none;
-  border-radius: 9px;
-  font-size: 15px;
-  font-weight: 700;
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  transition: all .25s;
-  margin-top: 4px;
+.social-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  padding: 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--white);
+  cursor: pointer;
+  transition: all .2s;
+  font-family: 'DM Sans', sans-serif
 }
 
-.auth-submit-btn:hover {
-  background: var(--navy3);
+.social-btn:hover {
+  border-color: var(--border2);
+  background: var(--smoke);
+  box-shadow: 0 2px 8px rgba(10, 22, 40, .06)
+}
+
+.social-icon {
+  width: 18px;
+  height: 18px
+}
+
+.auth-footer-note {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text3);
+  margin-top: 18px;
+  font-weight: 300
+}
+
+.auth-footer-note a {
+  color: var(--navy);
+  font-weight: 600;
+  text-decoration: none
+}
+
+/* Success state */
+.auth-success {
+  text-align: center;
+  padding: 20px 0
+}
+
+.auth-success-icon {
+  width: 64px;
+  height: 64px;
+  background: rgba(16, 185, 129, .1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 28px;
+  border: 2px solid rgba(16, 185, 129, .3)
+}
+
+.auth-success-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px
+}
+
+.auth-success-sub {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.6
+}
+
+/* Admin trigger pill */
+.admin-pill {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  background: rgba(201, 168, 76, .1);
+  border: 1px solid rgba(201, 168, 76, .25);
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gold);
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all .2s
+}
+
+.admin-pill:hover {
+  background: rgba(201, 168, 76, .2)
+}
+
+.admin-pill.show {
+  display: flex
 }

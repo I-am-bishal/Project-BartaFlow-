@@ -1,9 +1,9 @@
-/* ── CTA ─────────────────────────────── */
+/* ── CTA SECTION ─────────────────────────────────────────────────────── */
 .cta-section {
   padding: 100px 64px;
   background: var(--smoke);
   position: relative;
-  z-index: 10;
+  z-index: 10
 }
 
 .cta-inner {
@@ -12,7 +12,7 @@
   padding: 80px 64px;
   text-align: center;
   position: relative;
-  overflow: hidden;
+  overflow: hidden
 }
 
 .cta-dots {
@@ -20,7 +20,7 @@
   inset: 0;
   background-image: radial-gradient(circle, rgba(255, 255, 255, .05) 1px, transparent 1px);
   background-size: 28px 28px;
-  pointer-events: none;
+  pointer-events: none
 }
 
 .cta-glow {
@@ -31,19 +31,19 @@
   height: 500px;
   background: radial-gradient(circle, rgba(201, 168, 76, .08), transparent 70%);
   border-radius: 50%;
-  pointer-events: none;
+  pointer-events: none
 }
 
 .cta-inner .section-label {
   color: var(--gold);
   position: relative;
-  z-index: 2;
+  z-index: 2
 }
 
 .cta-inner .section-h {
   color: var(--white);
   position: relative;
-  z-index: 2;
+  z-index: 2
 }
 
 .cta-sub {
@@ -54,7 +54,7 @@
   max-width: 500px;
   margin: 0 auto 40px;
   position: relative;
-  z-index: 2;
+  z-index: 2
 }
 
 .cta-btns {
@@ -63,7 +63,7 @@
   justify-content: center;
   flex-wrap: wrap;
   position: relative;
-  z-index: 2;
+  z-index: 2
 }
 
 .cta-trust {
@@ -73,5 +73,9 @@
   color: rgba(255, 255, 255, .25);
   letter-spacing: .4px;
   position: relative;
-  z-index: 2;
+  z-index: 2
+}
+
+@media(max-width:768px) {
+  .cta-section { padding: 64px 24px }
 }

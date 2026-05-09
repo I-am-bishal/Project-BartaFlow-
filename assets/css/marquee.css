@@ -1,4 +1,4 @@
-/* ── TRUSTED-BY MARQUEE ──────────────── */
+/* ── TRUSTED-BY MARQUEE ──────────────────────────────────────────────── */
 .marquee-section {
   padding: 28px 0;
   border-top: 1px solid var(--border);
@@ -6,12 +6,12 @@
   background: var(--white);
   overflow: hidden;
   position: relative;
-  z-index: 10;
+  z-index: 10
 }
 
 [data-theme="dark"] .marquee-section {
   background: var(--smoke);
-  border-color: var(--border);
+  border-color: var(--border)
 }
 
 .marquee-label-row {
@@ -21,12 +21,12 @@
   color: var(--text3);
   letter-spacing: 2px;
   text-transform: uppercase;
-  margin-bottom: 18px;
+  margin-bottom: 18px
 }
 
 .marquee-track-wrap {
   position: relative;
-  overflow: hidden;
+  overflow: hidden
 }
 
 .marquee-track-wrap::before,
@@ -37,41 +37,39 @@
   bottom: 0;
   width: 80px;
   z-index: 2;
-  pointer-events: none;
+  pointer-events: none
 }
 
 .marquee-track-wrap::before {
   left: 0;
-  background: linear-gradient(90deg, var(--white), transparent);
+  background: linear-gradient(90deg, var(--white), transparent)
 }
 
 .marquee-track-wrap::after {
   right: 0;
-  background: linear-gradient(-90deg, var(--white), transparent);
+  background: linear-gradient(-90deg, var(--white), transparent)
 }
 
 [data-theme="dark"] .marquee-track-wrap::before {
-  background: linear-gradient(90deg, var(--smoke), transparent);
+  background: linear-gradient(90deg, var(--smoke), transparent)
 }
 
 [data-theme="dark"] .marquee-track-wrap::after {
-  background: linear-gradient(-90deg, var(--smoke), transparent);
+  background: linear-gradient(-90deg, var(--smoke), transparent)
 }
 
 .marquee-track {
   display: flex;
   gap: 40px;
   animation: marqueeScroll 28s linear infinite;
-  width: max-content;
+  width: max-content
 }
 
-.marquee-track:hover {
-  animation-play-state: paused;
-}
+.marquee-track:hover { animation-play-state: paused }
 
 @keyframes marqueeScroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0%   { transform: translateX(0) }
+  100% { transform: translateX(-50%) }
 }
 
 .mq-item {
@@ -84,12 +82,12 @@
   background: var(--smoke);
   white-space: nowrap;
   transition: border-color .2s, box-shadow .2s;
-  flex-shrink: 0;
+  flex-shrink: 0
 }
 
 .mq-item:hover {
   border-color: var(--border2);
-  box-shadow: var(--sh);
+  box-shadow: var(--sh)
 }
 
 .mq-logo {
@@ -100,12 +98,12 @@
   align-items: center;
   justify-content: center;
   font-size: 14px;
-  flex-shrink: 0;
+  flex-shrink: 0
 }
 
 .mq-name {
   font-size: 13px;
   font-weight: 600;
   color: var(--text2);
-  letter-spacing: -.2px;
+  letter-spacing: -.2px
 }

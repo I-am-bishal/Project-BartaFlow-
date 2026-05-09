@@ -1,0 +1,29 @@
+/* ── BARTAFLOW MAIN STYLESHEET ──────── */
+/* This file imports all modular CSS components */
+
+@import 'base.css';
+@import 'nav.css';
+@import 'hero.css';
+@import 'features.css';
+@import 'voice.css';
+@import 'voice-agent.css';
+@import 'modals.css';
+@import 'scheduler.css';
+@import 'auth.css';
+@import 'leads.css';
+@import 'chat-widget.css';
+@import 'marquee.css';
+@import 'faq.css';
+@import 'pricing.css';
+@import 'cta.css';
+@import 'footer.css';
+@import 'preloader.css';
+@import 'toasts.css';
+@import 'forms-validation.css';
+@import 'csv-viewer.css';
+@import 'payment.css';
+@import 'email-simulation.css';
+@import 'legal.css';
+@import 'dark-mode.css';
+@import 'dark-mode-fixes.css';
+@import 'mobile-menu.css';
