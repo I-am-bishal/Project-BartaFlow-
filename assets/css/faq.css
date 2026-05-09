@@ -288,10 +288,39 @@
   box-shadow: 0 6px 20px rgba(201, 168, 76, .35)
 }
 
-@media(max-width:768px) {
-  .faq-section { padding: 64px 24px }
-  .faq-layout { grid-template-columns: 1fr; gap: 40px }
-  .faq-brand-card { position: static }
-  .faq-brand-name { font-size: 30px }
-  .faq-a { padding-left: 14px }
+@media (max-width: 992px) {
+  .faq-layout {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  
+  .faq-brand-card {
+    position: static;
+    max-width: 500px;
+  }
 }
+
+@media (max-width: 768px) {
+  .faq-section {
+    padding: 80px 24px;
+  }
+  
+  .faq-brand-name {
+    font-size: 32px;
+  }
+  
+  .faq-a {
+    padding-left: 14px;
+  }
+  
+  .faq-cta-row {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 20px;
+  }
+  
+  .faq-cta-btn {
+    width: 100%;
+  }
+}
+

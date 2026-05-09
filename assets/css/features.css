@@ -209,7 +209,26 @@
   flex-shrink: 0
 }
 
-@media(max-width:768px) {
-  .features-section { padding: 64px 24px }
-  .features-grid { grid-template-columns: 1fr }
+@media (max-width: 1024px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
+
+@media (max-width: 768px) {
+  .features-section {
+    padding: 64px 24px;
+    text-align: center;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+    margin-top: 40px;
+  }
+  
+  .feat-card {
+    padding: 24px;
+    text-align: left;
+  }
+}
+

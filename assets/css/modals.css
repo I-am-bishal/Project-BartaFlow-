@@ -419,7 +419,62 @@
   line-height: 1.8
 }
 
-@media(max-width:768px) {
-  .demo-sched-box { grid-template-columns: 1fr }
-  .ds-left { display: none }
+@media (max-width: 768px) {
+  .demo-sched-overlay {
+    padding: 0;
+  }
+  
+  .demo-sched-box {
+    grid-template-columns: 1fr;
+    height: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+  
+  .ds-left {
+    display: none;
+  }
+  
+  .ds-right {
+    padding: 60px 20px 30px;
+    height: 100%;
+    max-height: none;
+  }
+  
+  .ds-close-btn {
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+    background: var(--white);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  
+  .slot-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .cal-day {
+    height: 44px; /* Proper touch target */
+  }
+  
+  .ds-panel-title {
+    font-size: 20px;
+  }
 }
+
+@media (max-width: 480px) {
+  .slot-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .ds-step-indicator {
+    gap: 4px;
+  }
+  
+  .ds-step {
+    width: 20px;
+    height: 20px;
+    font-size: 9px;
+  }
+}
+

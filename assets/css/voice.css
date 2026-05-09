@@ -240,7 +240,49 @@
 .va-launch-btn:hover { background: var(--gold2); box-shadow: 0 8px 32px rgba(201, 168, 76, .45); transform: translateY(-2px) }
 .va-launch-btn svg { width: 20px; height: 20px; fill: var(--navy); flex-shrink: 0 }
 
-@media(max-width:768px) {
-  .voice-section { padding: 64px 24px }
-  .voice-grid { grid-template-columns: 1fr }
+@media (max-width: 992px) {
+  .voice-section {
+    padding: 80px 24px;
+  }
+  
+  .voice-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+    text-align: center;
+  }
+  
+  .voice-features {
+    text-align: left;
+  }
+  
+  .voice-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
+
+@media (max-width: 768px) {
+  .voice-stats {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .va-try-strip {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+  
+  .call-sim {
+    padding: 20px;
+  }
+  
+  .waveform {
+    height: 40px;
+    gap: 2px;
+  }
+  
+  .wbar {
+    width: 3px;
+  }
+}
+

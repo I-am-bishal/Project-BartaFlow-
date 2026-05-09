@@ -3,27 +3,25 @@
 
 @import 'base.css';
 @import 'nav.css';
+@import 'mobile-menu.css';
 @import 'hero.css';
-@import 'features.css';
+@import 'marquee.css';
+@import 'bots.css';
 @import 'voice.css';
-@import 'voice-agent.css';
+@import 'features.css';
+@import 'faq.css';
+@import 'cta.css';
+@import 'footer.css';
+@import 'preloader.css';
 @import 'modals.css';
 @import 'scheduler.css';
 @import 'auth.css';
 @import 'leads.css';
 @import 'chat-widget.css';
-@import 'marquee.css';
-@import 'faq.css';
-@import 'pricing.css';
-@import 'cta.css';
-@import 'footer.css';
-@import 'preloader.css';
-@import 'toasts.css';
-@import 'forms-validation.css';
 @import 'csv-viewer.css';
 @import 'payment.css';
 @import 'email-simulation.css';
 @import 'legal.css';
 @import 'dark-mode.css';
-@import 'dark-mode-fixes.css';
-@import 'mobile-menu.css';
+@import 'toasts.css';
+@import 'admin-base.css'; /* Basic admin styles if needed */

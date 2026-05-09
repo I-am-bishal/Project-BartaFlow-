@@ -348,9 +348,37 @@
 
 .demo-send-btn:hover { background: var(--navy3) }
 
-@media(max-width:768px) {
-  .bots-grid,
-  .bots-row2 { grid-template-columns: repeat(2, 1fr) }
-  .bots-header { flex-direction: column; gap: 16px; align-items: flex-start }
-  .bots-section { padding: 64px 24px }
+@media (max-width: 1200px) {
+  .bots-grid, .bots-row2 {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
+
+@media (max-width: 768px) {
+  .bots-section {
+    padding: 80px 24px;
+  }
+  
+  .bots-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  
+  .bots-grid, .bots-row2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bots-grid, .bots-row2 {
+    grid-template-columns: 1fr;
+  }
+  
+  .demo-modal {
+    padding: 24px 20px;
+    width: 95%;
+  }
+}
+
