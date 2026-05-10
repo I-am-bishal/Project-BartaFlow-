@@ -1,0 +1,21 @@
+### BartaFlow API Testing
+# Use with VS Code "REST Client" extension
+
+@baseUrl = http://localhost:5000
+
+### 1. Health Check
+GET {{baseUrl}}/api/health
+
+### 2. Submit a Lead
+POST {{baseUrl}}/api/leads
+Content-Type: application/json
+
+{
+    "name": "Test User",
+    "email": "test@gmail.com",
+    "service": "AI Chatbot",
+    "message": "I'm interested in the professional plan."
+}
+
+### 3. Get All Leads
+GET {{baseUrl}}/api/leads

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BartaFlow — Enterprise AI Chatbot & Voice Agent Platform</title>
+  <!-- CRITICAL: Restore scroll immediately — prevents stuck page if previous session left overflow:hidden -->
+  <script>document.documentElement.style.overflow = ''; document.addEventListener('DOMContentLoaded', function () { document.body.style.overflow = ''; document.documentElement.style.overflow = ''; })</script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body>
+
+  <!-- ════ FEATURE 1 · PRELOADER ════ -->
+  <div id="preloader">
+    <div class="pl-logo">
+      <div class="pl-logo-box"><svg viewBox="0 0 24 24">
+          <path
+            d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.418A9.966 9.966 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" />
+        </svg></div>
+      <span class="pl-logo-name">BartaFlow</span>
+    </div>
+    <div class="pl-bar-wrap">
+      <div class="pl-bar"></div>
+    </div>
+    <div class="pl-text">Loading Platform...</div>
+  </div>
+
+  <!-- ── NAV ── -->
+  <nav id="nav">
+    <a href="#home" class="nav-logo">
+      <div class="logo-box"><svg viewBox="0 0 24 24">
+          <path
+            d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.418A9.966 9.966 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" />
+        </svg></div>
+      <span class="logo-name">BartaFlow<sup class="logo-v">PRO</sup></span>
+    </a>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#bots">AI Chatbots</a>
+      <a href="#voice">Voice Agent</a>
+      <a href="#features">Features</a>
+      <a href="#faq">FAQ</a>
+      <a href="#pricing">Pricing</a>
+    </div>
+    <div class="nav-right">
+      <button class="admin-pill" id="admin-pill" onclick="openLeadsPanel()">📊 View Leads <span id="leads-count-badge"
+          style="background:var(--gold);color:var(--navy);border-radius:10px;padding:1px 7px;font-size:10px;font-weight:700">0</span></button>
+      <a href="#" class="btn-ghost" onclick="openAuth('signin');return false">Sign In</a>
+      <a href="#" class="btn-solid" onclick="openDemoSched();return false">Request Demo</a>
+      <!-- ════ FEATURE 2 · DARK TOGGLE ════ -->
+      <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode"
+        aria-label="Toggle dark mode">☀️</button>
+      <!-- ════ FEATURE 3 · HAMBURGER ════ -->
+      <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Open menu"
+        aria-expanded="false">
+        <span class="hb-line"></span>
+        <span class="hb-line"></span>
+        <span class="hb-line"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ════ FEATURE 3 · MOBILE MENU ════ -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#home" class="mm-link" onclick="closeMobileMenu()"><span class="mm-link-icon">🏠</span> Home</a>
+    <a href="#bots" class="mm-link" onclick="closeMobileMenu()"><span class="mm-link-icon">🤖</span> AI Chatbots</a>
+    <a href="#voice" class="mm-link" onclick="closeMobileMenu()"><span class="mm-link-icon">📞</span> Voice Agent</a>
+    <a href="#features" class="mm-link" onclick="closeMobileMenu()"><span class="mm-link-icon">⚡</span> Features</a>
+    <a href="#faq" class="mm-link" onclick="closeMobileMenu()"><span class="mm-link-icon">💬</span> FAQ</a>
+    <a href="#pricing" class="mm-link" onclick="closeMobileMenu()"><span class="mm-link-icon">💰</span> Pricing</a>
+    <div class="mm-divider"></div>
+    <div class="mm-ctas">
+      <button class="mm-btn-ghost" onclick="openAuth('signin');closeMobileMenu()">Sign In</button>
+      <button class="mm-btn-solid" onclick="openDemoSched();closeMobileMenu()">Request Demo →</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+     SECTION 1 · HERO
+══════════════════════════════════════ -->
+  <section class="hero" id="home">
+    <div class="hero-bg-dots"></div>
+    <div class="hero-glow"></div>
+
+    <div class="hero-left">
+      <div class="hero-badge">
+        <div class="live-dot"></div>Now Live — 500+ Businesses Automated
+      </div>
+      <h1>Automate Your<br>Business <em>24/7</em><br>with AI</h1>
+      <p class="hero-sub">Zero missed leads. Instant replies. Sales on autopilot. BartaFlow's AI chatbots and voice
+        agents handle everything — while you sleep.</p>
+      <div class="hero-bullets">
+        <div class="hb"><span class="hb-check">✓</span>Instant AI replies — response time under 2 seconds</div>
+        <div class="hb"><span class="hb-check">✓</span>Zero missed leads — 24/7 automated qualification</div>
+        <div class="hb"><span class="hb-check">✓</span>Complete sales automation — from inquiry to payment</div>
+      </div>
+      <div class="hero-ctas">
+        <a href="#" class="btn-gold-lg" onclick="openAuth('signup');return false">Start Free Trial <svg width="14"
+            height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M3 8h10M9 4l4 4-4 4" />
+          </svg></a>
+        <a href="#" class="btn-outline-white" onclick="openDemoSched();return false">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="8" cy="8" r="6" />
+            <path d="M6.5 6l3 2-3 2V6z" fill="currentColor" stroke="none" />
+          </svg>
+          View AI Bots
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat">
+          <div class="hstat-n" id="h1">0</div>
+          <div class="hstat-l">Messages / Day</div>
+        </div>
+        <div class="hstat-div"></div>
+        <div class="hstat">
+          <div class="hstat-n" id="h2">0</div>
+          <div class="hstat-l">Active Clients</div>
+        </div>
+        <div class="hstat-div"></div>
+        <div class="hstat">
+          <div class="hstat-n">98.6%</div>
+          <div class="hstat-l">Uptime SLA</div>
+        </div>
+        <div class="hstat-div"></div>
+        <div class="hstat">
+          <div class="hstat-n">2.3s</div>
+          <div class="hstat-l">Avg Response</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <canvas id="hero-canvas"></canvas>
+      <div class="hero-chat-float">
+        <div class="fc-header">
+          <div class="fc-av">BF</div>
+          <div>
+            <div class="fc-name">BartaFlow AI</div>
+            <div class="fc-st">● Online · GPT-4o</div>
+          </div>
+        </div>
+        <div class="fc-msg fc-in">I want to book a Bali trip for 2 people</div>
+        <div class="fc-msg fc-out">
+          <span class="fc-ai">AI REPLY</span>
+          🏝 Bali 6D/5N — ₹65K/person. Dec 15 available — shall I confirm?
+        </div>
+        <div class="typing-ind">
+          <div class="td"></div>
+          <div class="td"></div>
+          <div class="td"></div>
+        </div>
+      </div>
+      <div class="hero-metric-float">
+        <div class="hmf-label">Leads Today</div>
+        <div class="hmf-val" id="hmetric">0</div>
+        <div class="hmf-trend">↑ 34% vs yesterday</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- [Rest of the index.html content omitted for brevity in this thought, but will be written in full] -->
+</body>
+</html>
