@@ -10,7 +10,7 @@ let LEADS = [
 ];
 let nextLeadId = 6;
 
-function saveLead(data) {
+async function saveLead(data) {
   const lead = {
     id: nextLeadId++,
     name:     data.name     || 'Unknown',
@@ -25,16 +25,35 @@ function saveLead(data) {
     time: 'Just now',
     ts:   Date.now()
   };
+
+  // 1. Update UI Immediately
   LEADS.unshift(lead);
   updateLeadsBadge();
-  showToast('✓', '📋 New lead captured: ' + lead.name);
+  showToast('✓', '📋 Lead captured: ' + lead.name);
+
+  // 2. Persist to Backend
+  try {
+    const response = await fetch('http://localhost:5000/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(lead)
+    });
+    const result = await response.json();
+    if (!result.success) console.warn('Backend save failed:', result.error);
+  } catch (error) {
+    console.error('Error connecting to backend:', error);
+    // Silent fail for user - we still have it in memory/local
+  }
+
   return lead;
 }
 window.saveLead = saveLead;
 
 function updateLeadsBadge() {
   const badge = document.getElementById('leads-count-badge');
+  const dashBadge = document.getElementById('sb-leads-count');
   if (badge) badge.textContent = LEADS.length;
+  if (dashBadge) dashBadge.textContent = LEADS.length;
 }
 
 // ── Leads panel ──────────────────────────────────────────────────────────
@@ -150,5 +169,36 @@ window.whatsappLead    = whatsappLead;
 window.deleteLead      = deleteLead;
 window.exportLeadsCSV  = exportLeadsCSV;
 
-// Initialise badge on load
+async function fetchLeads() {
+  try {
+    const response = await fetch('http://localhost:5000/api/leads');
+    if (response.ok) {
+      const backendLeads = await response.json();
+      // Combine with some initial mock data if desired, or just use backend
+      // For this SaaS, we'll keep the initial 5 samples + backend
+      LEADS = [
+        { id: 1, name: 'Priya Rathod',      email: 'priya@travelmate.in',  phone: '+91 98765 43210', company: 'TravelMate Agency',      industry: 'Travel & Tourism',       goal: 'Generate & qualify leads',      source: 'demo',    demoDate: 'Mon, 12 May 2025', demoTime: '10:00 AM IST', time: '2 hours ago',  ts: Date.now() - 7200000   },
+        { id: 2, name: 'Arjun Mehta',       email: 'arjun@fashionhub.com', phone: '+91 87654 32109', company: 'FashionHub',             industry: 'E-Commerce',              goal: 'Sell products via WhatsApp',    source: 'signup',  demoDate: '',                 demoTime: '',             time: '5 hours ago',  ts: Date.now() - 18000000  },
+        { id: 3, name: 'Dr. Sunita Kapoor', email: 'sunita@carepoint.in',  phone: '+91 76543 21098', company: 'CarePoint Clinics',      industry: 'Healthcare',              goal: 'Automate customer support',     source: 'demo',    demoDate: 'Wed, 14 May 2025', demoTime: '3:00 PM IST',  time: 'Yesterday',    ts: Date.now() - 86400000  },
+        { id: 4, name: 'Raj Verma',         email: 'raj@brightmind.edu',   phone: '+91 65432 10987', company: 'BrightMind Coaching',    industry: 'Education & Coaching',    goal: 'Booking & appointment management', source: 'chatbot', demoDate: '',             demoTime: '',             time: 'Yesterday',    ts: Date.now() - 90000000  },
+        { id: 5, name: 'Meena Sharma',      email: 'meena@spiceroute.com', phone: '',                company: 'SpiceRoute Restaurants', industry: 'Restaurant & Food',       goal: 'Automate customer support',     source: 'contact', demoDate: '',                 demoTime: '',             time: '2 days ago',   ts: Date.now() - 172800000 },
+      ];
+      
+      const mapped = backendLeads.map((l, i) => ({
+        id: 'be-' + i,
+        ...l,
+        ts: l.timestamp ? new Date(l.timestamp).getTime() : Date.now(),
+        time: 'From Database'
+      }));
+      
+      LEADS = LEADS.concat(mapped);
+      updateLeadsBadge();
+    }
+  } catch (error) {
+    console.error('Failed to fetch leads from backend:', error);
+  }
+}
+
+// Initialise
+fetchLeads();
 updateLeadsBadge();

@@ -1,25 +1,46 @@
-# 🤖 Enterprise AI SaaS Landing Page
+# 🤖 BartaFlow — Enterprise AI Chatbot & Voice Agent Platform
 
-A modern, high-performance landing page template designed for an Enterprise AI Chatbot and Voice Agent platform. Built with a focus on conversion, sleek aesthetics, and smooth user experience.
+BartaFlow is a high-performance, modular AI SaaS platform designed for sales automation and customer engagement. This repository follows a professional **Frontend/Backend separation** architecture.
 
-## ✨ Key Features
+## 📁 Project Structure
 
-- **Interactive 3D Hero:** Custom WebGL/Three.js animated background.
-- **Dark/Light Mode:** Full theme toggling support via CSS variables.
-- **Fully Responsive:** Optimized for desktop, tablet, and mobile viewing with a custom hamburger menu.
-- **Interactive Modals:** Functional UI mockups for Sign In/Sign Up, Demo Scheduling, and an Admin Leads Panel.
-- **Live Chat Widget:** A simulated floating chatbot interface in the bottom corner.
-- **Infinite Marquee:** 'Trusted By' social proof logo scroller.
-- **Preloader:** Sleek 1-second entry animation.
+### [frontend/](./frontend)
+The premium client-side experience.
+- **Landing Page**: Conversion-optimized UI with 3D Three.js hero.
+- **Admin Dashboard**: White-label management interface with real-time analytics (Chart.js).
+- **Design System**: Modular CSS with Glassmorphism and dark mode support.
+
+### [backend/](./backend)
+The robust API layer.
+- **Express Server**: Node.js API handling data persistence.
+- **Data Persistence**: File-based CSV storage for leads (convertible to SQL/NoSQL).
+- **Environment Support**: Pre-configured `.env` support for Meta/OpenAI keys.
+
+### [debug/](./debug)
+Advanced developer tools for platform health.
+- **Auditor**: Automated DOM/UX health checks.
+- **Logger**: Persistent session-based error tracking.
+
+## 🚀 Quick Start
+
+1. **Start the Backend**:
+   ```bash
+   cd backend
+   npm install
+   npm start
+   ```
+
+2. **Launch the Frontend**:
+   Open `frontend/index.html` in your browser.
+
+3. **Admin Access**:
+   Access the dashboard via `frontend/admin.html`.
+   - **Credentials**: `admin@gmail.com` / `Admin@123`
 
 ## 🛠️ Tech Stack
+- **Frontend**: Vanilla HTML/JS, Three.js, Chart.js.
+- **Backend**: Node.js, Express, CSV-DB.
+- **Tooling**: Custom Debug Suite, Watchdog Connectivity Check.
 
-- **Frontend:** HTML5, CSS3, Vanilla JavaScript
-- **3D Graphics:** Three.js (r128)
-- **Design System:** Custom CSS Variables (Glassmorphism, Flexbox, CSS Grid)
-- **Typography:** Playfair Display & DM Sans (Google Fonts)
-
-## 🚀 Getting Started
-
-Simply clone this repository and open `index.html` in any modern web browser. No build tools or package managers required.
-# Project-BartaFlow-
+---
+© 2025 BartaFlow Technologies Pvt. Ltd.

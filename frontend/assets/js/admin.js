@@ -217,18 +217,38 @@ var SAMPLE_LEADS = [
   {name:'Raj Verma',email:'raj@brightmind.edu',phone:'+91 65432 10987',company:'BrightMind Coaching',industry:'Education',source:'chatbot',score:45,value:'₹4,999'},
   {name:'Meena Sharma',email:'meena@spiceroute.com',phone:'',company:'SpiceRoute Restaurant',industry:'Restaurant',source:'contact',score:80,value:'₹15,000'},
 ];
-function getLeadsForDash(){
-  var stored = [];
-  try{ stored = JSON.parse(localStorage.getItem('bf_leads_main')||'[]'); }catch(e){}
-  return SAMPLE_LEADS.concat(stored.map(function(l){
-    return {name:l.name,email:l.email,phone:l.phone||'',company:l.company||'',industry:l.industry||'',source:l.source||'chatbot',score:Math.floor(50+Math.random()*45),value:'₹'+Math.floor(5000+Math.random()*50000).toLocaleString('en-IN')};
+let ALL_LEADS = [];
+
+async function populateLeadsDash() {
+  let backendLeads = [];
+  try {
+    const response = await fetch('http://localhost:5000/api/leads');
+    if (response.ok) {
+      backendLeads = await response.json();
+    }
+  } catch (error) {
+    console.error('Failed to fetch backend leads:', error);
+  }
+
+  const mappedBackend = backendLeads.map(l => ({
+    name: l.name || 'Anonymous',
+    email: l.email || '',
+    phone: l.phone || '',
+    company: l.company || '',
+    industry: l.industry || '',
+    source: l.source || 'chatbot',
+    score: Math.floor(40 + Math.random() * 55),
+    value: '₹' + Math.floor(5000 + Math.random() * 50000).toLocaleString('en-IN')
   }));
+
+  ALL_LEADS = SAMPLE_LEADS.concat(mappedBackend);
+  
+  const badge = document.getElementById('sb-leads-count');
+  if (badge) badge.textContent = ALL_LEADS.length;
+  
+  renderLeadsDashTable(ALL_LEADS);
 }
-function populateLeadsDash(){
-  var leads = getLeadsForDash();
-  document.getElementById('sb-leads-count').textContent = leads.length;
-  renderLeadsDashTable(leads);
-}
+
 function renderLeadsDashTable(leads){
   var tbody = document.getElementById('leads-table-body');
   if(!tbody) return;
@@ -250,23 +270,22 @@ function renderLeadsDashTable(leads){
 function filterLeadsDash(){
   var q = (document.getElementById('leads-search-dash').value||'').toLowerCase();
   var src = document.getElementById('leads-filter-dash').value;
-  var leads = getLeadsForDash().filter(function(l){
+  var filtered = ALL_LEADS.filter(function(l){
     var match = !q || (l.name+l.email+l.company+l.industry).toLowerCase().includes(q);
     var srcMatch = !src || l.source===src;
     return match && srcMatch;
   });
-  renderLeadsDashTable(leads);
+  renderLeadsDashTable(filtered);
 }
 function exportLeadsDash(){
-  var leads = getLeadsForDash();
-  var csv = ['Name,Email,Phone,Company,Industry,Source,Score,Value'].concat(leads.map(function(l){
+  var csv = ['Name,Email,Phone,Company,Industry,Source,Score,Value'].concat(ALL_LEADS.map(function(l){
     return [l.name,l.email,l.phone,l.company,l.industry,l.source,l.score+'%',l.value].map(function(v){return '"'+(v||'').replace(/"/g,'""')+'"';}).join(',');
   })).join('\n');
   var blob = new Blob([csv],{type:'text/csv'});
   var url = URL.createObjectURL(blob);
   var a = document.createElement('a'); a.href=url; a.download='bartaflow-leads-'+new Date().toISOString().slice(0,10)+'.csv'; a.click();
   URL.revokeObjectURL(url);
-  dashToast('⬇','Exported '+leads.length+' leads as CSV');
+  dashToast('⬇','Exported '+ALL_LEADS.length+' leads as CSV');
 }
 
 function escHtmlDash(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
