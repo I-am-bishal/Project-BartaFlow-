@@ -10,6 +10,22 @@ let LEADS = [
 ];
 let nextLeadId = 6;
 
+function saveLocalLeads() {
+  localStorage.setItem('bf_leads', JSON.stringify(LEADS.filter(l => typeof l.id === 'number')));
+}
+
+function loadLocalLeads() {
+  const stored = localStorage.getItem('bf_leads');
+  if (stored) {
+    const savedLeads = JSON.parse(stored);
+    if (savedLeads.length > 0) {
+      LEADS = savedLeads;
+      const maxId = Math.max(...LEADS.map(l => l.id), 5);
+      nextLeadId = maxId + 1;
+    }
+  }
+}
+
 async function saveLead(data) {
   const lead = {
     id: nextLeadId++,
@@ -28,6 +44,7 @@ async function saveLead(data) {
 
   // 1. Update UI Immediately
   LEADS.unshift(lead);
+  saveLocalLeads();
   updateLeadsBadge();
   showToast('✓', '📋 Lead captured: ' + lead.name);
 
@@ -146,6 +163,7 @@ function whatsappLead(phone, name) {
 function deleteLead(id) {
   if (!confirm('Remove this lead from your list?')) return;
   LEADS = LEADS.filter(l => l.id !== id);
+  saveLocalLeads();
   updateLeadsBadge();
   renderLeads();
   showToast('🗑', 'Lead removed');
@@ -200,5 +218,6 @@ async function fetchLeads() {
 }
 
 // Initialise
+loadLocalLeads();
 fetchLeads();
 updateLeadsBadge();
