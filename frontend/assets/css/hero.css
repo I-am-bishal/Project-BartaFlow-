@@ -8,6 +8,11 @@
   position: relative;
   overflow: hidden;
   background: var(--navy);
+  transition: background 0.3s ease;
+}
+
+[data-theme="light"] .hero {
+  background: #f8fafc;
 }
 
 .hero-bg-dots {
@@ -63,6 +68,10 @@
   animation: fadeUp .7s ease .1s both;
 }
 
+[data-theme="light"] .hero h1 {
+  color: var(--navy);
+}
+
 .hero h1 em {
   font-style: italic;
   color: var(--gold);
@@ -74,14 +83,44 @@
   line-height: 1.75;
   font-weight: 300;
   max-width: 460px;
-  margin-bottom: 36px;
+  margin-bottom: 24px;
   animation: fadeUp .7s ease .2s both;
+}
+
+[data-theme="light"] .hero-sub {
+  color: var(--text2);
 }
 
 .hero-ctas {
   display: flex;
   gap: 12px;
   animation: fadeUp .7s ease .3s both;
+  margin-top: 10px;
+}
+
+.hero-bullets {
+  margin-bottom: 30px;
+  animation: fadeUp .7s ease .25s both;
+}
+
+.hb {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 12px;
+  font-weight: 400;
+}
+
+.hb-check {
+  color: var(--gold);
+  font-weight: 800;
+  font-size: 16px;
+}
+
+[data-theme="light"] .hb {
+  color: var(--text2);
 }
 
 .btn-gold-lg {

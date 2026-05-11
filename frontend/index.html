@@ -1987,20 +1987,22 @@
           </div>
         </div>
         <!-- Payment method -->
-        <div class="pay-form-title">Payment Method</div>
+        <div class="pay-form-title">
+          <span>💳</span> Payment Method
+        </div>
         <div class="pay-methods">
-          <div class="pay-method selected" onclick="selectPayMethod(this,'card')">💳 Card</div>
-          <div class="pay-method" onclick="selectPayMethod(this,'upi')">📱 UPI</div>
-          <div class="pay-method" onclick="selectPayMethod(this,'netbanking')">🏦 Net Banking</div>
-          <div class="pay-method" onclick="selectPayMethod(this,'wallet')">👜 Wallets</div>
+          <div class="pay-method selected" onclick="selectPayMethod(this,'card')"><span>💳</span> Card</div>
+          <div class="pay-method" onclick="selectPayMethod(this,'upi')"><span>📱</span> UPI</div>
+          <div class="pay-method" onclick="selectPayMethod(this,'netbanking')"><span>🏦</span> Net Banking</div>
+          <div class="pay-method" onclick="selectPayMethod(this,'wallet')"><span>👜</span> Wallets</div>
         </div>
         <!-- Card form -->
         <div id="pay-card-form">
           <div class="pay-card-row">
-            <span class="pay-card-icon">💳</span>
-            <input class="pay-card-input" placeholder="Card number" maxlength="19" oninput="formatCard(this)"
+            <span class="pay-card-icon-left">💳</span>
+            <input class="pay-card-input" placeholder="0000 0000 0000 0000" maxlength="19" oninput="formatCard(this)"
               id="card-number">
-            <span style="font-size:20px">🔒</span>
+            <span class="pay-card-icon-right">🔒</span>
           </div>
           <div class="pay-form-grid">
             <input class="pay-input" placeholder="MM / YY" maxlength="7" oninput="formatExpiry(this)" id="card-expiry">
@@ -2014,11 +2016,14 @@
         <div id="pay-upi-form" style="display:none">
           <input class="pay-input" placeholder="Enter UPI ID (e.g. name@upi)" id="upi-id"
             style="width:100%;margin-bottom:10px">
-          <div style="font-size:11px;font-family:'DM Mono',monospace;color:var(--text3)">Supported: GPay, PhonePe,
-            Paytm, BHIM, Amazon Pay</div>
+          <div style="font-size:11px;font-family:'DM Mono',monospace;color:var(--text3);padding:0 4px">
+            Supported: GPay, PhonePe, Paytm, BHIM, Amazon Pay
+          </div>
         </div>
         <!-- Billing info -->
-        <div class="pay-form-title" style="margin-top:14px">Billing Information</div>
+        <div class="pay-form-title" style="margin-top:24px">
+          <span>📋</span> Billing Information
+        </div>
         <div class="pay-form-grid">
           <input class="pay-input" placeholder="Full Name" id="bill-name">
           <input class="pay-input" placeholder="Phone Number" id="bill-phone">
@@ -2028,7 +2033,12 @@
           <input class="pay-input full" placeholder="GST Number (optional)" id="bill-gst" style="grid-column:span 2">
         </div>
         <div class="pay-error" id="pay-error">Please fill in all required fields.</div>
-        <div class="pay-security">🔒 256-bit SSL secured · Powered by Razorpay</div>
+        <div class="pay-security">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 1a2 2 0 0 0-2 2v2H5V3a3 3 0 1 1 6 0v2h-1V3a2 2 0 0 0-2-2zM4 5a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4z"/>
+          </svg>
+          256-bit SSL secured · Powered by Razorpay
+        </div>
         <button class="pay-submit-btn" id="pay-submit-btn" onclick="processPayment()">
           <span id="pay-submit-text">Pay Now →</span>
         </button>

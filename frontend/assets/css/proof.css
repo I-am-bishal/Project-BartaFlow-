@@ -1,19 +1,31 @@
-/* ── TESTIMONIALS SECTION (Blue Theme) ── */
 #testimonials {
   padding: 100px 64px;
-  background: #050a14 !important; /* Deep dark background */
+  background: var(--navy);
   position: relative;
   z-index: 10;
+  transition: background 0.3s ease;
+}
+
+[data-theme="light"] #testimonials {
+  background: #f8fafc !important;
 }
 
 #testimonials .section-h {
   color: #fff !important;
 }
 
+[data-theme="light"] #testimonials .section-h {
+  color: var(--navy) !important;
+}
+
 #testimonials .section-h span, 
 #testimonials .section-h em {
   color: #60a5fa !important;
   font-style: italic;
+}
+
+[data-theme="light"] #testimonials .section-h span {
+  color: #2563eb !important;
 }
 
 /* Transform the grid into a premium blue-tinged area */
@@ -25,6 +37,11 @@
   margin-top: 40px;
 }
 
+[data-theme="light"] .test-grid-container {
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  border-color: rgba(37, 99, 235, 0.1);
+}
+
 .test-card-blue {
   background: rgba(15, 23, 42, 0.6) !important;
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
@@ -32,6 +49,13 @@
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+[data-theme="light"] .test-card-blue {
+  background: #fff !important;
+  border-color: rgba(37, 99, 235, 0.1) !important;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.05);
 }
 
 .test-card-header-blue {
@@ -40,6 +64,18 @@
   display: flex;
   align-items: center;
   gap: 14px;
+}
+
+[data-theme="light"] .test-card-header-blue {
+  background: linear-gradient(to right, #dbeafe, #eff6ff) !important;
+}
+
+[data-theme="light"] .test-card-header-blue div div:first-child {
+  color: var(--navy) !important;
+}
+
+[data-theme="light"] .test-card-header-blue div div:last-child {
+  color: #64748b !important;
 }
 
 /* PROOF ELEMENTS */
