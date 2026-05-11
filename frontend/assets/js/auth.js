@@ -15,6 +15,11 @@ function saveUsers(u) { localStorage.setItem('bf_users', JSON.stringify(u)); }
   }
 })();
 
+// Session management
+function getSession() { try { return JSON.parse(localStorage.getItem('bf_session')); } catch (e) { return null; } }
+function saveSession(u) { localStorage.setItem('bf_session', JSON.stringify(u)); }
+function clearSession() { localStorage.removeItem('bf_session'); }
+
 // Simple XOR-fold hash (front-end simulation only — not cryptographic)
 function hashPw(pw) {
   let h = 5381;
@@ -149,7 +154,7 @@ function setAuthLoading(btnId, textId, loading, def, showSpinner) {
 }
 
 // ── Sign In ───────────────────────────────────────────────────────────────
-function showAuthSuccess(title, sub) {
+function showAuthSuccess(title, sub, user) {
   document.querySelectorAll('.auth-panel').forEach(p => p.classList.remove('active'));
   document.getElementById('auth-title').textContent       = '🎉 Success!';
   document.getElementById('auth-sub').textContent         = '';
@@ -157,8 +162,12 @@ function showAuthSuccess(title, sub) {
   document.getElementById('auth-success-sub').textContent   = sub;
   document.getElementById('panel-success').classList.add('active');
   document.querySelector('.auth-tabs').style.display = 'none';
-  const pill = document.getElementById('admin-pill');
-  if (pill) pill.classList.add('show');
+  
+  if (user) {
+    saveSession(user);
+    checkAuthState();
+  }
+
   setTimeout(closeAuth, 2600);
   setTimeout(() => { document.querySelector('.auth-tabs').style.display = ''; }, 2800);
 }
@@ -176,7 +185,7 @@ window.doSignIn = function () {
     const user  = users.find(u => u.email === email && u.password === hashPw(pwd));
     setAuthLoading('signin-btn', 'signin-btn-text', false, 'Sign In to Dashboard');
     if (user) {
-      showAuthSuccess('Welcome back, ' + user.name + '!', 'You are now signed in. Redirecting to your dashboard...');
+      showAuthSuccess('Welcome back, ' + user.name + '!', 'You are now signed in. Redirecting to your dashboard...', user);
     } else {
       errEl.textContent = 'Incorrect email or password. Try: demo@gmail.com / Demo@1234';
       errEl.classList.add('show');
@@ -325,6 +334,45 @@ window.doSetNewPassword = function () {
   showAuthSuccess('Password Updated!', 'Your password has been changed. Please sign in with your new password.');
   setTimeout(() => switchAuthTab('signin'), 2700);
 };
+
+// ── Auth State & UI Sync ──────────────────────────────────────────────────
+window.checkAuthState = function () {
+  const user = getSession();
+  const signInBtn = document.querySelector('.btn-ghost[onclick*="signin"]');
+  const mmSignInBtn = document.querySelector('.mm-btn-ghost[onclick*="signin"]');
+  const pill = document.getElementById('admin-pill');
+
+  if (user) {
+    if (signInBtn) {
+      signInBtn.textContent = 'Sign Out';
+      signInBtn.onclick = (e) => { e.preventDefault(); doLogout(); };
+    }
+    if (mmSignInBtn) {
+      mmSignInBtn.textContent = 'Sign Out';
+      mmSignInBtn.onclick = () => { doLogout(); closeMobileMenu(); };
+    }
+    if (pill) pill.classList.add('show');
+  } else {
+    if (signInBtn) {
+      signInBtn.textContent = 'Sign In';
+      signInBtn.onclick = (e) => { e.preventDefault(); openAuth('signin'); };
+    }
+    if (mmSignInBtn) {
+      mmSignInBtn.textContent = 'Sign In';
+      mmSignInBtn.onclick = () => { openAuth('signin'); closeMobileMenu(); };
+    }
+    if (pill) pill.classList.remove('show');
+  }
+};
+
+window.doLogout = function () {
+  clearSession();
+  checkAuthState();
+  showToast('👋', 'Signed out successfully');
+};
+
+// Initial check
+document.addEventListener('DOMContentLoaded', checkAuthState);
 
 // Attach live confirm-pw listener after DOM ready
 (function () {

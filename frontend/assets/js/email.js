@@ -98,14 +98,18 @@ window.closeEmailModal = function () {
 
 // ── Hook: show welcome email after signup ─────────────────────────────────
 var _origShowAuthSuccess = window.showAuthSuccess;
-window.showAuthSuccess = function (title, sub) {
-  if (_origShowAuthSuccess) _origShowAuthSuccess(title, sub);
-  if (title && (title.indexOf('Account') !== -1 || title.indexOf('Welcome,') !== -1)) {
+window.showAuthSuccess = function (title, sub, user) {
+  if (_origShowAuthSuccess) _origShowAuthSuccess(title, sub, user);
+  
+  // Only show welcome email for first-time account creation
+  if (title && title.indexOf('Account Created') !== -1) {
     var emailEl = document.getElementById('su-email');
     var fnameEl = document.getElementById('su-fname');
     if (emailEl && emailEl.value) {
       var name = (fnameEl && fnameEl.value) ? fnameEl.value : 'User';
-      setTimeout(function () { showEmailPreview('welcome', [name, emailEl.value.trim()]); }, 2800);
+      setTimeout(function () { 
+        if (typeof showEmailPreview === 'function') showEmailPreview('welcome', [name, emailEl.value.trim()]); 
+      }, 2800);
     }
   }
 };
