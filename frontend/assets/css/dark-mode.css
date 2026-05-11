@@ -14,7 +14,89 @@
   --sh-lg: 0 16px 56px rgba(0, 0, 0, .5);
 }
 
-/* Dark-mode toggle button */
+/* ── GLOBAL TEXT OVERRIDES ── */
+[data-theme="dark"] .section-h,
+[data-theme="dark"] .hero h1,
+[data-theme="dark"] .logo-name,
+[data-theme="dark"] .bot-name,
+[data-theme="dark"] .feat-title,
+[data-theme="dark"] .ind-name,
+[data-theme="dark"] .test-name,
+[data-theme="dark"] .price-amt,
+[data-theme="dark"] .lead-name,
+[data-theme="dark"] .faq-brand-name,
+[data-theme="dark"] .btn-ghost,
+[data-theme="dark"] .btn-solid,
+[data-theme="dark"] .bot-demo-btn,
+[data-theme="dark"] .nav-links a:hover,
+[data-theme="dark"] .auth-tab.active,
+[data-theme="dark"] .pl-text,
+[data-theme="dark"] .pl-logo-name,
+[data-theme="dark"] .fch-name,
+[data-theme="dark"] .fch-close-x:hover,
+[data-theme="dark"] .em-title,
+[data-theme="dark"] .em-close:hover,
+[data-theme="dark"] .legal-tab.active,
+[data-theme="dark"] .legal-close:hover,
+[data-theme="dark"] .auth-title,
+[data-theme="dark"] .auth-label,
+[data-theme="dark"] .auth-input,
+[data-theme="dark"] .auth-left,
+[data-theme="dark"] .lp-val {
+  color: var(--text) !important;
+}
+
+[data-theme="dark"] .section-sub,
+[data-theme="dark"] .hero-sub,
+[data-theme="dark"] .bot-features,
+[data-theme="dark"] .footer-desc,
+[data-theme="dark"] .lp-stat-label,
+[data-theme="dark"] .hb {
+  color: var(--text2) !important;
+}
+
+/* ── COMPONENT OVERRIDES ── */
+[data-theme="dark"] nav {
+  background: rgba(10, 22, 40, 0.95) !important;
+  border-bottom-color: var(--border);
+}
+
+[data-theme="dark"] .nav-links a {
+  color: var(--text2);
+}
+
+[data-theme="dark"] .hero {
+  background: var(--navy); /* Keep it dark navy */
+}
+
+[data-theme="dark"] .hero-bg-dots {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, .03) 1px, transparent 1px);
+}
+
+[data-theme="dark"] .btn-ghost {
+  border-color: var(--border2);
+}
+
+[data-theme="dark"] .btn-solid {
+  background: var(--navy3) !important;
+  border: 1px solid var(--border2);
+}
+
+[data-theme="dark"] .price-card,
+[data-theme="dark"] .bot-card,
+[data-theme="dark"] .feat-card,
+[data-theme="dark"] .faq-brand-card {
+  background: var(--smoke);
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .confirm-card,
+[data-theme="dark"] .ds-panel {
+  background: var(--smoke2);
+  border-color: var(--border);
+}
+
+/* ── UTILS ── */
 .theme-toggle {
   width: 36px;
   height: 36px;
@@ -43,19 +125,10 @@
 
 [data-theme="dark"] .theme-toggle:hover { background: var(--smoke2) }
 
-/* Theme transition - only fires when user manually toggles */
 .theme-ready * {
   transition: background-color .28s ease, color .28s ease, border-color .28s ease
 }
 
-/* These animations must always be instant */
-.pl-bar,
-.wbar,
-.fch-typing-dot,
-.td,
-.live-dot,
-.sys-dot,
-.va-bar,
-.pw-strength-fill {
+.pl-bar, .wbar, .fch-typing-dot, .td, .live-dot, .sys-dot, .va-bar, .pw-strength-fill {
   transition: none !important
 }
