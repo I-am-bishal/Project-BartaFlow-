@@ -1,49 +1,63 @@
 /**
  * BartaFlow Backend Connectivity Check
- * Notifies the developer if the backend is offline.
+ * Gracefully handles offline state for the demo.
  */
 (function() {
     const API_URL = 'http://localhost:5000/api/health';
+    let isOffline = false;
     
     async function checkBackend() {
         try {
             const response = await fetch(API_URL);
             if (response.ok) {
-                console.log('✅ Backend is connected and running.');
+                console.log('✅ BartaFlow Backend: Connected');
             } else {
-                showWarning('Backend responded with an error status.');
+                handleOffline('Server error');
             }
         } catch (error) {
-            showWarning('Backend is offline. Please run "npm run dev" in the backend folder.');
+            handleOffline('Backend offline');
         }
     }
 
-    function showWarning(msg) {
-        console.warn('📡 Backend Warning:', msg);
+    function handleOffline(reason) {
+        isOffline = true;
+        console.warn(`📡 BartaFlow Backend: ${reason}. Running in Simulation Mode.`);
         
-        // Optional: Show a small floating badge in dev mode
-        const badge = document.createElement('div');
-        badge.style.cssText = `
+        // Show a subtle indicator instead of a big red bar
+        const status = document.createElement('div');
+        status.id = 'api-status-indicator';
+        status.style.cssText = `
             position: fixed;
             bottom: 20px;
-            left: 20px;
-            background: #ff4757;
-            color: white;
-            padding: 8px 12px;
-            border-radius: 5px;
-            font-size: 12px;
+            right: 20px;
+            background: rgba(10, 22, 40, 0.8);
+            backdrop-filter: blur(8px);
+            color: #8b9ab8;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 10px;
             z-index: 9999;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            font-family: sans-serif;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'DM Mono', monospace;
+            pointer-events: none;
+            transition: opacity 0.3s;
         `;
-        badge.innerHTML = `⚠️ <strong>API Offline:</strong> ${msg}`;
-        document.body.appendChild(badge);
+        status.innerHTML = `<span style="width:6px;height:6px;background:#ff4757;border-radius:50%;display:inline-block;box-shadow:0 0 8px #ff4757"></span> SIMULATION MODE`;
+        document.body.appendChild(status);
         
-        setTimeout(() => badge.remove(), 10000);
+        // Auto-hide after 5 seconds to stay out of the way
+        setTimeout(() => {
+            if (status) status.style.opacity = '0';
+            setTimeout(() => status.remove(), 300);
+        }, 5000);
     }
 
-    // Only run on localhost
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    // Only run on localhost/127.0.0.1
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    if (isLocal) {
         checkBackend();
     }
 })();

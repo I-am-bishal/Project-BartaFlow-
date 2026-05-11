@@ -49,8 +49,16 @@ function doLogin(){
 }
 function doLogout(){
   currentUser = null;
-  document.getElementById('login-screen').classList.remove('hidden');
-  document.getElementById('dashboard').classList.remove('active');
+  const loginScreen = document.getElementById('login-screen');
+  const dashboard = document.getElementById('dashboard');
+  if (loginScreen) loginScreen.classList.remove('hidden');
+  if (dashboard) dashboard.classList.remove('active');
+  
+  // If we are on the landing page, we might need a different logout flow
+  if (typeof checkAuthState === 'function') {
+    clearSession();
+    checkAuthState();
+  }
 }
 
 // ════════════════════════════════════════
