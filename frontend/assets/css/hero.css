@@ -91,6 +91,7 @@
   border-radius: 9px;
   font-size: 15px;
   font-weight: 700;
+  text-decoration: none;
   transition: all .25s;
   display: inline-flex;
   align-items: center;

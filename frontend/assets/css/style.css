@@ -29,6 +29,24 @@
       --sh-lg: 0 16px 56px rgba(10, 22, 40, 0.14);
     }
 
+/* ── DARK THEME VARIABLE OVERRIDES ── */
+[data-theme="dark"] {
+  --text: #e8ecf4;      /* primary text */
+  --text2: #cbd5e1;     /* secondary text */
+  --text3: #a1aebf;     /* tertiary text */
+  --border: #2e3a52;   /* darker border */
+  --border2: #445a73;  /* secondary border */
+  --navy: #0a1628;
+  --white: #ffffff;
+  --gold: #c9a84c;
+}
+
+[data-theme="dark"] body {
+  background: #0a1628;
+  color: var(--text);
+}
+
+
     html {
       scroll-behavior: auto
     }
