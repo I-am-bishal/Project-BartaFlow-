@@ -217,30 +217,44 @@
   .pricing-grid-3 {
     grid-template-columns: 1fr;
     gap: 20px;
-  }
-  
-  .price-card {
-    padding: 28px 24px;
+    margin-top: 40px;
   }
   
   .price-card:last-child {
     grid-column: span 1;
   }
   
+  .price-card {
+    padding: 28px 22px;
+    border-radius: 16px;
+  }
+  
+  .price-card.featured {
+    transform: scale(1);
+    order: -1; /* Featured card shows first on mobile */
+  }
+  
+  .price-card.featured:hover {
+    transform: translateY(-4px);
+  }
+  
   .price-tier {
-    margin-bottom: 12px;
+    font-size: 9px;
+    margin-bottom: 14px;
   }
   
   .price-amt {
     font-size: 36px;
-    margin-bottom: 4px;
+    letter-spacing: -1.5px;
   }
   
   .price-per {
+    font-size: 12px;
     margin-bottom: 8px;
   }
   
   .price-setup {
+    font-size: 10px;
     padding-bottom: 16px;
     margin-bottom: 16px;
   }
@@ -252,10 +266,31 @@
   
   .pf {
     font-size: 12px;
+    gap: 8px;
+  }
+  
+  .pf::before {
+    font-size: 10px;
   }
   
   .price-btn {
     padding: 12px;
     font-size: 13px;
   }
+  
+  .featured-badge {
+    font-size: 8px;
+    padding: 5px 14px;
+  }
 }
+
+@media (max-width: 480px) {
+  .price-card {
+    padding: 22px 18px;
+  }
+  
+  .price-amt {
+    font-size: 32px;
+  }
+}
+
