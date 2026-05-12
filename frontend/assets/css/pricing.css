@@ -211,19 +211,51 @@
 
 @media (max-width: 768px) {
   .pricing-section {
-    padding: 80px 24px;
+    padding: 64px 20px;
   }
   
   .pricing-grid-3 {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 20px;
+  }
+  
+  .price-card {
+    padding: 28px 24px;
   }
   
   .price-card:last-child {
     grid-column: span 1;
   }
   
+  .price-tier {
+    margin-bottom: 12px;
+  }
+  
   .price-amt {
-    font-size: 40px;
+    font-size: 36px;
+    margin-bottom: 4px;
+  }
+  
+  .price-per {
+    margin-bottom: 8px;
+  }
+  
+  .price-setup {
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .price-feats {
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  
+  .pf {
+    font-size: 12px;
+  }
+  
+  .price-btn {
+    padding: 12px;
+    font-size: 13px;
   }
 }

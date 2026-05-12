@@ -261,19 +261,72 @@
 }
 
 @media (max-width: 768px) {
+  .voice-section {
+    padding: 64px 20px;
+  }
+  
+  .voice-grid {
+    gap: 40px;
+  }
+  
+  .voice-features {
+    gap: 12px;
+    margin-top: 24px;
+  }
+  
+  .vf {
+    padding: 14px 16px;
+    gap: 12px;
+  }
+  
+  .vf-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+  
   .voice-stats {
-    grid-template-columns: 1fr;
-    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  
+  .vs-card {
+    padding: 12px 8px;
+  }
+  
+  .vs-n {
+    font-size: 16px;
+  }
+  
+  .vs-l {
+    font-size: 8px;
   }
   
   .va-try-strip {
     flex-direction: column;
     text-align: center;
-    gap: 15px;
+    gap: 12px;
+    padding: 14px 16px;
+  }
+  
+  .va-launch-btn {
+    padding: 12px 24px;
+    font-size: 14px;
+    margin-top: 16px;
+    width: 100%;
+    justify-content: center;
   }
   
   .call-sim {
-    padding: 20px;
+    padding: 20px 16px;
+  }
+  
+  .cs-header {
+    margin-bottom: 16px;
+  }
+  
+  .cs-transcript {
+    max-height: 140px;
   }
   
   .waveform {
