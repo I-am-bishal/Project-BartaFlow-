@@ -267,6 +267,63 @@
   .features-section .section-h br {
     display: none;
   }
+
+  .features-grid.show-all .feat-card {
+    display: block !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+  
+  .feat-card:nth-child(n+4) {
+    display: none;
+  }
+
+  .features-more-mob {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+  }
+  
+  .feat-more-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--smoke);
+    border: 1px solid var(--border);
+    padding: 12px 24px;
+    border-radius: 50px;
+    color: var(--navy);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .3s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  
+  .feat-more-btn:hover {
+    background: var(--white);
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(201, 168, 76, 0.15);
+  }
+  
+  .feat-more-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    transition: transform .3s;
+  }
+  
+  .feat-more-btn.active svg {
+    transform: rotate(180deg);
+  }
+}
+
+@media (min-width: 769px) {
+  .features-more-mob {
+    display: none;
+  }
 }
 
 /* SUBTLE FLOATING ANIMATION FOR ICONS */

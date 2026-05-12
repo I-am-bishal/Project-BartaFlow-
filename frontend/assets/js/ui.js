@@ -166,6 +166,29 @@ const _barObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.3 });
 document.querySelectorAll('.feat-card').forEach(c => _barObserver.observe(c));
 
+// ── FEATURES SHOW MORE (MOBILE) ───────────────────────────────────────────
+window.toggleFeatures = function () {
+  const grid = document.querySelector('.features-grid');
+  const btn  = document.getElementById('feat-more-btn');
+  if (!grid || !btn) return;
+  
+  const isExpanding = !grid.classList.contains('show-all');
+  grid.classList.toggle('show-all');
+  btn.classList.toggle('active');
+  
+  const btnText = btn.querySelector('span');
+  if (btnText) {
+    btnText.textContent = isExpanding ? 'Show Less' : 'View All Capabilities';
+  }
+  
+  if (!isExpanding) {
+    const featuresSection = document.getElementById('features');
+    if (featuresSection) {
+      featuresSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+};
+
 // ── GLOBAL ESC KEY HANDLER ────────────────────────────────────────────────
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
@@ -177,5 +200,8 @@ document.addEventListener('keydown', e => {
     if (typeof closeLegal        === 'function') closeLegal();
     if (typeof closePayment      === 'function') closePayment();
     if (typeof closeEmailModal   === 'function') closeEmailModal();
+    
+    const featGrid = document.querySelector('.features-grid');
+    if (featGrid && featGrid.classList.contains('show-all')) toggleFeatures();
   }
 });
