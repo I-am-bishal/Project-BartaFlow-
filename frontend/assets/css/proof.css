@@ -125,34 +125,66 @@
   }
   
   .test-stats-grid {
-    gap: 6px;
+    gap: 8px;
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+  
+  .test-stats-grid > div {
+    padding: 8px 4px !important;
+  }
+  
+  .test-stats-grid div[style*="font-size:18px"] {
+    font-size: 14px !important;
+  }
+  
+  .test-stats-grid div[style*="font-size:9px"] {
+    font-size: 8px !important;
   }
   
   .test-card-header-blue {
-    padding: 16px 20px;
+    padding: 12px 18px;
+  }
+  
+  .test-card-header-blue div[style*="font-size:15px"] {
+    font-size: 13px !important;
   }
   
   .test-card-body {
-    padding: 16px 20px;
+    padding: 16px 18px;
+  }
+  
+  .test-card-body div[style*="font-size:13px"] {
+    font-size: 12px !important;
+    line-height: 1.6 !important;
   }
 }
 
 @media (max-width: 480px) {
+  .test-grid-container {
+    padding: 20px 12px;
+  }
+  
   .test-stats-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 5px;
   }
   
   .test-stats-grid > div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 16px !important;
-    text-align: left !important;
+    padding: 6px 2px !important;
   }
   
-  .test-stats-grid > div div:last-child {
-    margin-top: 0 !important;
+  .test-stats-grid div[style*="font-size:18px"] {
+    font-size: 12px !important;
+  }
+  
+  .test-card-header-blue {
+    padding: 10px 14px;
+    gap: 10px;
+  }
+  
+  .test-card-header-blue div[style*="width:44px"] {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 16px !important;
   }
 }
 

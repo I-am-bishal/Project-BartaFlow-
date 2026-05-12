@@ -224,11 +224,75 @@
   .features-grid {
     grid-template-columns: 1fr;
     margin-top: 40px;
+    gap: 16px;
   }
   
   .feat-card {
-    padding: 24px;
+    padding: 20px;
     text-align: left;
+    border-radius: 12px;
   }
+  
+  .feat-icon-wrap {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+  
+  .feat-title {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  
+  .feat-desc {
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  
+  .feat-num {
+    margin-bottom: 10px;
+  }
+  
+  .lang-wrap, .mini-analytics, .crm-flow {
+    margin-top: 12px;
+  }
+
+  .features-section .section-h {
+    font-size: 24px;
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+  
+  .features-section .section-h br {
+    display: none;
+  }
+}
+
+/* SUBTLE FLOATING ANIMATION FOR ICONS */
+@keyframes featFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.feat-icon-wrap {
+  animation: featFloat 3s ease-in-out infinite;
+}
+
+.feat-card:nth-child(even) .feat-icon-wrap {
+  animation-delay: 1.5s;
+}
+
+/* STAGGERED ANIMATION FOR FEATURES */
+.features-grid .feat-card:nth-child(1) { transition-delay: 0.1s; }
+.features-grid .feat-card:nth-child(2) { transition-delay: 0.2s; }
+.features-grid .feat-card:nth-child(3) { transition-delay: 0.3s; }
+.features-grid .feat-card:nth-child(4) { transition-delay: 0.4s; }
+.features-grid .feat-card:nth-child(5) { transition-delay: 0.5s; }
+.features-grid .feat-card:nth-child(6) { transition-delay: 0.6s; }
+
+.feat-card:hover {
+  transform: translateY(-8px) scale(1.02) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
 }
 
