@@ -189,6 +189,31 @@ window.toggleFeatures = function () {
   }
 };
 
+// ── BOTS SHOW MORE (MOBILE) ──────────────────────────────────────────────
+window.toggleBots = function () {
+  const grid1 = document.querySelector('.bots-grid');
+  const grid2 = document.querySelector('.bots-row2');
+  const btn   = document.getElementById('bot-more-btn');
+  if (!grid1 || !grid2 || !btn) return;
+  
+  const isExpanding = !grid1.classList.contains('show-all');
+  grid1.classList.toggle('show-all');
+  grid2.classList.toggle('show-all');
+  btn.classList.toggle('active');
+  
+  const btnText = btn.querySelector('span');
+  if (btnText) {
+    btnText.textContent = isExpanding ? 'Show Less' : 'Explore All Industries';
+  }
+  
+  if (!isExpanding) {
+    const botsSection = document.getElementById('bots');
+    if (botsSection) {
+      botsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+};
+
 // ── GLOBAL ESC KEY HANDLER ────────────────────────────────────────────────
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
@@ -203,5 +228,8 @@ document.addEventListener('keydown', e => {
     
     const featGrid = document.querySelector('.features-grid');
     if (featGrid && featGrid.classList.contains('show-all')) toggleFeatures();
+
+    const botGrid = document.querySelector('.bots-grid');
+    if (botGrid && botGrid.classList.contains('show-all')) toggleBots();
   }
 });
