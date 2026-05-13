@@ -212,6 +212,29 @@ window.toggleBots = function () {
   }
 };
 
+// ── PRICING SHOW MORE (MOBILE) ─────────────────────────────────────────────
+window.togglePricing = function () {
+  const grid = document.querySelector('.pricing-grid-3');
+  const btn  = document.getElementById('pricing-more-btn');
+  if (!grid || !btn) return;
+  
+  const isExpanding = !grid.classList.contains('show-all');
+  grid.classList.toggle('show-all');
+  btn.classList.toggle('active');
+  
+  const btnText = btn.querySelector('span');
+  if (btnText) {
+    btnText.textContent = isExpanding ? 'Hide Plans' : 'See All Plans';
+  }
+  
+  if (!isExpanding) {
+    const pricingSection = document.getElementById('pricing');
+    if (pricingSection) {
+      pricingSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+};
+
 // ── GLOBAL ESC KEY HANDLER ────────────────────────────────────────────────
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
@@ -229,5 +252,8 @@ document.addEventListener('keydown', e => {
 
     const botsSection = document.querySelector('.bots-section');
     if (botsSection && botsSection.classList.contains('show-all')) toggleBots();
+
+    const priceGrid = document.querySelector('.pricing-grid-3');
+    if (priceGrid && priceGrid.classList.contains('show-all')) togglePricing();
   }
 });

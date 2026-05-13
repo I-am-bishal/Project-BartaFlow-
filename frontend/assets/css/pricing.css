@@ -181,6 +181,10 @@
   transform: translateY(-2px);
 }
 
+.pricing-more-mob {
+  display: none;
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 1200px) {
   .pricing-section {
@@ -281,6 +285,53 @@
   .featured-badge {
     font-size: 8px;
     padding: 5px 14px;
+  }
+
+  /* ── MOBILE "SEE MORE" LOGIC ── */
+  .pricing-grid-3 .price-card:not(.featured) {
+    display: none;
+  }
+
+  .pricing-grid-3.show-all .price-card:not(.featured) {
+    display: flex;
+    animation: fadeUp .5s ease both;
+  }
+
+  .pricing-more-mob {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+  }
+
+  .pricing-more-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(201, 168, 76, .1);
+    border: 1px solid rgba(201, 168, 76, .3);
+    color: var(--gold);
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .3s;
+  }
+
+  .pricing-more-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    transition: transform .3s;
+  }
+
+  .pricing-more-btn.active {
+    background: var(--gold);
+    color: var(--navy);
+  }
+
+  .pricing-more-btn.active svg {
+    transform: rotate(180deg);
   }
 }
 
