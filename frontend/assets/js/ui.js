@@ -235,6 +235,69 @@ window.togglePricing = function () {
   }
 };
 
+// ── VOICE FEATURES SHOW MORE (MOBILE) ─────────────────────────────────────
+window.toggleVoiceFeatures = function () {
+  const section = document.querySelector('.voice-section');
+  const btn     = document.getElementById('voice-more-btn');
+  if (!section || !btn) return;
+  
+  const isExpanding = !section.classList.contains('show-all-features');
+  section.classList.toggle('show-all-features');
+  btn.classList.toggle('active');
+  
+  const btnText = btn.querySelector('span');
+  if (btnText) {
+    btnText.textContent = isExpanding ? 'Show Fewer Features' : 'Show All Features';
+  }
+};
+
+// ── TESTIMONIALS SHOW MORE (MOBILE) ───────────────────────────────────────
+window.toggleTestimonials = function () {
+  const container = document.querySelector('.test-grid-container');
+  const btn       = document.getElementById('test-more-btn');
+  if (!container || !btn) return;
+  
+  const isExpanding = !container.classList.contains('show-all');
+  container.classList.toggle('show-all');
+  btn.classList.toggle('active');
+  
+  const btnText = btn.querySelector('span');
+  if (btnText) {
+    btnText.textContent = isExpanding ? 'Show Fewer Stories' : 'View More Stories';
+  }
+  
+  if (!isExpanding) {
+    const testimonialsSection = document.getElementById('testimonials');
+    if (testimonialsSection) {
+      testimonialsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+};
+
+// ── FAQ LIST SHOW MORE (MOBILE) ───────────────────────────────────────────
+window.toggleFaqList = function () {
+  const section = document.querySelector('.faq-section');
+  const btn     = document.getElementById('faq-more-btn');
+  if (!section || !btn) return;
+  
+  const isExpanding = !section.classList.contains('show-all');
+  section.classList.toggle('show-all');
+  btn.classList.toggle('active');
+  
+  const btnText = btn.querySelector('span');
+  if (btnText) {
+    btnText.textContent = isExpanding ? 'Show Fewer FAQs' : 'Show All FAQs';
+  }
+  
+  if (!isExpanding) {
+    const faqSection = document.getElementById('faq');
+    if (faqSection) {
+      faqSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+};
+
+
 // ── GLOBAL ESC KEY HANDLER ────────────────────────────────────────────────
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
@@ -255,5 +318,14 @@ document.addEventListener('keydown', e => {
 
     const priceGrid = document.querySelector('.pricing-grid-3');
     if (priceGrid && priceGrid.classList.contains('show-all')) togglePricing();
+
+    const voiceSection = document.querySelector('.voice-section');
+    if (voiceSection && voiceSection.classList.contains('show-all-features')) toggleVoiceFeatures();
+
+    const testContainer = document.querySelector('.test-grid-container');
+    if (testContainer && testContainer.classList.contains('show-all')) toggleTestimonials();
+
+    const faqSection = document.querySelector('.faq-section');
+    if (faqSection && faqSection.classList.contains('show-all')) toggleFaqList();
   }
 });

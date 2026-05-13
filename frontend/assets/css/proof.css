@@ -154,8 +154,55 @@
   }
   
   .test-card-body div[style*="font-size:13px"] {
-    font-size: 12px !important;
     line-height: 1.6 !important;
+  }
+
+  /* Compact testimonials */
+  .test-grid-inner .test-card-blue:nth-child(n+3) {
+    display: none;
+  }
+
+  .test-grid-container.show-all .test-grid-inner .test-card-blue:nth-child(n+3) {
+    display: block;
+    animation: fadeUp .5s ease both;
+  }
+
+  .test-more-mob {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+  }
+
+  .test-more-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, .05);
+    border: 1px solid rgba(255, 255, 255, .1);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  [data-theme="light"] .test-more-btn {
+    background: #fff;
+    border-color: rgba(37, 99, 235, 0.1);
+    color: var(--navy);
+  }
+
+  .test-more-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    transition: transform 0.3s;
+  }
+
+  .test-more-btn.active svg {
+    transform: rotate(180deg);
   }
 }
 

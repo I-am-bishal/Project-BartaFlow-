@@ -322,5 +322,55 @@
   .faq-cta-btn {
     width: 100%;
   }
+
+  /* Compact FAQ items */
+  .faq-list .faq-item:nth-child(n+5) {
+    display: none;
+  }
+
+  .faq-section.show-all .faq-list .faq-item:nth-child(n+5) {
+    display: block;
+    animation: fadeUp .5s ease both;
+  }
+
+  .faq-more-mob {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+  }
+
+  .faq-more-btn {
+    background: none;
+    border: none;
+    color: var(--navy);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  [data-theme="dark"] .faq-more-btn {
+    color: var(--gold);
+  }
+
+  .faq-more-btn:hover {
+    opacity: 1;
+  }
+
+  .faq-more-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    transition: transform 0.3s;
+  }
+
+  .faq-more-btn.active svg {
+    transform: rotate(180deg);
+  }
 }
 

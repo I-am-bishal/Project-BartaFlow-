@@ -284,6 +284,53 @@
     height: 32px;
     font-size: 14px;
   }
+
+  /* Compact features on mobile */
+  .voice-features .vf:nth-child(n+3) {
+    display: none;
+  }
+
+  .voice-section.show-all-features .voice-features .vf:nth-child(n+3) {
+    display: flex;
+    animation: fadeUp .5s ease both;
+  }
+
+  .voice-more-mob {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .voice-more-btn {
+    background: none;
+    border: none;
+    color: var(--gold);
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+  }
+
+  .voice-more-btn:hover {
+    opacity: 1;
+  }
+
+  .voice-more-btn svg {
+    width: 12px;
+    height: 12px;
+    fill: currentColor;
+    transition: transform 0.3s;
+  }
+
+  .voice-more-btn.active svg {
+    transform: rotate(180deg);
+  }
   
   .voice-stats {
     grid-template-columns: repeat(3, 1fr);
