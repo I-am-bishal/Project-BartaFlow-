@@ -182,8 +182,12 @@ footer {
   }
   
   .footer-top {
-    grid-template-columns: 1fr;
-    gap: 40px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 20px;
+  }
+
+  .footer-top > div:first-child {
+    grid-column: 1 / -1;
   }
   
   .footer-logo {
@@ -216,9 +220,7 @@ footer {
     justify-content: center;
   }
 
-  .footer-top {
-    gap: 32px;
-  }
+
 
   .footer-col h4 {
     margin-bottom: 12px;

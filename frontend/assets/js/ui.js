@@ -235,21 +235,7 @@ window.togglePricing = function () {
   }
 };
 
-// ── VOICE FEATURES SHOW MORE (MOBILE) ─────────────────────────────────────
-window.toggleVoiceFeatures = function () {
-  const section = document.querySelector('.voice-section');
-  const btn     = document.getElementById('voice-more-btn');
-  if (!section || !btn) return;
-  
-  const isExpanding = !section.classList.contains('show-all-features');
-  section.classList.toggle('show-all-features');
-  btn.classList.toggle('active');
-  
-  const btnText = btn.querySelector('span');
-  if (btnText) {
-    btnText.textContent = isExpanding ? 'Show Fewer Features' : 'Show All Features';
-  }
-};
+
 
 // ── TESTIMONIALS SHOW MORE (MOBILE) ───────────────────────────────────────
 window.toggleTestimonials = function () {
@@ -319,8 +305,7 @@ document.addEventListener('keydown', e => {
     const priceGrid = document.querySelector('.pricing-grid-3');
     if (priceGrid && priceGrid.classList.contains('show-all')) togglePricing();
 
-    const voiceSection = document.querySelector('.voice-section');
-    if (voiceSection && voiceSection.classList.contains('show-all-features')) toggleVoiceFeatures();
+
 
     const testContainer = document.querySelector('.test-grid-container');
     if (testContainer && testContainer.classList.contains('show-all')) toggleTestimonials();
