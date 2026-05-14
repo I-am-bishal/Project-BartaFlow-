@@ -410,7 +410,8 @@
     width: 100%;
   }
   
-  .btn-gold-lg {
+  .btn-gold-lg,
+  .btn-outline-white {
     width: 100%;
     justify-content: center;
   }
