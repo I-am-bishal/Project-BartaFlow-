@@ -102,6 +102,10 @@
   }
 }
 
+.test-more-mob {
+  display: none;
+}
+
 @media (max-width: 768px) {
   #testimonials {
     padding: 60px 24px;

@@ -300,6 +300,10 @@
   }
 }
 
+.faq-more-mob {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .faq-section {
     padding: 80px 24px;
