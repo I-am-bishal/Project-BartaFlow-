@@ -177,33 +177,47 @@ footer {
 
 @media (max-width: 768px) {
   footer {
-    padding: 60px 24px 30px;
-    text-align: center;
+    padding: 48px 24px 24px;
+    text-align: left;
   }
   
   .footer-top {
     grid-template-columns: repeat(2, 1fr);
-    gap: 40px 20px;
+    gap: 32px 20px;
   }
 
   .footer-top > div:first-child {
     grid-column: 1 / -1;
-  }
-  
-  .footer-logo {
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
   
   .footer-desc {
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left;
+    max-width: 100%;
+    font-size: 12px;
+    margin-top: 10px;
   }
   
   .footer-bottom {
     flex-direction: column;
-    gap: 20px;
+    align-items: flex-start;
+    gap: 16px;
+    padding-top: 20px;
   }
-  
+
+  .footer-col h4 {
+    margin-bottom: 12px;
+  }
+
+  .footer-col a {
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+
   #cookie-banner {
     padding: 20px 24px;
     text-align: center;
@@ -218,31 +232,6 @@ footer {
   .ck-btns {
     width: 100%;
     justify-content: center;
-  }
-
-
-
-  .footer-col h4 {
-    margin-bottom: 12px;
-  }
-
-  .footer-col a {
-    margin-bottom: 8px;
-    font-size: 12px;
-  }
-
-  .footer-desc {
-    font-size: 12px;
-    margin-top: 10px;
-  }
-
-  footer {
-    padding: 48px 24px 24px;
-  }
-
-  .footer-bottom {
-    padding-top: 20px;
-    gap: 16px;
   }
 }
 
