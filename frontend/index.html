@@ -2202,19 +2202,65 @@
   </div>
 
   <!-- ══════════════════════════════════════
-     COOKIE CONSENT BANNER
+     COOKIE CONSENT BANNER & MODAL
 ══════════════════════════════════════ -->
-  <div id="cookie-banner">
-    <div class="ck-text">
-      <strong>🍪 We use cookies</strong>
-      We use cookies and similar technologies to improve your experience, analyse traffic, and personalise content. By
-      continuing, you agree to our <a href="#" onclick="openLegal('privacy');return false">Privacy Policy</a> and <a
-        href="#" onclick="openLegal('tos');return false">Terms of Service</a>.
+  <div class="cookie-overlay" id="cookie-overlay" onclick="if(event.target.id==='cookie-overlay')closeCookiePrefs()">
+    <div class="cookie-prefs-modal">
+      <div class="cp-header">
+        <div class="cp-title">Cookie Preferences</div>
+        <button class="cp-close" onclick="closeCookiePrefs()">✕</button>
+      </div>
+      <div class="cp-body">
+        <div class="cp-row">
+          <div class="cp-info">
+            <div class="cp-name">Strictly Necessary</div>
+            <div class="cp-desc">Required for the website to function securely. Cannot be disabled.</div>
+          </div>
+          <div class="cp-toggle">
+            <label class="cp-switch"><input type="checkbox" checked disabled><span class="cp-slider"></span></label>
+          </div>
+        </div>
+        <div class="cp-row">
+          <div class="cp-info">
+            <div class="cp-name">Analytics & Performance</div>
+            <div class="cp-desc">Helps us understand how visitors interact with our website to improve user experience.</div>
+          </div>
+          <div class="cp-toggle">
+            <label class="cp-switch"><input type="checkbox" id="cp-analytics" checked><span class="cp-slider"></span></label>
+          </div>
+        </div>
+        <div class="cp-row">
+          <div class="cp-info">
+            <div class="cp-name">Marketing & Advertising</div>
+            <div class="cp-desc">Used to deliver relevant advertisements and track ad performance across campaigns.</div>
+          </div>
+          <div class="cp-toggle">
+            <label class="cp-switch"><input type="checkbox" id="cp-marketing"><span class="cp-slider"></span></label>
+          </div>
+        </div>
+      </div>
+      <div class="cp-footer">
+        <button class="cp-save-btn" onclick="saveCookiePrefs()">Save Preferences</button>
+        <button class="cp-accept-all-btn" onclick="acceptCookies()">Accept All</button>
+      </div>
     </div>
-    <div class="ck-btns">
-      <button class="ck-accept" onclick="acceptCookies()">Accept All</button>
-      <button class="ck-decline" onclick="declineCookies()">Decline</button>
-      <button class="ck-prefs" onclick="openLegal('privacy')">Manage Preferences</button>
+  </div>
+
+  <div id="cookie-banner" class="cookie-floating-card">
+    <div class="ck-header-mob">
+      <div class="ck-title">🍪 Cookie Consent</div>
+    </div>
+    <div class="ck-content">
+      <div class="ck-title desktop-only">🍪 We value your privacy</div>
+      <div class="ck-text">
+        We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.
+        <a href="#" onclick="openLegal('privacy');return false">Privacy Policy</a>
+      </div>
+    </div>
+    <div class="ck-btns-col">
+      <button class="ck-btn-primary" onclick="acceptCookies()">Accept All</button>
+      <button class="ck-btn-secondary" onclick="declineCookies()">Reject All</button>
+      <button class="ck-btn-text" onclick="openCookiePrefs()">Customize</button>
     </div>
   </div>
 
