@@ -127,25 +127,7 @@
   }, 3000);
 })();
 
-// ── COOKIE CONSENT BANNER ─────────────────────────────────────────────────
-(function () {
-  const COOKIE_KEY = 'bf_cookie_consent';
-  const banner     = document.getElementById('cookie-banner');
-  if (!banner) return;
-  if (!localStorage.getItem(COOKIE_KEY)) {
-    setTimeout(() => banner.classList.add('show'), 1800);
-  }
-  window.acceptCookies = function () {
-    localStorage.setItem(COOKIE_KEY, 'accepted');
-    banner.classList.remove('show');
-    showToast('🍪', 'Preferences saved. Thank you!');
-  };
-  window.declineCookies = function () {
-    localStorage.setItem(COOKIE_KEY, 'declined');
-    banner.classList.remove('show');
-    showToast('✓', 'Non-essential cookies declined.');
-  };
-})();
+
 
 // ── SCROLL REVEAL & ANALYTICS BAR ANIMATION ───────────────────────────────
 const _revealObserver = new IntersectionObserver(entries => {
