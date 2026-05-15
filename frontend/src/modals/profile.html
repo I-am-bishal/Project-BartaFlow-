@@ -1,0 +1,83 @@
+<!-- ══════════════════════════════════════
+     PROFILE / CUSTOMER PORTAL
+══════════════════════════════════════ -->
+<div class="profile-overlay" id="profile-overlay" onclick="if(event.target.id==='profile-overlay')closeProfile()">
+  <div class="profile-panel">
+    <div class="profile-header">
+      <div class="profile-user">
+        <div class="profile-av" id="p-av">JD</div>
+        <div class="profile-info">
+          <div class="profile-name" id="p-name">John Doe</div>
+          <div class="profile-email" id="p-email">john@example.com</div>
+        </div>
+      </div>
+      <button class="profile-close" onclick="closeProfile()">✕</button>
+    </div>
+
+    <div class="profile-tabs">
+      <button class="p-tab active" onclick="switchPTab(this,'overview')">Overview</button>
+      <button class="p-tab" onclick="switchPTab(this,'billing')">Billing</button>
+      <button class="p-tab" onclick="switchPTab(this,'settings')">Settings</button>
+    </div>
+
+    <div class="profile-body">
+      <!-- Overview -->
+      <div class="p-content active" id="p-overview">
+        <div class="p-status-card">
+          <div class="p-status-label">ACTIVE PLAN</div>
+          <div class="p-plan-row">
+            <span class="p-plan-name" id="p-plan-title">14-Day Free Trial</span>
+            <span class="p-status-tag">Active</span>
+          </div>
+          <div class="p-trial-info" id="p-trial-days">14 days remaining</div>
+          <div class="p-trial-bar">
+            <div class="p-trial-fill" id="p-trial-progress" style="width:100%"></div>
+          </div>
+          <button class="p-upgrade-btn" onclick="closeProfile();document.getElementById('pricing').scrollIntoView()">Upgrade to Pro →</button>
+        </div>
+
+        <div class="p-stats-grid">
+          <div class="p-stat-box">
+            <div class="p-stat-v">0/500</div>
+            <div class="p-stat-l">Messages Used</div>
+          </div>
+          <div class="p-stat-box">
+            <div class="p-stat-v">1</div>
+            <div class="p-stat-l">Active Bots</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Billing -->
+      <div class="p-content" id="p-billing">
+        <div style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:12px">Billing History</div>
+        <div class="p-invoice-list">
+          <div class="p-invoice-item">
+            <div>
+              <div style="font-weight:600;font-size:12px">Free Trial Activation</div>
+              <div style="font-size:10px;color:var(--text3)">Apr 15, 2025</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-weight:600;font-size:12px">₹0.00</div>
+              <div style="font-size:10px;color:var(--green)">Processed</div>
+            </div>
+          </div>
+        </div>
+        <button class="p-billing-btn" onclick="comingSoon('Invoicing System')">Download All Invoices (PDF)</button>
+      </div>
+
+      <!-- Settings -->
+      <div class="p-content" id="p-settings">
+        <div class="p-setting-row">
+          <span>Dark Mode</span>
+          <label class="cp-switch"><input type="checkbox" checked onchange="toggleDarkMode()"><span class="cp-slider"></span></label>
+        </div>
+        <div class="p-setting-row">
+          <span>Email Notifications</span>
+          <label class="cp-switch"><input type="checkbox" checked><span class="cp-slider"></span></label>
+        </div>
+        <button class="p-logout-btn" onclick="doSignOut()">Sign Out</button>
+      </div>
+    </div>
+  </div>
+</div>
