@@ -80,3 +80,20 @@ window.openDemo        = openDemo;
 window.sendDemoMsg     = sendDemoMsg;
 window.closeModal      = closeModal;
 window.closeModalDirect = closeModalDirect;
+
+window.openIndustryDemo = function(id) {
+  const container = document.getElementById(id);
+  if (!container) return;
+  
+  // 1. Scroll to the section first
+  container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  
+  // 2. Find the card and trigger the demo
+  const card = container.querySelector('.bot-card');
+  if (card) {
+    // Add a slight delay so the scroll starts before the modal pops up
+    setTimeout(() => {
+      card.click();
+    }, 400);
+  }
+};
