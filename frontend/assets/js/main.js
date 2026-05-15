@@ -26,6 +26,7 @@
  *  12. legal.js
  *  13. email.js
  *  14. payment.js
- *  15. ui.js        ← last (hooks into other modules via ESC handler etc.)
- *  16. admin.js     ← admin panel (separate)
+ *  15. cookies.js
+ *  16. ui.js        ← last (hooks into other modules via ESC handler etc.)
+ *  17. admin.js     ← admin panel (separate)
  */
