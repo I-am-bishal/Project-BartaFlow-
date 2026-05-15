@@ -2184,69 +2184,77 @@
 ══════════════════════════════════════ -->
   <section class="pricing-section" id="pricing">
     <div class="section-label" style="text-align:center">Simple Pricing</div>
-    <div class="section-h" style="text-align:center">Transparent plans.<br><span style="color:var(--gold)">No hidden
-        fees.</span></div>
-    <p class="section-sub" style="text-align:center;margin:12px auto 0">All plans include a 14-day free trial. Cancel
-      anytime.</p>
-    <div class="pricing-grid-3 reveal">
-      <!-- Starter -->
-      <div class="price-card">
-        <div class="price-tier">Starter</div>
-        <div class="price-amt">₹999</div>
-        <div class="price-per">per month</div>
-        <div class="price-setup">+ ₹5,000 one-time setup fee</div>
-        <div class="price-feats">
-          <div class="pf">500 messages / month</div>
-          <div class="pf">GPT-3.5 AI engine</div>
-          <div class="pf">Lead capture & CRM</div>
-          <div class="pf">1 WhatsApp number</div>
-          <div class="pf">Email support</div>
-          <div class="pf no">E-commerce catalog</div>
-          <div class="pf no">Broadcast campaigns</div>
-          <div class="pf no">White-label</div>
-        </div>
-        <button class="price-btn" onclick="openPayment('Starter','₹999/month + ₹5,000 setup',999,5000)">Get
-          Started</button>
+    <div class="section-h" style="text-align:center">Choose the plan that<br>works for you</div>
+    <p class="section-sub" style="text-align:center;margin:12px auto 0;max-width:500px">
+      Transparent plans. No hidden fees. All plans include a 14-day free trial. Cancel anytime.
+    </p>
+
+    <div class="pricing-toggle-wrap reveal">
+      <div class="pricing-toggle" id="price-toggle-group">
+        <div class="toggle-bg"></div>
+        <button class="active" onclick="setBillingCycle('monthly')">Monthly</button>
+        <button onclick="setBillingCycle('yearly')">Yearly <span class="toggle-save-badge">Save 30%</span></button>
       </div>
-      <!-- Pro -->
+    </div>
+
+    <div class="pricing-grid-3 reveal" id="pricing-grid">
+      <!-- Basic -->
+      <div class="price-card">
+        <div class="price-tier">Basic</div>
+        <div class="price-desc">Create Interactive AI chatbots that connect to your business workflow</div>
+        <div class="price-amt-wrap">
+          <div class="price-amt" data-monthly="1,499" data-yearly="999">₹1,499<span class="price-unit">/mo</span></div>
+          <span class="price-save-label">Save ₹6,000 /yr</span>
+        </div>
+        <button class="price-btn" onclick="openPayment('Basic','Monthly Plan',1499,5000)">Get Basic</button>
+        <div class="price-feats">
+          <div class="pf">500 messages/mo included</div>
+          <div class="pf">1 active AI agent</div>
+          <div class="pf">Unlimited lead capture</div>
+          <div class="pf">Standard response speed</div>
+        </div>
+      </div>
+
+      <!-- Plus -->
       <div class="price-card featured">
-        <div class="featured-badge">Most Popular</div>
-        <div class="price-tier">Professional</div>
-        <div class="price-amt" style="color:var(--gold)">₹2,499</div>
-        <div class="price-per">per month</div>
-        <div class="price-setup">+ ₹10,000 one-time setup fee</div>
-        <div class="price-feats">
-          <div class="pf">5,000 messages / month</div>
-          <div class="pf">GPT-4o AI engine</div>
-          <div class="pf">Full CRM + Lead scoring</div>
-          <div class="pf">E-commerce + Payments</div>
-          <div class="pf">Booking & calendar</div>
-          <div class="pf">Broadcast campaigns</div>
-          <div class="pf">Priority support</div>
-          <div class="pf no">White-label</div>
+        <div class="price-tier">Plus</div>
+        <div class="price-desc">Make your AI conversations more personalized and on-brand</div>
+        <div class="price-amt-wrap">
+          <div class="price-amt" data-monthly="3,499" data-yearly="2,499">₹3,499<span class="price-unit">/mo</span></div>
+          <span class="price-save-label">Save ₹12,000 /yr</span>
         </div>
-        <button class="price-btn price-btn-inv"
-          onclick="openPayment('Professional','₹2,499/month + ₹10,000 setup',2499,10000)">Start Free Trial</button>
+        <button class="price-btn" onclick="openPayment('Plus','Monthly Plan',3499,10000)">Get Plus</button>
+        <div class="price-feats">
+          <div class="pf">5,000 responses/mo included</div>
+          <div class="pf">3 active AI agents</div>
+          <div class="pf">Everything in Basic</div>
+          <div class="pf">Remove BartaFlow branding</div>
+          <div class="pf">Custom industry training</div>
+        </div>
       </div>
-      <!-- Enterprise -->
+
+      <!-- Business -->
       <div class="price-card">
-        <div class="price-tier">Enterprise</div>
-        <div class="price-amt">₹4,999</div>
-        <div class="price-per">per month</div>
-        <div class="price-setup">+ ₹25,000 one-time setup fee</div>
-        <div class="price-feats">
-          <div class="pf">Unlimited messages</div>
-          <div class="pf">Custom AI training</div>
-          <div class="pf">White-label branding</div>
-          <div class="pf">Instagram + Telegram</div>
-          <div class="pf">Voice AI agent</div>
-          <div class="pf">API access</div>
-          <div class="pf">Dedicated manager</div>
-          <div class="pf">Multi-client dashboard</div>
+        <div class="price-tier">Business</div>
+        <div class="price-desc">Analyze performance with AI and do more with your customer data</div>
+        <div class="price-amt-wrap">
+          <div class="price-amt" data-monthly="6,999" data-yearly="4,999">₹6,999<span class="price-unit">/mo</span></div>
+          <span class="price-save-label">Save ₹24,000 /yr</span>
         </div>
-        <button class="price-btn" onclick="openPayment('Enterprise','₹4,999/month + ₹25,000 setup',4999,25000)">Contact
-          Sales</button>
+        <button class="price-btn" onclick="openPayment('Business','Monthly Plan',6999,25000)">Get Business</button>
+        <div class="price-feats">
+          <div class="pf">10,000 responses/mo included</div>
+          <div class="pf">5 active AI agents</div>
+          <div class="pf">Everything in Plus</div>
+          <div class="pf">Priority support & live chat</div>
+          <div class="pf">Conversion tracking</div>
+          <div class="pf">API & Voice Agent access</div>
+        </div>
       </div>
+    </div>
+
+    <div style="text-align:center;margin-top:40px;font-size:14px;color:var(--text3)" class="reveal">
+      Or try it out with our <a href="#" onclick="openAuth('signup');return false" style="color:var(--navy);font-weight:600;text-decoration:underline">free 14-day trial plan</a>
     </div>
     
     <!-- MOBILE VIEW MORE PLANS -->

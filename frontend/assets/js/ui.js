@@ -242,6 +242,52 @@ window.toggleTestimonials = function () {
   }
 };
 
+// ── PRICING BILLING CYCLE TOGGLE ───────────────────────────────────────────
+window.setBillingCycle = function(cycle) {
+  const grid = document.getElementById('pricing-grid');
+  const group = document.getElementById('price-toggle-group');
+  if (!grid || !group) return;
+
+  const btns = group.querySelectorAll('button');
+  btns.forEach(btn => {
+    if (btn.textContent.toLowerCase().includes(cycle)) btn.classList.add('active');
+    else btn.classList.remove('active');
+  });
+
+  if (cycle === 'yearly') {
+    grid.classList.add('yearly');
+    group.classList.add('yearly');
+  } else {
+    grid.classList.remove('yearly');
+    group.classList.remove('yearly');
+  }
+
+  // Update amounts with animation
+  const amounts = grid.querySelectorAll('.price-amt');
+  amounts.forEach(amt => {
+    const val = cycle === 'yearly' ? amt.dataset.yearly : amt.dataset.monthly;
+    amt.innerHTML = `₹${val}<span class="price-unit">/mo</span>`;
+    
+    // Add a quick flash animation
+    amt.style.animation = 'none';
+    amt.offsetHeight; // trigger reflow
+    amt.style.animation = 'countUp 0.3s ease-out';
+  });
+};
+
+// Add countUp animation keyframes if not exists
+if (!document.getElementById('pricing-anim-styles')) {
+  const s = document.createElement('style');
+  s.id = 'pricing-anim-styles';
+  s.textContent = `
+    @keyframes countUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  `;
+  document.head.appendChild(s);
+}
+
 // ── FAQ LIST SHOW MORE (MOBILE) ───────────────────────────────────────────
 window.toggleFaqList = function () {
   const section = document.querySelector('.faq-section');

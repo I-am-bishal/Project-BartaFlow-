@@ -5,12 +5,36 @@ var currentPlan      = {};
 var currentPayMethod = 'card';
 
 window.openPayment = function (planName, planDesc, monthlyAmt, setupAmt) {
-  currentPlan = { name: planName, desc: planDesc, monthly: monthlyAmt, setup: setupAmt };
-  var gst   = Math.round((monthlyAmt + setupAmt) * 0.18);
-  var total = monthlyAmt + setupAmt + gst;
+  // Check current cycle from the UI
+  const grid = document.getElementById('pricing-grid');
+  const isYearly = grid && grid.classList.contains('yearly');
+  
+  let finalAmt = monthlyAmt;
+  let finalDesc = planDesc;
 
-  document.getElementById('pay-plan-name').textContent  = planName + ' Plan';
-  document.getElementById('pay-monthly-val').textContent = '₹' + monthlyAmt.toLocaleString('en-IN');
+  if (isYearly) {
+    // If yearly, calculate the yearly total (with discount applied in the UI amounts)
+    // We get the data-yearly from the card
+    const card = Array.from(document.querySelectorAll('.price-card')).find(c => c.querySelector('.price-tier').textContent === planName);
+    if (card) {
+      const amtEl = card.querySelector('.price-amt');
+      finalAmt = parseInt(amtEl.dataset.yearly.replace(/,/g, ''));
+      finalDesc = "Yearly Plan (Discounted)";
+    }
+  }
+
+  currentPlan = { 
+    name: planName, 
+    desc: finalDesc, 
+    monthly: finalAmt, 
+    setup: setupAmt, 
+    isYearly: isYearly,
+    subtotal: subtotal,
+    total: total
+  };
+
+  document.getElementById('pay-plan-name').textContent  = planName + ' ' + (isYearly ? 'Yearly' : 'Monthly') + ' Plan';
+  document.getElementById('pay-monthly-val').textContent = '₹' + subtotal.toLocaleString('en-IN') + (isYearly ? ' (12 months)' : '');
   document.getElementById('pay-setup-val').textContent   = '₹' + setupAmt.toLocaleString('en-IN');
   document.getElementById('pay-gst-val').textContent     = '₹' + gst.toLocaleString('en-IN');
   document.getElementById('pay-total-val').textContent   = '₹' + total.toLocaleString('en-IN');
@@ -70,8 +94,7 @@ window.processPayment = function () {
 
   setTimeout(function () {
     var ref   = 'BF' + Date.now().toString().slice(-8).toUpperCase();
-    var gst   = Math.round((currentPlan.monthly + currentPlan.setup) * 0.18);
-    var total = currentPlan.monthly + currentPlan.setup + gst;
+    var total = currentPlan.total;
     var now   = new Date();
 
     saveLead({ name: name, email: email, phone: phone, company: company, source: 'payment', industry: currentPlan.name, goal: 'Purchased ' + currentPlan.name + ' plan' });
