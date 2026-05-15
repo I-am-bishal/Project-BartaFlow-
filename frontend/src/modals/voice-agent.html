@@ -1,0 +1,223 @@
+<!-- ════════════════════════════════════════
+     REAL AI VOICE AGENT MODAL
+════════════════════════════════════════ -->
+<div class="va-overlay" id="va-overlay" onclick="if(event.target.id==='va-overlay')closeVoiceAgent()">
+  <div class="va-modal" id="va-modal">
+
+    <!-- STEP 0: Setup (Language + Voice) -->
+    <div class="va-setup" id="va-step-setup">
+      <div class="va-setup-logo">
+        <div class="va-setup-logobox"><svg viewBox="0 0 24 24">
+            <path
+              d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.418A9.966 9.966 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" />
+          </svg></div>
+        <span class="va-setup-name">BartaFlow AI Agent</span>
+      </div>
+      <div class="va-setup-title">Choose Your Language &amp; Voice</div>
+      <div class="va-setup-sub">Select the language you'd like to speak in, then pick male or female voice for your AI
+        agent.</div>
+
+      <!-- Language Selection -->
+      <div class="va-lang-label">Select Language</div>
+      <div class="va-lang-grid" id="va-lang-grid">
+        <button class="va-lang-btn selected" data-lang="en-IN" data-name="English" onclick="selectLang(this)">
+          <span class="va-lang-flag">🇬🇧</span>
+          <span class="va-lang-name">English</span>
+          <span class="va-lang-native">English</span>
+        </button>
+        <button class="va-lang-btn" data-lang="hi-IN" data-name="Hindi" onclick="selectLang(this)">
+          <span class="va-lang-flag">🇮🇳</span>
+          <span class="va-lang-name">Hindi</span>
+          <span class="va-lang-native">हिंदी</span>
+        </button>
+        <button class="va-lang-btn" data-lang="bn-IN" data-name="Bengali" onclick="selectLang(this)">
+          <span class="va-lang-flag">🇧🇩</span>
+          <span class="va-lang-name">Bengali</span>
+          <span class="va-lang-native">বাংলা</span>
+        </button>
+        <button class="va-lang-btn" data-lang="ta-IN" data-name="Tamil" onclick="selectLang(this)">
+          <span class="va-lang-flag">🌊</span>
+          <span class="va-lang-name">Tamil</span>
+          <span class="va-lang-native">தமிழ்</span>
+        </button>
+        <button class="va-lang-btn" data-lang="te-IN" data-name="Telugu" onclick="selectLang(this)">
+          <span class="va-lang-flag">🏔️</span>
+          <span class="va-lang-name">Telugu</span>
+          <span class="va-lang-native">తెలుగు</span>
+        </button>
+        <button class="va-lang-btn" data-lang="mr-IN" data-name="Marathi" onclick="selectLang(this)">
+          <span class="va-lang-flag">🎭</span>
+          <span class="va-lang-name">Marathi</span>
+          <span class="va-lang-native">मराठी</span>
+        </button>
+        <button class="va-lang-btn" data-lang="gu-IN" data-name="Gujarati" onclick="selectLang(this)">
+          <span class="va-lang-flag">💫</span>
+          <span class="va-lang-name">Gujarati</span>
+          <span class="va-lang-native">ગુજરાતી</span>
+        </button>
+        <button class="va-lang-btn" data-lang="kn-IN" data-name="Kannada" onclick="selectLang(this)">
+          <span class="va-lang-flag">🌿</span>
+          <span class="va-lang-name">Kannada</span>
+          <span class="va-lang-native">ಕನ್ನಡ</span>
+        </button>
+        <button class="va-lang-btn" data-lang="ar-SA" data-name="Arabic" onclick="selectLang(this)">
+          <span class="va-lang-flag">🌙</span>
+          <span class="va-lang-name">Arabic</span>
+          <span class="va-lang-native">العربية</span>
+        </button>
+      </div>
+
+      <!-- Voice Gender Selection -->
+      <div class="va-voice-label">Select Voice</div>
+      <div class="va-voice-row">
+        <div class="va-voice-card male selected" id="va-card-male" onclick="selectVoice('male')">
+          <div class="va-voice-icon">👨</div>
+          <div class="va-voice-info">
+            <div class="va-voice-gender">Male Voice</div>
+            <div class="va-voice-desc">Deep, professional tone</div>
+          </div>
+          <div class="va-voice-check">✓</div>
+        </div>
+        <div class="va-voice-card female" id="va-card-female" onclick="selectVoice('female')">
+          <div class="va-voice-icon">👩</div>
+          <div class="va-voice-info">
+            <div class="va-voice-gender">Female Voice</div>
+            <div class="va-voice-desc">Warm, friendly tone</div>
+          </div>
+          <div class="va-voice-check"></div>
+        </div>
+      </div>
+
+      <button class="va-start-btn" id="va-start-btn" onclick="goToTopicSelect()">
+        <svg viewBox="0 0 24 24">
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
+        Continue — Choose Topic
+      </button>
+    </div>
+
+    <!-- STEP 1: Topic Selection -->
+    <div class="va-topic" id="va-step-topic">
+      <div class="va-topic-title">What would you like to discuss?</div>
+      <div class="va-topic-sub">Pick a topic and our AI agent will begin a real conversation with you in your chosen
+        language.</div>
+      <div class="va-topic-grid" id="va-topic-grid">
+        <div class="va-topic-card selected" data-topic="sales" onclick="selectTopic(this)">
+          <div class="va-topic-icon">🏠</div>
+          <div>
+            <div class="va-topic-name">Real Estate Sales</div>
+            <div class="va-topic-desc">Property inquiry, budget, site visit booking</div>
+          </div>
+        </div>
+        <div class="va-topic-card" data-topic="travel" onclick="selectTopic(this)">
+          <div class="va-topic-icon">✈️</div>
+          <div>
+            <div class="va-topic-name">Travel Booking</div>
+            <div class="va-topic-desc">Packages, itineraries, pricing</div>
+          </div>
+        </div>
+        <div class="va-topic-card" data-topic="health" onclick="selectTopic(this)">
+          <div class="va-topic-icon">🏥</div>
+          <div>
+            <div class="va-topic-name">Healthcare</div>
+            <div class="va-topic-desc">Doctor appointment, reports, queries</div>
+          </div>
+        </div>
+        <div class="va-topic-card" data-topic="ecom" onclick="selectTopic(this)">
+          <div class="va-topic-icon">🛍️</div>
+          <div>
+            <div class="va-topic-name">E-Commerce Support</div>
+            <div class="va-topic-desc">Orders, returns, product help</div>
+          </div>
+        </div>
+        <div class="va-topic-card" data-topic="edu" onclick="selectTopic(this)">
+          <div class="va-topic-icon">📚</div>
+          <div>
+            <div class="va-topic-name">Education Enquiry</div>
+            <div class="va-topic-desc">Course info, fee, enrollment</div>
+          </div>
+        </div>
+        <div class="va-topic-card" data-topic="bartaflow" onclick="selectTopic(this)">
+          <div class="va-topic-icon">🤖</div>
+          <div>
+            <div class="va-topic-name">About BartaFlow</div>
+            <div class="va-topic-desc">Platform features, pricing, demo</div>
+          </div>
+        </div>
+      </div>
+      <div class="va-row-btns">
+        <button class="va-back-btn" onclick="backToSetup()">← Back</button>
+        <button class="va-start-btn" id="va-call-btn" onclick="startAICall()">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3zm-1 13.93A7.001 7.001 0 0 1 5 8H3a9.001 9.001 0 0 0 8 8.94V20H8v2h8v-2h-3v-3.07A9.001 9.001 0 0 0 21 8h-2a7 7 0 0 1-6 6.93z" />
+          </svg>
+          Start AI Call Now
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Active Call -->
+    <div class="va-call" id="va-step-call">
+      <div class="va-call-header">
+        <div class="va-call-agent">
+          <div class="va-agent-av male" id="va-agent-av">
+            <div class="va-agent-av-ring"></div>
+            <span id="va-agent-emoji">🤖</span>
+          </div>
+          <div>
+            <div class="va-agent-name" id="va-agent-name">BartaFlow AI Agent</div>
+            <div class="va-agent-lang" id="va-agent-lang-display">English · Professional Voice</div>
+          </div>
+        </div>
+        <div class="va-call-status-pill connecting" id="va-status-pill">
+          <span class="va-status-dot"></span>
+          <span id="va-status-text">CONNECTING</span>
+        </div>
+      </div>
+
+      <!-- Dual waveform (agent + user) -->
+      <div class="va-wave-area">
+        <span class="va-wave-label" style="color:var(--gold);font-size:9px">AGENT</span>
+        <div class="va-wave-bars" id="va-agent-wave"></div>
+        <div class="va-wave-timer" id="va-call-timer">00:00</div>
+      </div>
+      <div class="va-wave-area" style="padding-top:0">
+        <span class="va-wave-label" style="color:#60a5fa;font-size:9px">YOU</span>
+        <div class="va-wave-bars" id="va-user-wave"></div>
+      </div>
+
+      <!-- Transcript -->
+      <div class="va-transcript" id="va-transcript"></div>
+
+      <!-- Type or mic input -->
+      <div class="va-input-area">
+        <button class="va-mic-btn" id="va-mic-btn" onclick="toggleMic()" title="Hold to speak">🎙️</button>
+        <input class="va-text-input" id="va-text-input" placeholder="Type your message or click mic to speak..."
+          onkeydown="if(event.key==='Enter')sendVoiceMsg()">
+        <button class="va-send-btn" onclick="sendVoiceMsg()">
+          <svg viewBox="0 0 24 24">
+            <path d="M2 21l21-9L2 3v7l15 2-15 2z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Controls -->
+      <div class="va-call-controls">
+        <button class="va-ctrl-btn" onclick="toggleMute()">
+          <div class="va-ctrl-circle mute-btn" id="va-mute-circle">🔇</div>
+          <span class="va-ctrl-label">Mute</span>
+        </button>
+        <button class="va-ctrl-btn" onclick="endVoiceCall()">
+          <div class="va-ctrl-circle end-btn">📵</div>
+          <span class="va-ctrl-label end-lbl">End Call</span>
+        </button>
+        <button class="va-ctrl-btn" onclick="toggleSpeaker()">
+          <div class="va-ctrl-circle spk-btn" id="va-spk-circle">🔊</div>
+          <span class="va-ctrl-label">Speaker</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

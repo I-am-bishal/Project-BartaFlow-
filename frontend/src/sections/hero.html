@@ -1,0 +1,115 @@
+<!-- ══════════════════════════════════════
+     HERO SECTION
+══════════════════════════════════════ -->
+<section class="hero-section" id="hero">
+  <div class="hero-bg-accent"></div>
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+
+  <div class="hero-content">
+    <div class="badge-row reveal">
+      <span class="hero-badge">NEW</span>
+      <span class="badge-text">v2.5: AI Voice Agents now available</span>
+    </div>
+
+    <h1 class="hero-title reveal">
+      The Ultimate AI <span class="text-gold">Chatbot</span><br>
+      for WhatsApp &amp; Web
+    </h1>
+
+    <p class="hero-sub reveal">
+      Automate customer support, lead generation, and appointment booking using advanced AI.
+      Scale your business without scaling your team. Start your 14-day free trial today.
+    </p>
+
+    <div class="hero-btns reveal">
+      <button class="btn-solid-gold" onclick="openAuth('signup')">
+        Start 14-Day Free Trial
+        <svg viewBox="0 0 24 24">
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
+      </button>
+      <button class="btn-outline-white" onclick="openDemoSched()">
+        Book Demo
+      </button>
+    </div>
+
+    <div class="hero-trust reveal">
+      <div class="trust-avatars">
+        <div class="ta" style="background:#3b82f6">JD</div>
+        <div class="ta" style="background:#10b981">AS</div>
+        <div class="ta" style="background:#f59e0b">MK</div>
+        <div class="ta" style="background:#8b5cf6">+</div>
+      </div>
+      <div class="trust-text">
+        <strong>4.9/5</strong> rating from 500+ businesses
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Visual / Floating Card -->
+  <div class="hero-visual reveal">
+    <div class="hero-card">
+      <div class="hc-header">
+        <div class="hc-dot"></div>
+        <div class="hc-dot"></div>
+        <div class="hc-dot"></div>
+        <div class="hc-title">AI Agent Simulation</div>
+      </div>
+      <div class="hc-body" id="hero-chat-sim">
+        <div class="hc-msg hc-in">
+          <span class="hc-tag">CUSTOMER</span>
+          I'm looking for a 2BHK in South Kolkata under ₹80 Lakhs.
+        </div>
+        <div class="hc-msg hc-out">
+          <span class="hc-tag gold">AI REPLY</span>
+          Found 3 matches! Would you like to see photos or book a site visit?
+        </div>
+        <div class="hc-msg hc-in">
+          <span class="hc-tag">CUSTOMER</span>
+          Book a visit for this Saturday morning please.
+        </div>
+        <div class="hc-msg hc-out">
+          <span class="hc-tag gold">AI REPLY</span>
+          Great! Scheduled for Saturday at 11:00 AM. A confirmation is sent to your WhatsApp.
+        </div>
+      </div>
+      <div class="hc-footer">
+        <div class="hc-input">Type message...</div>
+        <div class="hc-send">➤</div>
+      </div>
+    </div>
+
+    <!-- Floating UI elements -->
+    <div class="float-card fc-1">
+      <div class="fc-icon">🚀</div>
+      <div>
+        <div class="fc-label">Conversion</div>
+        <div class="fc-val">+128%</div>
+      </div>
+    </div>
+    <div class="float-card fc-2">
+      <div class="fc-icon">💬</div>
+      <div class="fc-msg-stack">
+        <div class="fc-msg-mini">
+          <span class="fc-user">User</span>
+          Is Bali package available for Dec?
+        </div>
+        <div class="fc-msg-mini ai">
+          <span class="fc-ai">AI REPLY</span>
+          🏝 Bali 6D/5N — ₹65K/person. Dec 15 available — shall I confirm?
+        </div>
+      </div>
+      <div class="typing-ind">
+        <div class="td"></div>
+        <div class="td"></div>
+        <div class="td"></div>
+      </div>
+    </div>
+    <div class="hero-metric-float">
+      <div class="hmf-label">Leads Today</div>
+      <div class="hmf-val" id="hmetric">0</div>
+      <div class="hmf-trend">↑ 34% vs yesterday</div>
+    </div>
+  </div>
+</section>

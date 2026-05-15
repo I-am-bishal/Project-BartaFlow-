@@ -1,0 +1,35 @@
+<!-- ══════════════════════════════════════
+     EMAIL SIMULATION MODAL
+══════════════════════════════════════ -->
+<div class="email-overlay" id="email-overlay" onclick="if(event.target.id==='email-overlay')closeEmailModal()">
+  <div class="email-modal">
+    <div class="email-header">
+      <div class="em-title">📧 Email Preview</div>
+      <button class="em-close" onclick="closeEmailModal()">✕</button>
+    </div>
+    <div class="email-body">
+      <div class="em-meta">
+        <div class="em-field"><span class="em-field-label">From:</span><span
+            class="em-field-val">team@bartaflow.in</span></div>
+        <div class="em-field"><span class="em-field-label">To:</span><span class="em-field-val"
+            id="em-to">you@gmail.com</span></div>
+        <div class="em-field"><span class="em-field-label">Date:</span><span class="em-field-val" id="em-date"></span>
+        </div>
+      </div>
+      <div class="em-content">
+        <div class="em-subject" id="em-subject">Welcome to BartaFlow!</div>
+        <div class="em-preview">
+          <div class="em-preview-header">
+            <div class="em-logo-sm">BF</div>
+            <div class="em-preview-name">BartaFlow Platform</div>
+          </div>
+          <div class="em-preview-body" id="em-preview-body">Loading...</div>
+          <div class="em-preview-footer">BartaFlow Technologies Pvt. Ltd. · Kolkata, India · <a href="#"
+              style="color:var(--text3)">Unsubscribe</a></div>
+        </div>
+        <div class="em-note" id="em-note">📌 Demo mode: In production, this email is sent automatically via SendGrid
+          within seconds of the triggering action.</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<!-- ══════════════════════════════════════
+     LEGAL MODAL (ToS + Privacy Policy)
+══════════════════════════════════════ -->
+<div class="legal-overlay" id="legal-overlay" onclick="if(event.target.id==='legal-overlay')closeLegal()">
+  <div class="legal-modal">
+    <div class="legal-header">
+      <div class="legal-header-left">
+        <div class="legal-header-icon">📋</div>
+        <div class="legal-title" id="legal-title">Terms of Service</div>
+      </div>
+      <button class="legal-close" onclick="closeLegal()">✕</button>
+    </div>
+    <div class="legal-tabs">
+      <button class="legal-tab active" id="ltab-tos" onclick="switchLegal('tos')">Terms of Service</button>
+      <button class="legal-tab" id="ltab-privacy" onclick="switchLegal('privacy')">Privacy Policy</button>
+    </div>
+    <div class="legal-body" id="legal-body">Loading...</div>
+    <div class="legal-footer"><button class="legal-done-btn" onclick="closeLegal()">I Understand ✓</button></div>
+  </div>
+</div>

@@ -1,0 +1,117 @@
+<!-- ══════════════════════════════════════
+     SECTION 3 · AI VOICE AGENT
+══════════════════════════════════════ -->
+<section class="voice-section" id="voice">
+  <div class="vs-dots"></div>
+  <div class="vs-glow"></div>
+  <div class="voice-grid">
+    <div class="voice-left reveal">
+      <div class="section-label">AI Voice Agent</div>
+      <div class="section-h">Human-Like AI<br>Calling, 24/7</div>
+      <div class="section-sub">Our voice agent handles inbound and outbound calls with natural conversation —
+        qualifying leads, booking appointments, and closing sales without a human agent.</div>
+      <div class="voice-features">
+        <div class="vf">
+          <div class="vf-icon">📞</div>
+          <div>
+            <div class="vf-title">24/7 Inbound & Outbound Calls</div>
+            <div class="vf-desc">Never miss a call. The AI answers instantly, handles objections, and routes complex
+              queries to human agents when needed.</div>
+          </div>
+        </div>
+        <div class="vf">
+          <div class="vf-icon">🎯</div>
+          <div>
+            <div class="vf-title">Intelligent Lead Qualification</div>
+            <div class="vf-desc">Ask the right questions, score leads in real-time, and pass hot prospects directly to
+              your sales team's WhatsApp.</div>
+          </div>
+        </div>
+        <div class="vf">
+          <div class="vf-icon">📅</div>
+          <div>
+            <div class="vf-title">Appointment Booking by Voice</div>
+            <div class="vf-desc">Syncs with Google Calendar live. Confirms slots, sends reminders, and handles
+              reschedules automatically.</div>
+          </div>
+        </div>
+        <div class="vf">
+          <div class="vf-icon">🌍</div>
+          <div>
+            <div class="vf-title">Multilingual Voice Support</div>
+            <div class="vf-desc">Speaks fluently in Hindi, Bengali, Tamil, Telugu, English and 8 more languages —
+              auto-detected from the caller.</div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+
+    <div class="voice-right reveal">
+      <!-- Static demo call (kept) -->
+      <div class="call-sim">
+        <div class="cs-header">
+          <div class="cs-caller">
+            <div class="cs-av">RK</div>
+            <div>
+              <div class="cs-name">Rajesh Kumar</div>
+              <div class="cs-num">+91 98765 43210</div>
+            </div>
+          </div>
+          <div class="cs-status"><span class="cs-live"></span>LIVE CALL</div>
+        </div>
+        <div class="waveform" id="waveform"></div>
+        <div class="cs-transcript" id="cs-transcript">
+          <div class="ct-line ct-user"><span class="ct-speaker">CALLER</span>Hello, I'm interested in the 3BHK
+            properties you have in Kolkata.</div>
+          <div class="ct-line ct-ai"><span class="ct-speaker">AI AGENT</span>Good afternoon! I'd be happy to help. May
+            I know your preferred location — New Town, Salt Lake, or Rajarhat?</div>
+          <div class="ct-line ct-user"><span class="ct-speaker">CALLER</span>New Town, preferably near the metro.
+          </div>
+          <div class="ct-line ct-ai"><span class="ct-speaker">AI AGENT</span>Perfect. We have 2 excellent options —
+            one at ₹72L and another at ₹85L, both within 500m of the metro. What's your budget range?</div>
+          <div class="ct-line ct-user"><span class="ct-speaker">CALLER</span>Around 75 lakhs is fine.</div>
+          <div class="ct-line ct-ai"><span class="ct-speaker">AI AGENT</span>The ₹72L option is a perfect match —
+            1,350 sqft, east-facing, RERA approved. Shall I schedule a site visit for this weekend?</div>
+        </div>
+        <div class="cs-controls">
+          <button class="cs-btn mute" title="Mute">🔇</button>
+          <button class="cs-btn hangup" title="End Call" onclick="simulateNewCall()">📵</button>
+          <button class="cs-btn add" title="Transfer">👤</button>
+        </div>
+        <div class="cs-timer" id="cs-timer">02:34 · AI handling call</div>
+      </div>
+
+      <!-- Try Real AI Agent strip -->
+      <div class="va-try-strip">
+        <div class="va-try-text">
+          <strong>🎙️ Talk to our Real AI Agent</strong>
+          Choose your language, pick male or female voice — have a live conversation with BartaFlow's AI.
+        </div>
+        <button class="va-launch-btn" onclick="openVoiceAgent()">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3zm-1 13.93A7.001 7.001 0 0 1 5 8H3a9.001 9.001 0 0 0 8 8.94V20H8v2h8v-2h-3v-3.07A9.001 9.001 0 0 0 21 8h-2a7 7 0 0 1-6 6.93z" />
+          </svg>
+          Start AI Call
+        </button>
+      </div>
+
+      <div class="voice-stats">
+        <div class="vs-card">
+          <div class="vs-n">94%</div>
+          <div class="vs-l">Call Resolution</div>
+        </div>
+        <div class="vs-card">
+          <div class="vs-n">1.8s</div>
+          <div class="vs-l">Response Latency</div>
+        </div>
+        <div class="vs-card">
+          <div class="vs-n">12+</div>
+          <div class="vs-l">Languages Spoken</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

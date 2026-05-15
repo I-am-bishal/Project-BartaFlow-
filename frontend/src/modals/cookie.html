@@ -1,0 +1,57 @@
+<!-- ══════════════════════════════════════
+     COOKIE CONSENT BANNER & MODAL
+══════════════════════════════════════ -->
+<div class="cookie-overlay" id="cookie-overlay" onclick="if(event.target.id==='cookie-overlay')closeCookiePrefs()">
+  <div class="cookie-prefs-modal">
+    <div class="cp-header">
+      <div class="cp-title">Cookie Preferences</div>
+      <button class="cp-close" onclick="closeCookiePrefs()">✕</button>
+    </div>
+    <div class="cp-body">
+      <div class="cp-row">
+        <div class="cp-info">
+          <div class="cp-name">Strictly Necessary</div>
+          <div class="cp-desc">Required for the website to function securely. Cannot be disabled.</div>
+        </div>
+        <div class="cp-toggle">
+          <label class="cp-switch"><input type="checkbox" checked disabled><span class="cp-slider"></span></label>
+        </div>
+      </div>
+      <div class="cp-row">
+        <div class="cp-info">
+          <div class="cp-name">Analytics & Performance</div>
+          <div class="cp-desc">Helps us understand how visitors interact with our website to improve user experience.</div>
+        </div>
+        <div class="cp-toggle">
+          <label class="cp-switch"><input type="checkbox" id="cp-analytics" checked><span class="cp-slider"></span></label>
+        </div>
+      </div>
+      <div class="cp-row">
+        <div class="cp-info">
+          <div class="cp-name">Marketing & Advertising</div>
+          <div class="cp-desc">Used to deliver relevant advertisements and track ad performance across campaigns.</div>
+        </div>
+        <div class="cp-toggle">
+          <label class="cp-switch"><input type="checkbox" id="cp-marketing"><span class="cp-slider"></span></label>
+        </div>
+      </div>
+    </div>
+    <div class="cp-footer">
+      <button class="cp-save-btn" onclick="saveCookiePrefs()">Save Preferences</button>
+      <button class="cp-accept-all-btn" onclick="acceptCookies()">Accept All</button>
+    </div>
+  </div>
+</div>
+
+<div id="cookie-banner" class="cookie-full-banner">
+  <div class="ck-content">
+    <div class="ck-title">Cookie consent</div>
+    <div class="ck-text">
+      We use our own and third-party cookies to show you more relevant content based on your browsing and navigation history. Please accept or manage your cookie settings below. Here's our <a href="#" onclick="openLegal('privacy');return false">cookie policy</a>
+    </div>
+  </div>
+  <div class="ck-actions">
+    <button class="ck-btn-accept" onclick="acceptCookies()">Accept all cookies</button>
+    <button class="ck-btn-settings" onclick="openCookiePrefs()">Cookie settings</button>
+  </div>
+</div>

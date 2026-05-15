@@ -1,0 +1,29 @@
+<!-- ════ UPGRADE v2 · DATA.CSV VIEWER ════ -->
+<div class="csv-overlay" id="csv-overlay" onclick="if(event.target.id==='csv-overlay')closeCsvViewer()">
+  <div class="csv-modal">
+    <div class="csv-header">
+      <div class="csv-title-group">
+        <div class="csv-icon">📊</div>
+        <div>
+          <div class="csv-title">Data Viewer</div>
+          <div class="csv-subtitle" id="csv-subtitle">Upload or load data.csv</div>
+        </div>
+      </div>
+      <button class="csv-close" onclick="closeCsvViewer()">✕</button>
+    </div>
+    <div id="csv-main-content">
+      <div class="csv-upload-area" id="csv-upload-area" ondragover="event.preventDefault();this.classList.add('drag')"
+        ondragleave="this.classList.remove('drag')" ondrop="handleCsvDrop(event)">
+        <div class="csv-upload-icon">📁</div>
+        <div class="csv-upload-title">Load your data.csv file</div>
+        <div class="csv-upload-sub">Drag & drop a CSV file here, or click to browse.<br>Supports any CSV with headers
+          in the first row.</div>
+        <input type="file" id="csv-file-input" accept=".csv,.txt" style="display:none"
+          onchange="handleCsvFile(this.files[0])">
+        <button class="csv-upload-btn" onclick="document.getElementById('csv-file-input').click()">📂 Browse
+          File</button>
+        <button class="csv-sample-btn" onclick="loadSampleCsv()">Load Sample Data</button>
+      </div>
+    </div>
+  </div>
+</div>

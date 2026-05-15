@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>BartaFlow | Modular AI Chatbot & Voice Agent Platform</title>
+  
+  <!-- SEO Tags -->
+  <meta name="description" content="Enterprise AI chatbot & voice agent platform. Automate sales, bookings, and support — then resell as your white-label SaaS.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Playfair+Display:wght@700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Core Styles -->
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+  <link rel="stylesheet" href="assets/css/hero.css">
+  <link rel="stylesheet" href="assets/css/features.css">
+  <link rel="stylesheet" href="assets/css/bots.css">
+  <link rel="stylesheet" href="assets/css/voice.css">
+  <link rel="stylesheet" href="assets/css/pricing.css">
+  <link rel="stylesheet" href="assets/css/auth.css">
+  <link rel="stylesheet" href="assets/css/ui.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <link rel="stylesheet" href="assets/css/theme-blue.css">
+
+  <style>
+    /* Prevent FOUC during component loading */
+    body { opacity: 0; transition: opacity 0.3s ease; }
+    body.loaded { opacity: 1; }
+  </style>
+</head>
+<body class="dark-theme">
+
+  <!-- Core Layout Structure -->
+  <div id="preloader-root"></div>
+  <div id="nav-root"></div>
+
+  <main>
+    <div id="hero-root"></div>
+    <div id="marquee-root"></div>
+    <div id="features-root"></div>
+    <div id="bots-root"></div>
+    <div id="voice-root"></div>
+    <div id="testimonials-root"></div>
+    <div id="faq-root"></div>
+    <div id="pricing-root"></div>
+    <div id="cta-root"></div>
+  </main>
+
+  <div id="footer-root"></div>
+
+  <!-- Modals & Overlays -->
+  <div id="auth-root"></div>
+  <div id="demo-root"></div>
+  <div id="leads-root"></div>
+  <div id="chat-root"></div>
+  <div id="settings-root"></div>
+  <div id="payment-root"></div>
+  <div id="email-root"></div>
+  <div id="legal-root"></div>
+  <div id="cookie-root"></div>
+  <div id="toast-root"></div>
+
+  <!-- ── SCRIPTS ── -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  
+  <!-- Component Loader First -->
+  <script src="assets/js/component-loader.js"></script>
+
+  <!-- Modular JS -->
+  <script src="assets/js/utils.js"></script>
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/preloader.js"></script>
+  <script src="assets/js/nav.js"></script>
+  <script src="assets/js/hero.js"></script>
+  <script src="assets/js/leads.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/bots.js"></script>
+  <script src="assets/js/scheduler.js"></script>
+  <script src="assets/js/csv.js"></script>
+  <script src="assets/js/voice.js"></script>
+  <script src="assets/js/legal.js"></script>
+  <script src="assets/js/email.js"></script>
+  <script src="assets/js/payment.js"></script>
+  <script src="assets/js/cookies.js"></script>
+  <script src="assets/js/ui.js"></script>
+  <script src="assets/js/api-check.js"></script>
+  <script src="assets/js/error-handler.js"></script>
+
+  <script>
+    // Reveal body after components are likely loaded
+    // In a real app, you'd use a more robust promise-based approach
+    setTimeout(() => {
+        document.body.classList.add('loaded');
+    }, 1000);
+  </script>
+</body>
+</html>

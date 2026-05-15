@@ -1,0 +1,49 @@
+<!-- ════ FEATURE 4 · FLOATING CHAT WIDGET ════ -->
+<div class="float-chat-wrap" id="float-chat-wrap">
+  <!-- Chat Box (hidden by default) -->
+  <div class="float-chat-box" id="float-chat-box" style="display:none">
+    <div class="fch-header">
+      <div class="fch-av">BF</div>
+      <div class="fch-info">
+        <div class="fch-name">BartaFlow Support</div>
+        <div class="fch-status"><span class="fch-online-dot"></span>Online — replies in seconds</div>
+      </div>
+      <button class="fch-close-x" onclick="toggleFloatChat()" aria-label="Close chat">✕</button>
+    </div>
+    <div class="fch-body" id="fch-body">
+      <div class="fch-msg fch-msg-in">
+        <span class="fch-msg-ai-tag">BOTFLOW AI</span>
+        👋 Hi there! I'm BartaFlow's AI assistant. How can I help you today?
+      </div>
+      <div class="fch-msg fch-msg-in">
+        <span class="fch-msg-ai-tag">BOTFLOW AI</span>
+        Whether it's pricing, a demo, or a quick question — I've got you covered!
+      </div>
+    </div>
+    <div class="fch-quick-replies" id="fch-qr">
+      <button class="fch-qr" onclick="fchQuickReply('What\'s the pricing?')">💰 Pricing</button>
+      <button class="fch-qr" onclick="fchQuickReply('Book a demo')">📅 Book Demo</button>
+      <button class="fch-qr" onclick="fchQuickReply('How does it work?')">⚡ How it works</button>
+    </div>
+    <div class="fch-input-row">
+      <input class="fch-input" id="fch-input" placeholder="Type a message..."
+        onkeydown="if(event.key==='Enter')fchSend()">
+      <button class="fch-send" onclick="fchSend()" aria-label="Send message">
+        <svg viewBox="0 0 24 24">
+          <path d="M2 21l21-9L2 3v7l15 2-15 2z" />
+        </svg>
+      </button>
+    </div>
+  </div>
+  <!-- Toggle Button -->
+  <button class="float-chat-btn" id="float-chat-btn" onclick="toggleFloatChat()" aria-label="Open chat">
+    <span class="float-chat-notif" id="fch-notif">1</span>
+    <svg class="icon-chat" viewBox="0 0 24 24">
+      <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
+    </svg>
+    <svg class="icon-close" viewBox="0 0 24 24" style="display:none">
+      <path
+        d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+    </svg>
+  </button>
+</div>

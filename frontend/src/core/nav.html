@@ -1,0 +1,51 @@
+<!-- ══════════════════════════════════════
+     NAVIGATION
+══════════════════════════════════════ -->
+<nav id="main-nav">
+  <div class="nav-container">
+    <a href="#" class="nav-logo" onclick="scrollToTop(event)">
+      <div class="logo-box"><svg viewBox="0 0 24 24">
+          <path
+            d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.418A9.966 9.966 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" />
+        </svg></div>
+      <span class="logo-name">BartaFlow</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#bots">Solutions</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </div>
+
+    <div class="nav-actions">
+      <button class="btn-login" id="nav-login-btn" onclick="openAuth('signin')">Sign In</button>
+      <button class="btn-get-started" id="nav-signup-btn" onclick="openAuth('signup')">Free Trial</button>
+
+      <!-- Authenticated State (Hidden by default) -->
+      <div class="nav-user" id="nav-user" style="display:none">
+        <button class="btn-leads" onclick="openLeadsPanel()">Leads</button>
+        <button class="user-profile-btn" onclick="toggleProfile()" id="user-initial">U</button>
+      </div>
+
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ════ MOBILE MENU ════ -->
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mm-links">
+    <a href="#features" onclick="closeMobileMenu()">Features</a>
+    <a href="#bots" onclick="closeMobileMenu()">Solutions</a>
+    <a href="#pricing" onclick="closeMobileMenu()">Pricing</a>
+    <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
+  </div>
+  <div class="mm-actions">
+    <button class="btn-login" style="width:100%" onclick="openAuth('signin');closeMobileMenu()">Sign In</button>
+    <button class="btn-get-started" style="width:100%" onclick="openAuth('signup');closeMobileMenu()">Start Free
+      Trial</button>
+  </div>
+</div>

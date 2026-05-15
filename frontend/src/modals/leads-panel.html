@@ -1,0 +1,48 @@
+<!-- ══════════════════════════════════════
+     CUSTOMER LEADS ADMIN PANEL
+══════════════════════════════════════ -->
+<div class="leads-overlay" id="leads-overlay" onclick="handleLeadsOverlayClick(event)">
+  <div class="leads-panel">
+    <div class="lp-header">
+      <div class="lp-title-group">
+        <div class="lp-icon">📋</div>
+        <div>
+          <div class="lp-title">Customer Leads</div>
+          <div class="lp-sub" id="lp-sub-text">All captured contacts</div>
+        </div>
+      </div>
+      <button class="lp-close" onclick="closeLeadsPanel()">✕</button>
+    </div>
+    <div class="lp-stats">
+      <div class="lp-stat">
+        <div class="lp-stat-n" id="ls-total">0</div>
+        <div class="lp-stat-l">Total Leads</div>
+      </div>
+      <div class="lp-stat">
+        <div class="lp-stat-n" id="ls-demo">0</div>
+        <div class="lp-stat-l">Demo Booked</div>
+      </div>
+      <div class="lp-stat">
+        <div class="lp-stat-n" id="ls-signup">0</div>
+        <div class="lp-stat-l">Signed Up</div>
+      </div>
+      <div class="lp-stat">
+        <div class="lp-stat-n" id="ls-today">0</div>
+        <div class="lp-stat-l">Today</div>
+      </div>
+    </div>
+    <div class="lp-toolbar">
+      <input class="lp-search" id="leads-search" placeholder="🔍  Search by name, email, company..."
+        oninput="renderLeads()">
+      <select class="lp-filter-sel" id="leads-filter" onchange="renderLeads()">
+        <option value="">All Sources</option>
+        <option value="demo">Demo Booked</option>
+        <option value="signup">Signed Up</option>
+        <option value="chatbot">Chatbot</option>
+        <option value="contact">Contact Form</option>
+      </select>
+      <button class="lp-export-btn" onclick="exportLeadsCSV()">⬇ Export CSV</button>
+    </div>
+    <div class="lp-leads-list" id="leads-list"></div>
+  </div>
+</div>
