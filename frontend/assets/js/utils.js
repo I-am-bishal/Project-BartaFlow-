@@ -27,3 +27,7 @@ function showToast(icon, msg) {
 // Make both available globally (required by inline onclick handlers in HTML)
 window.escHtml   = escHtml;
 window.showToast = showToast;
+
+window.comingSoon = function(feature) {
+  showToast('🚀', feature + ' is coming soon to BartaFlow!');
+};

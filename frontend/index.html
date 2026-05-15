@@ -263,7 +263,7 @@
     <!-- Row 1: Bots 1–5 -->
     <div class="bots-grid reveal">
       <!-- Bot 1: Real Estate -->
-      <div class="bc-re">
+      <div class="bc-re" id="bot-real-estate">
         <div class="bot-card"
           onclick="openDemo('PropBot Pro','🏠','Real Estate',['Qualify buyer intent','Schedule site visits','Send property brochures','Follow-up sequences'],['rePropBot','Hi! I\'m looking for a 3BHK flat in Kolkata under 80 lakhs.','Great! I have 3 options matching your budget. Would you like photos + virtual tour links?','Yes please!','Sending now 📎 Also, shall I book a site visit for this Saturday?'])">
           <span class="bot-rank">#01</span>
@@ -280,7 +280,7 @@
       </div>
 
       <!-- Bot 2: E-Commerce -->
-      <div class="bc-ec">
+      <div class="bc-ec" id="bot-ecommerce">
         <div class="bot-card"
           onclick="openDemo('ShopBot AI','🛍️','E-Commerce',['Product catalog browsing','Cart & UPI payment','Order tracking','Return flows'],['shopBot','Do you have white sneakers in size 8?','Yes! We have 3 styles starting ₹1,299. Want to see them?','Show me the Nike ones','Here\'s the Nike Air Force 1 — ₹2,499. Add to cart? 🛒'])">
           <span class="bot-rank">#02</span>
@@ -297,7 +297,7 @@
       </div>
 
       <!-- Bot 3: Healthcare -->
-      <div class="bc-hc">
+      <div class="bc-hc" id="bot-healthcare">
         <div class="bot-card"
           onclick="openDemo('CareBot MD','🏥','Healthcare',['Doctor appointment booking','Report delivery','Health reminders','Insurance queries'],['careBot','I need an appointment with a cardiologist','Dr. Sharma is available Monday 10 AM or Wednesday 3 PM. Which works?','Monday 10 AM please','Confirmed! ✅ You\'ll receive a reminder 2 hours before. Shall I send your last report to the doctor?'])">
           <span class="bot-rank">#03</span>
@@ -314,7 +314,7 @@
       </div>
 
       <!-- Bot 4: Education -->
-      <div class="bc-ed">
+      <div class="bc-ed" id="bot-education">
         <div class="bot-card"
           onclick="openDemo('EduBot Guru','📚','Education',['Course inquiries','Demo class booking','Fee payment','Student support'],['eduBot','Tell me about your UPSC coaching program','We offer a 12-month program with 200+ hours of live classes. Fee: ₹35,000. Want a free demo class?','Yes! When\'s the next one?','Saturday 11 AM — I\'ll register you now. Name & mobile please?'])">
           <span class="bot-rank">#04</span>
@@ -351,7 +351,7 @@
     <!-- Row 2: Bots 6–10 -->
     <div class="bots-row2 reveal">
       <!-- Bot 6: Travel -->
-      <div class="bc-tr">
+      <div class="bc-tr" id="bot-travel">
         <div class="bot-card"
           onclick="openDemo('TravelBot Pro','✈️','Travel & Tourism',['Package inquiries','Itinerary sharing','Booking & payment','Visa guidance'],['travelBot','I want a 7-day Europe trip in March','March is a great time! Our Paris + Rome + Amsterdam package is ₹1.2L/person. Flights included. Interested?','Yes! Is visa included?','Visa guidance + appointment booking is included. Shall I send the full itinerary PDF?'])">
           <span class="bot-rank">#06</span>
@@ -665,7 +665,7 @@
       </div>
 
       <!-- Feature 5: Real-time Analytics -->
-      <div class="feat-card">
+      <div class="feat-card" id="analytics">
         <div class="feat-num">FEATURE 05</div>
         <div class="feat-icon-wrap" style="background:rgba(139,92,246,.1)">📊</div>
         <div class="feat-title">Real-Time Analytics Dashboard</div>
@@ -696,7 +696,7 @@
       </div>
 
       <!-- Feature 6: Broadcast -->
-      <div class="feat-card">
+      <div class="feat-card" id="broadcast">
         <div class="feat-num">FEATURE 06</div>
         <div class="feat-icon-wrap" style="background:rgba(6,182,212,.1)">📡</div>
         <div class="feat-title">Broadcast & Campaign Engine</div>
@@ -2481,17 +2481,26 @@
       </div>
       <div class="footer-col">
         <h4>Product</h4>
-        <a href="#">AI Chatbots</a><a href="#">Voice Agent</a><a href="#">Broadcast</a><a href="#">Analytics</a><a
-          href="#">API Docs</a>
+        <a href="#bots">AI Chatbots</a>
+        <a href="#voice">Voice Agent</a>
+        <a href="#broadcast">Broadcast</a>
+        <a href="#analytics">Analytics</a>
+        <a href="#" onclick="comingSoon('API Documentation');return false">API Docs</a>
       </div>
       <div class="footer-col">
         <h4>Industries</h4>
-        <a href="#">Real Estate</a><a href="#">E-Commerce</a><a href="#">Healthcare</a><a href="#">Education</a><a
-          href="#">Travel</a>
+        <a href="#bot-real-estate">Real Estate</a>
+        <a href="#bot-ecommerce">E-Commerce</a>
+        <a href="#bot-healthcare">Healthcare</a>
+        <a href="#bot-education">Education</a>
+        <a href="#bot-travel">Travel</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
-        <a href="#">About</a><a href="#">Blog</a><a href="#">Careers</a><a href="#">Contact</a>
+        <a href="#features">About</a>
+        <a href="#" onclick="comingSoon('BartaFlow Blog');return false">Blog</a>
+        <a href="#" onclick="comingSoon('Careers Portal');return false">Careers</a>
+        <a href="#" onclick="openDemoSched();return false">Contact</a>
         <a href="#" onclick="openLegal('privacy');return false">Privacy Policy</a>
         <a href="#" onclick="openLegal('tos');return false">Terms of Service</a>
       </div>
