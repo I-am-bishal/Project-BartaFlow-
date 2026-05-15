@@ -463,3 +463,119 @@
   [data-theme="dark"] .settings-sidebar { border-bottom-color: rgba(255,255,255,0.05); }
   .settings-tab { flex: 1; text-align: center; white-space: nowrap; }
 }
+
+/* ── PLAN & BILLING TABS ──────── */
+.plan-card {
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 480px;
+}
+[data-theme="dark"] .plan-card { border-color: rgba(255,255,255,0.1); }
+
+.plan-card-header {
+  padding: 20px;
+  background: rgba(0,0,0,0.02);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+[data-theme="dark"] .plan-card-header {
+  background: rgba(255,255,255,0.02);
+  border-bottom-color: rgba(255,255,255,0.1);
+}
+
+.plan-card-body {
+  padding: 20px;
+}
+
+.plan-stat {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: var(--navy);
+}
+[data-theme="dark"] .plan-stat { color: var(--white); }
+
+.progress-bar-container {
+  height: 6px;
+  background: rgba(0,0,0,0.05);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+[data-theme="dark"] .progress-bar-container { background: rgba(255,255,255,0.1); }
+
+.progress-bar {
+  height: 100%;
+  background: var(--gold);
+  border-radius: 3px;
+}
+
+.plan-card-footer {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  display: flex;
+  gap: 12px;
+}
+[data-theme="dark"] .plan-card-footer { border-top-color: rgba(255,255,255,0.1); }
+
+.billing-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 600px;
+}
+
+.billing-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+[data-theme="dark"] .billing-item { border-color: rgba(255,255,255,0.1); }
+
+.bill-date {
+  font-weight: 600;
+  color: var(--navy);
+  font-size: 14px;
+}
+[data-theme="dark"] .bill-date { color: var(--white); }
+
+.bill-desc {
+  font-size: 13px;
+  color: rgba(0,0,0,0.5);
+  margin-top: 4px;
+}
+[data-theme="dark"] .bill-desc { color: rgba(255,255,255,0.5); }
+
+.bill-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.bill-amt {
+  font-weight: 600;
+  color: var(--navy);
+}
+[data-theme="dark"] .bill-amt { color: var(--white); }
+
+.bill-dl-btn {
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--navy);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+[data-theme="dark"] .bill-dl-btn { border-color: rgba(255,255,255,0.2); color: var(--white); }
+.bill-dl-btn:hover { background: rgba(0,0,0,0.05); }
+[data-theme="dark"] .bill-dl-btn:hover { background: rgba(255,255,255,0.05); }
