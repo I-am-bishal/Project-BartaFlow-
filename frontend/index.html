@@ -1277,7 +1277,7 @@
                 <p style="font-size:12px;margin-top:12px;margin-bottom:0;">Renews on Dec 15, 2026</p>
               </div>
               <div class="plan-card-footer">
-                <button class="btn-outline-navy" style="flex:1;" onclick="alert('Feature coming soon!')">Cancel Plan</button>
+                <button class="btn-outline-navy" style="flex:1;" onclick="comingSoon('Subscription Cancellation')">Cancel Plan</button>
                 <button class="btn-solid" style="flex:1;" onclick="closeSettings(); document.getElementById('pricing').scrollIntoView({behavior:'smooth'});">Upgrade Plan</button>
               </div>
             </div>
@@ -2489,11 +2489,11 @@
       </div>
       <div class="footer-col">
         <h4>Industries</h4>
-        <a href="#bot-real-estate">Real Estate</a>
-        <a href="#bot-ecommerce">E-Commerce</a>
-        <a href="#bot-healthcare">Healthcare</a>
-        <a href="#bot-education">Education</a>
-        <a href="#bot-travel">Travel</a>
+        <a href="#" onclick="openIndustryDemo('bot-real-estate');return false">Real Estate</a>
+        <a href="#" onclick="openIndustryDemo('bot-ecommerce');return false">E-Commerce</a>
+        <a href="#" onclick="openIndustryDemo('bot-healthcare');return false">Healthcare</a>
+        <a href="#" onclick="openIndustryDemo('bot-education');return false">Education</a>
+        <a href="#" onclick="openIndustryDemo('bot-travel');return false">Travel</a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
