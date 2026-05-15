@@ -338,23 +338,25 @@ window.doSetNewPassword = function () {
 // ── Auth State & UI Sync ──────────────────────────────────────────────────
 window.checkAuthState = function () {
   const user = getSession();
-  const signInBtn = document.querySelector('.btn-ghost[onclick*="signin"]');
-  const mmSignInBtn = document.querySelector('.mm-btn-ghost[onclick*="signin"]');
+  const signInBtn = document.querySelector('.btn-ghost[onclick*="signin"]') || document.querySelector('.btn-ghost[onclick*="openProfile"]');
+  const mmSignInBtn = document.querySelector('.mm-btn-ghost[onclick*="signin"]') || document.querySelector('.mm-btn-ghost[onclick*="openProfile"]');
   const pill = document.getElementById('admin-pill');
 
   if (user) {
     if (signInBtn) {
-      signInBtn.textContent = 'Sign Out';
-      signInBtn.onclick = (e) => { e.preventDefault(); doLogout(); };
+      signInBtn.innerHTML = '<div class="nav-avatar">' + (user.name || 'U').charAt(0).toUpperCase() + '</div> My Account';
+      signInBtn.classList.add('logged-in');
+      signInBtn.onclick = (e) => { e.preventDefault(); openProfile(); };
     }
     if (mmSignInBtn) {
-      mmSignInBtn.textContent = 'Sign Out';
-      mmSignInBtn.onclick = () => { doLogout(); closeMobileMenu(); };
+      mmSignInBtn.textContent = 'My Account';
+      mmSignInBtn.onclick = () => { openProfile(); closeMobileMenu(); };
     }
     if (pill) pill.classList.add('show');
   } else {
     if (signInBtn) {
       signInBtn.textContent = 'Sign In';
+      signInBtn.classList.remove('logged-in');
       signInBtn.onclick = (e) => { e.preventDefault(); openAuth('signin'); };
     }
     if (mmSignInBtn) {
@@ -363,6 +365,21 @@ window.checkAuthState = function () {
     }
     if (pill) pill.classList.remove('show');
   }
+};
+
+window.openProfile = function() {
+  const user = getSession();
+  if(!user) return;
+  document.getElementById('prof-name').textContent = user.name || 'User';
+  document.getElementById('prof-email').textContent = user.email || '';
+  document.getElementById('prof-av').textContent = (user.name || 'U').charAt(0).toUpperCase();
+  document.getElementById('profile-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+};
+
+window.closeProfile = function() {
+  document.getElementById('profile-overlay').classList.remove('open');
+  document.body.style.overflow = '';
 };
 
 window.doLogout = function () {
