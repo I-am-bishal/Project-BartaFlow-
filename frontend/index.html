@@ -1182,21 +1182,21 @@
               <div class="prof-item-icon">🏢</div>
               <span>Company Profile</span>
             </div>
-            <button class="prof-btn">Edit</button>
+            <button class="prof-btn" onclick="openSettings('general')">Edit</button>
           </div>
           <div class="prof-item">
             <div class="prof-item-left">
               <div class="prof-item-icon">💳</div>
               <span>Billing History</span>
             </div>
-            <button class="prof-btn">View</button>
+            <button class="prof-btn" onclick="openPaymentModal();closeProfile()">View</button>
           </div>
           <div class="prof-item">
             <div class="prof-item-left">
               <div class="prof-item-icon">🔒</div>
               <span>Security</span>
             </div>
-            <button class="prof-btn">Update</button>
+            <button class="prof-btn" onclick="openSettings('security')">Update</button>
           </div>
         </div>
       </div>
@@ -1207,6 +1207,69 @@
           </svg>
           Sign Out
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+     SETTINGS MODAL
+══════════════════════════════════════ -->
+  <div class="settings-overlay" id="settings-overlay" onclick="if(event.target.id==='settings-overlay')closeSettings()">
+    <div class="settings-modal">
+      <div class="settings-header">
+        <h2 class="settings-title">Account Settings</h2>
+        <button class="settings-close" onclick="closeSettings()">✕</button>
+      </div>
+      <div class="settings-layout">
+        <div class="settings-sidebar">
+          <button class="settings-tab active" onclick="switchSettingsTab('general')" id="stab-general">General</button>
+          <button class="settings-tab" onclick="switchSettingsTab('security')" id="stab-security">Security</button>
+        </div>
+        <div class="settings-content">
+          <!-- General Tab -->
+          <div class="settings-panel active" id="spanel-general">
+            <h3>Profile Details</h3>
+            <p>Update your personal and company information.</p>
+            <div class="settings-form">
+              <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="set-email" class="set-input" disabled>
+                <div class="field-hint">Email cannot be changed</div>
+              </div>
+              <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="set-name" class="set-input">
+              </div>
+              <div class="form-group">
+                <label>Company Name</label>
+                <input type="text" id="set-company" class="set-input">
+              </div>
+              <button class="btn-solid" style="width:100%;margin-top:16px;" onclick="saveGeneralSettings()" id="set-gen-btn">Save Changes</button>
+            </div>
+          </div>
+
+          <!-- Security Tab -->
+          <div class="settings-panel" id="spanel-security">
+            <h3>Security</h3>
+            <p>Update your password to keep your account secure.</p>
+            <div class="settings-form">
+              <div class="form-group">
+                <label>Current Password</label>
+                <input type="password" id="set-curr-pw" class="set-input">
+              </div>
+              <div class="form-group">
+                <label>New Password</label>
+                <input type="password" id="set-new-pw" class="set-input">
+              </div>
+              <div class="form-group">
+                <label>Confirm New Password</label>
+                <input type="password" id="set-conf-pw" class="set-input">
+              </div>
+              <div id="set-sec-err" class="field-hint err" style="margin-top:-8px;margin-bottom:16px;"></div>
+              <button class="btn-solid" style="width:100%;" onclick="saveSecuritySettings()" id="set-sec-btn">Update Password</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

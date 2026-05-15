@@ -382,6 +382,94 @@ window.closeProfile = function() {
   document.body.style.overflow = '';
 };
 
+// ── Settings Modal Logic ──────────────────────────────────────────────────
+window.openSettings = function(tab = 'general') {
+  const user = getSession();
+  if(!user) return;
+  
+  // Populate form
+  document.getElementById('set-email').value = user.email || '';
+  document.getElementById('set-name').value = user.name || '';
+  document.getElementById('set-company').value = user.company || '';
+  
+  // Clear security form
+  document.getElementById('set-curr-pw').value = '';
+  document.getElementById('set-new-pw').value = '';
+  document.getElementById('set-conf-pw').value = '';
+  document.getElementById('set-sec-err').textContent = '';
+  
+  document.getElementById('settings-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  switchSettingsTab(tab);
+  
+  // Close profile panel if it was open
+  closeProfile();
+};
+
+window.closeSettings = function() {
+  document.getElementById('settings-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+};
+
+window.switchSettingsTab = function(tab) {
+  document.querySelectorAll('.settings-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.settings-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('stab-' + tab).classList.add('active');
+  document.getElementById('spanel-' + tab).classList.add('active');
+};
+
+window.saveGeneralSettings = function() {
+  const name = document.getElementById('set-name').value.trim();
+  const company = document.getElementById('set-company').value.trim();
+  
+  if(!name) { showToast('✕', 'Name cannot be empty'); return; }
+  
+  const user = getSession();
+  user.name = name;
+  user.company = company;
+  saveSession(user);
+  
+  // Update in users array
+  const users = getUsers();
+  const idx = users.findIndex(u => u.email === user.email);
+  if(idx > -1) {
+    users[idx].name = name;
+    users[idx].company = company;
+    saveUsers(users);
+  }
+  
+  checkAuthState(); // Refresh UI
+  showToast('✓', 'Profile updated successfully');
+};
+
+window.saveSecuritySettings = function() {
+  const curr = document.getElementById('set-curr-pw').value;
+  const newPw = document.getElementById('set-new-pw').value;
+  const confPw = document.getElementById('set-conf-pw').value;
+  const errEl = document.getElementById('set-sec-err');
+  
+  errEl.textContent = '';
+  
+  if(!curr || !newPw || !confPw) { errEl.textContent = 'Please fill all fields.'; return; }
+  if(newPw !== confPw) { errEl.textContent = 'New passwords do not match.'; return; }
+  if(newPw.length < 6) { errEl.textContent = 'Password must be at least 6 characters.'; return; }
+  
+  const user = getSession();
+  const users = getUsers();
+  const idx = users.findIndex(u => u.email === user.email);
+  
+  if(idx > -1) {
+    if(users[idx].password !== hashPw(curr)) {
+      errEl.textContent = 'Current password is incorrect.';
+      return;
+    }
+    users[idx].password = hashPw(newPw);
+    saveUsers(users);
+    showToast('✓', 'Password updated successfully');
+    closeSettings();
+  }
+};
+
 window.doLogout = function () {
   clearSession();
   checkAuthState();
