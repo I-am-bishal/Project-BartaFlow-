@@ -1167,8 +1167,8 @@
             <div class="prof-item-left">
               <div class="prof-item-icon">⚡</div>
               <div>
-                <div>Pro Plan <span class="prof-badge">Active</span></div>
-                <div style="font-size:12px;color:rgba(0,0,0,0.5);font-weight:400;margin-top:2px;" class="theme-text-gray">Free Trial · 14 Days Left</div>
+                <div style="font-weight:600">Pro Plan <span class="prof-badge" style="background:rgba(37,211,102,0.1);color:#16a34a;border:1px solid rgba(37,211,102,0.2);margin-left:4px">Active</span></div>
+                <div style="font-size:12px;color:var(--gold);font-weight:600;margin-top:2px;">14 DAY FREE TRIAL</div>
               </div>
             </div>
             <button class="prof-btn" onclick="openSettings('plan')">Manage</button>
@@ -1258,27 +1258,40 @@
               <div class="plan-card-header">
                 <div>
                   <h4 style="margin:0;font-size:18px;color:var(--navy);" class="theme-text-white">Pro Plan</h4>
-                  <div style="font-size:13px;color:rgba(0,0,0,0.5);margin-top:4px;" class="theme-text-gray">Billed Monthly • ₹4,999/mo</div>
+                  <div style="font-size:13px;color:var(--gold);font-weight:600;margin-top:4px;">14 DAY FREE TRIAL</div>
                 </div>
-                <div class="prof-badge" style="font-size:12px;padding:4px 10px;">Active</div>
+                <div class="prof-badge" style="font-size:12px;padding:4px 10px;background:rgba(37,211,102,0.1);color:#16a34a;border:1px solid rgba(37,211,102,0.2);">Active</div>
               </div>
               <div class="plan-card-body">
+                <div style="background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.15);border-radius:8px;padding:16px;margin-bottom:24px;">
+                  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                    <span style="font-size:13px;font-weight:600;color:var(--navy);" class="theme-text-white">Trial Progress</span>
+                    <span style="font-size:12px;color:var(--gold);font-weight:600">14 Days Remaining</span>
+                  </div>
+                  <div class="progress-bar-container" style="margin-bottom:0;background:rgba(201,168,76,0.1);height:8px;">
+                    <div class="progress-bar" style="width: 100%; background:var(--gold); border-radius:4px;"></div>
+                  </div>
+                </div>
+                
                 <div class="plan-stat">
                   <span>Messages Used</span>
-                  <strong>1,240 / 5,000</strong>
+                  <strong>0 / 5,000</strong>
+                </div>
+                <div class="progress-bar-container" style="height:6px;margin-bottom:16px;">
+                  <div class="progress-bar" style="width: 0%;"></div>
                 </div>
                 <div class="plan-stat">
                   <span>Agents Active</span>
-                  <strong>2 / 3</strong>
+                  <strong>0 / 3</strong>
                 </div>
-                <div class="progress-bar-container">
-                  <div class="progress-bar" style="width: 25%;"></div>
+                <div class="progress-bar-container" style="height:6px;margin-bottom:16px;">
+                  <div class="progress-bar" style="width: 0%;"></div>
                 </div>
-                <p style="font-size:12px;margin-top:12px;margin-bottom:0;">Renews on Dec 15, 2026</p>
+                <p style="font-size:12px;margin-top:16px;margin-bottom:0;color:rgba(0,0,0,0.5);line-height:1.5;" class="theme-text-gray">You are currently on a full-access trial. Your credit card will not be charged until the trial period ends.</p>
               </div>
               <div class="plan-card-footer">
-                <button class="btn-outline-navy" style="flex:1;" onclick="comingSoon('Subscription Cancellation')">Cancel Plan</button>
-                <button class="btn-solid" style="flex:1;" onclick="closeSettings(); document.getElementById('pricing').scrollIntoView({behavior:'smooth'});">Upgrade Plan</button>
+                <button class="btn-outline-navy" style="flex:1;" onclick="comingSoon('Trial Cancellation')">Cancel Trial</button>
+                <button class="btn-solid" style="flex:1;" onclick="closeSettings(); document.getElementById('pricing').scrollIntoView({behavior:'smooth'});">Upgrade Now</button>
               </div>
             </div>
           </div>
