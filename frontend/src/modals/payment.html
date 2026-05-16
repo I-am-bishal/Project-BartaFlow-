@@ -31,63 +31,40 @@
         <span>💳</span> Payment Method
       </div>
       <div class="pay-methods">
-        <div class="pay-method selected" onclick="selectPayMethod(this,'card')"><span>💳</span> Card</div>
-        <div class="pay-method" onclick="selectPayMethod(this,'upi')"><span>📱</span> UPI</div>
-        <div class="pay-method" onclick="selectPayMethod(this,'netbanking')"><span>🏦</span> Net Banking</div>
-        <div class="pay-method" onclick="selectPayMethod(this,'wallet')"><span>👜</span> Wallets</div>
-      </div>
-      <!-- Card form -->
-      <div id="pay-card-form">
-        <div class="pay-card-row">
-          <span class="pay-card-icon-left">💳</span>
-          <input class="pay-card-input" placeholder="0000 0000 0000 0000" maxlength="19" oninput="formatCard(this)"
-            id="card-number">
-          <span class="pay-card-icon-right">🔒</span>
+        <div class="pay-method active" onclick="switchPayMethod(this,'upi')">
+          <div class="pm-radio"></div>
+          <div class="pm-name">UPI (GPay, PhonePe)</div>
+          <div class="pm-icons">⚡</div>
         </div>
-        <div class="pay-form-grid">
-          <input class="pay-input" placeholder="MM / YY" maxlength="7" oninput="formatExpiry(this)" id="card-expiry">
-          <input class="pay-input" placeholder="CVV" maxlength="3" type="password" id="card-cvv">
+        <div class="pay-method" onclick="switchPayMethod(this,'card')">
+          <div class="pm-radio"></div>
+          <div class="pm-name">Card (Visa, Master, Amex)</div>
+          <div class="pm-icons">💳</div>
         </div>
-        <div class="pay-form-grid">
-          <input class="pay-input full" placeholder="Name on card" id="card-name" style="grid-column:span 2">
+        <div class="pay-method" onclick="switchPayMethod(this,'net')">
+          <div class="pm-radio"></div>
+          <div class="pm-name">Net Banking</div>
+          <div class="pm-icons">🏦</div>
         </div>
       </div>
-      <!-- UPI form (hidden) -->
-      <div id="pay-upi-form" style="display:none">
-        <input class="pay-input" placeholder="Enter UPI ID (e.g. name@upi)" id="upi-id"
-          style="width:100%;margin-bottom:10px">
-        <div style="font-size:11px;font-family:'DM Mono',monospace;color:var(--text3);padding:0 4px">
-          Supported: GPay, PhonePe, Paytm, BHIM, Amazon Pay
+      <div class="pay-btn-wrap">
+        <div
+          style="display:flex;align-items:center;gap:6px;font-size:10px;color:var(--text3);font-family:'DM Mono',monospace;margin-bottom:12px">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+            <path d="M7 11V7a5 5 0 0110 0v4" />
+          </svg>
+          SSL ENCRYPTED SECURE PAYMENT
         </div>
-      </div>
-      <!-- Billing info -->
-      <div class="pay-form-title" style="margin-top:24px">
-        <span>📋</span> Billing Information
-      </div>
-      <div class="pay-form-grid">
-        <input class="pay-input" placeholder="Full Name" id="bill-name">
-        <input class="pay-input" placeholder="Phone Number" id="bill-phone">
-        <input class="pay-input full" placeholder="Email Address" id="bill-email" style="grid-column:span 2">
-        <input class="pay-input full" placeholder="Company / Business Name" id="bill-company"
-          style="grid-column:span 2">
-        <input class="pay-input full" placeholder="GST Number (optional)" id="bill-gst" style="grid-column:span 2">
-      </div>
-      <div class="pay-error" id="pay-error">Please fill in all required fields.</div>
-      <div class="pay-security">
-        <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor">
-          <path
-            d="M8 1a2 2 0 0 0-2 2v2H5V3a3 3 0 1 1 6 0v2h-1V3a2 2 0 0 0-2-2zM4 5a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4z" />
-        </svg>
-        256-bit SSL secured · Powered by Razorpay
-      </div>
-      <button class="pay-submit-btn" id="pay-submit-btn" onclick="processPayment()">
-        <span id="pay-submit-text">Pay Now →</span>
-      </button>
-      <div
-        style="text-align:center;font-size:11px;font-family:'DM Mono',monospace;color:var(--text3);margin-top:10px">
-        By completing payment you agree to our <a href="#" onclick="openLegal('tos');return false"
-          style="color:var(--gold)">Terms of Service</a> and <a href="#" onclick="openLegal('privacy');return false"
-          style="color:var(--gold)">Privacy Policy</a>
+        <button class="pay-submit-btn" id="pay-submit-btn" onclick="processPayment()">
+          <span id="pay-submit-text">Pay Now →</span>
+        </button>
+        <div
+          style="text-align:center;font-size:11px;font-family:'DM Mono',monospace;color:var(--text3);margin-top:10px">
+          By completing payment you agree to our <a href="#" onclick="openLegal('tos');return false"
+            style="color:var(--gold)">Terms of Service</a> and <a href="#" onclick="openLegal('privacy');return false"
+            style="color:var(--gold)">Privacy Policy</a>
+        </div>
       </div>
     </div>
     <!-- Success screen (hidden) -->

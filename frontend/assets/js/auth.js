@@ -155,43 +155,21 @@ function setAuthLoading(btnId, textId, loading, def, showSpinner) {
 
 // ── Sign In ───────────────────────────────────────────────────────────────
 function showAuthSuccess(title, sub, user) {
-  // 1. Hide all panels and tabs
   document.querySelectorAll('.auth-panel').forEach(p => p.classList.remove('active'));
-  const tabs = document.querySelector('.auth-tabs');
-  if (tabs) tabs.style.display = 'none';
-
-  // 2. Update Header
-  document.getElementById('auth-title').textContent = '🎉 Success!';
-  const authSub = document.getElementById('auth-sub');
-  if (authSub) authSub.style.opacity = '0'; // Hide subtext for cleaner look
-
-  // 3. Update Success Panel Content
-  const successTitle = document.getElementById('auth-success-title');
-  const successSub = document.getElementById('auth-success-sub');
-  if (successTitle) successTitle.textContent = title;
-  if (successSub) successSub.textContent = sub;
+  document.getElementById('auth-title').textContent       = '🎉 Success!';
+  document.getElementById('auth-sub').textContent         = '';
+  document.getElementById('auth-success-title').textContent = title;
+  document.getElementById('auth-success-sub').textContent   = sub;
+  document.getElementById('panel-success').classList.add('active');
+  document.querySelector('.auth-tabs').style.display = 'none';
   
-  const successPanel = document.getElementById('panel-success');
-  if (successPanel) successPanel.classList.add('active');
-  
-  // 4. Update Session & Global UI State
   if (user) {
     saveSession(user);
-    checkAuthState(); // Update Nav immediately
-    
-    // Also trigger lead count refresh if admin
-    if (typeof refreshLeads === 'function') refreshLeads();
+    checkAuthState();
   }
 
-  // 5. Professional Closure
-  setTimeout(() => {
-    closeAuth();
-    // Reset modal state for next time
-    setTimeout(() => {
-      if (tabs) tabs.style.display = '';
-      if (authSub) authSub.style.opacity = '';
-    }, 500);
-  }, 2200);
+  setTimeout(closeAuth, 2600);
+  setTimeout(() => { document.querySelector('.auth-tabs').style.display = ''; }, 2800);
 }
 window.showAuthSuccess = showAuthSuccess;
 
@@ -500,7 +478,6 @@ window.doLogout = function () {
 
 // Initial check
 document.addEventListener('DOMContentLoaded', checkAuthState);
-document.addEventListener('BartaFlowReady', checkAuthState);
 
 // Attach live confirm-pw listener after DOM ready
 (function () {

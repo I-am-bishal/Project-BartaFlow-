@@ -1,5 +1,73 @@
 <!-- ══════════════════════════════════════
-     ACCOUNT SETTINGS MODAL
+     PROFILE / CUSTOMER PORTAL
+══════════════════════════════════════ -->
+<div class="profile-overlay" id="profile-overlay" onclick="if(event.target.id==='profile-overlay')closeProfile()">
+  <div class="profile-panel">
+    <div class="prof-header">
+      <div class="prof-title">My Account</div>
+      <button class="prof-close" onclick="closeProfile()">✕</button>
+    </div>
+    <div class="prof-body">
+      <div class="prof-user-card">
+        <div class="prof-avatar" id="prof-av">U</div>
+        <div class="prof-info">
+          <h3 id="prof-name">User</h3>
+          <p id="prof-email">user@gmail.com</p>
+        </div>
+      </div>
+
+      <div class="prof-section">
+        <h4>Subscription Plan</h4>
+        <div class="prof-item">
+          <div class="prof-item-left">
+            <div class="prof-item-icon">⚡</div>
+            <div>
+              <div style="font-weight:600">Pro Plan <span class="prof-badge" style="background:rgba(37,211,102,0.1);color:#16a34a;border:1px solid rgba(37,211,102,0.2);margin-left:4px">Active</span></div>
+              <div style="font-size:12px;color:var(--gold);font-weight:600;margin-top:2px;">14 DAY FREE TRIAL</div>
+            </div>
+          </div>
+          <button class="prof-btn" onclick="openSettings('plan')">Manage</button>
+        </div>
+      </div>
+
+      <div class="prof-section">
+        <h4>Account Settings</h4>
+        <div class="prof-item">
+          <div class="prof-item-left">
+            <div class="prof-item-icon">🏢</div>
+            <span>Company Profile</span>
+          </div>
+          <button class="prof-btn" onclick="openSettings('general')">Edit</button>
+        </div>
+        <div class="prof-item">
+          <div class="prof-item-left">
+            <div class="prof-item-icon">💳</div>
+            <span>Billing History</span>
+          </div>
+          <button class="prof-btn" onclick="openSettings('billing')">View</button>
+        </div>
+        <div class="prof-item">
+          <div class="prof-item-left">
+            <div class="prof-item-icon">🔒</div>
+            <span>Security</span>
+          </div>
+          <button class="prof-btn" onclick="openSettings('security')">Update</button>
+        </div>
+      </div>
+    </div>
+    <div class="prof-footer">
+      <button class="prof-logout-btn" onclick="doLogout();closeProfile()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/>
+        </svg>
+        Sign Out
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SETTINGS MODAL
 ══════════════════════════════════════ -->
 <div class="settings-overlay" id="settings-overlay" onclick="if(event.target.id==='settings-overlay')closeSettings()">
   <div class="settings-modal">
