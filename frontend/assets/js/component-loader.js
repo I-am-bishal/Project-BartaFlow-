@@ -46,7 +46,6 @@ async function initApp() {
     await loadComponent('payment-root', 'src/modals/payment.html');
     await loadComponent('email-root', 'src/modals/email.html');
     await loadComponent('legal-root', 'src/modals/legal.html');
-    await loadComponent('profile-root', 'src/modals/profile.html');
     await loadComponent('cookie-root', 'src/modals/cookie.html');
     await loadComponent('toast-root', 'src/modals/toast.html');
 

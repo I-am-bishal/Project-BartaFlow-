@@ -31,8 +31,3 @@ window.showToast = showToast;
 window.comingSoon = function(feature) {
   showToast('🚀', feature + ' is coming soon to BartaFlow!');
 };
-
-window.scrollToTop = function(e) {
-  if (e) e.preventDefault();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
