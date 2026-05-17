@@ -23,6 +23,11 @@ window.openPayment = function (planName, planDesc, monthlyAmt, setupAmt) {
     }
   }
 
+  let subscriptionAmt = isYearly ? finalAmt * 12 : finalAmt;
+  let subtotal = subscriptionAmt + setupAmt;
+  let gst = Math.round(subtotal * 0.18);
+  let total = subtotal + gst;
+
   currentPlan = { 
     name: planName, 
     desc: finalDesc, 
@@ -34,7 +39,7 @@ window.openPayment = function (planName, planDesc, monthlyAmt, setupAmt) {
   };
 
   document.getElementById('pay-plan-name').textContent  = planName + ' ' + (isYearly ? 'Yearly' : 'Monthly') + ' Plan';
-  document.getElementById('pay-monthly-val').textContent = '₹' + subtotal.toLocaleString('en-IN') + (isYearly ? ' (12 months)' : '');
+  document.getElementById('pay-monthly-val').textContent = '₹' + subscriptionAmt.toLocaleString('en-IN') + (isYearly ? ' (12 months)' : '');
   document.getElementById('pay-setup-val').textContent   = '₹' + setupAmt.toLocaleString('en-IN');
   document.getElementById('pay-gst-val').textContent     = '₹' + gst.toLocaleString('en-IN');
   document.getElementById('pay-total-val').textContent   = '₹' + total.toLocaleString('en-IN');
