@@ -399,7 +399,9 @@
 }
 
 [data-theme="dark"] .price-tier,
-[data-theme="dark"] .price-amt {
+[data-theme="dark"] .price-amt,
+[data-theme="dark"] .price-card.featured .price-tier,
+[data-theme="dark"] .price-card.featured .price-amt {
   color: var(--text) !important;
 }
 

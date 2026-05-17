@@ -34,7 +34,7 @@
 .float-chat-btn svg {
   width: 24px;
   height: 24px;
-  fill: var(--white);
+  fill: #ffffff;
   transition: all .25s
 }
 
@@ -49,10 +49,10 @@
   height: 18px;
   background: var(--rose);
   border-radius: 50%;
-  border: 2px solid var(--white);
+  border: 2px solid #ffffff;
   font-size: 9px;
   font-family: 'DM Mono', monospace;
-  color: var(--white);
+  color: #ffffff;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -282,5 +282,32 @@
 .fch-send svg {
   width: 14px;
   height: 14px;
-  fill: var(--white)
+  fill: #ffffff
+}
+
+/* ── DARK THEME OVERRIDES ── */
+[data-theme="dark"] .float-chat-btn {
+  background: #1e2a40;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .float-chat-btn:hover {
+  background: var(--gold);
+}
+
+[data-theme="dark"] .float-chat-btn:hover svg {
+  fill: var(--navy) !important;
+}
+
+[data-theme="dark"] .fch-send {
+  background: var(--gold);
+}
+
+[data-theme="dark"] .fch-send svg {
+  fill: var(--navy) !important;
+}
+
+[data-theme="dark"] .fch-send:hover {
+  background: var(--gold2);
 }
