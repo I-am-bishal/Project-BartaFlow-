@@ -141,13 +141,6 @@
   border-color: var(--navy)
 }
 
-/* Second row: bots 6-10 */
-.bots-row2 {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
-  margin-top: 16px
-}
 
 /* Bot color variants */
 .bc-re .bot-card::before,
@@ -349,25 +342,19 @@
 .demo-send-btn:hover { background: var(--navy3) }
 
 @media (max-width: 1200px) {
-  .bots-grid, .bots-row2 {
+  .bots-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 1024px) {
   /* Hide bots beyond the first 6 on tablets */
-  .bots-grid > div:nth-child(n+7),
-  .bots-row2 {
+  .bots-grid > div:nth-child(n+7) {
     display: none;
   }
   
   .bots-section.show-all .bots-grid > div:nth-child(n+7) {
     display: block !important;
-    animation: botSpringIn .6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-  }
-  
-  .bots-section.show-all .bots-row2 {
-    display: grid !important;
     animation: botSpringIn .6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   }
   
@@ -424,7 +411,7 @@
     margin-bottom: 40px;
   }
   
-  .bots-grid, .bots-row2 {
+  .bots-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
@@ -448,17 +435,13 @@
   }
 
   /* Show only 4 bots on mobile by default */
-  .bots-grid > div:nth-child(n+5),
-  .bots-row2 {
+  .bots-grid > div:nth-child(n+5) {
     display: none;
   }
 
   .bots-section.show-all .bots-grid > div:nth-child(n+5) {
     display: block !important;
-  }
-  
-  .bots-section.show-all .bots-row2 {
-    display: grid !important;
+    animation: botSpringIn .6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   }
 
   .bots-more-btn {
@@ -479,7 +462,7 @@
 }
 
 @media (max-width: 480px) {
-  .bots-grid, .bots-row2 {
+  .bots-grid {
     grid-template-columns: 1fr;
   }
   
