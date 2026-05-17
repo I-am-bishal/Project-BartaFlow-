@@ -39,7 +39,7 @@
   font-family: 'Playfair Display', serif;
   font-size: 38px;
   font-weight: 800;
-  color: var(--white);
+  color: #ffffff;
   letter-spacing: -1.5px;
   line-height: 1;
   margin-bottom: 6px
@@ -181,7 +181,7 @@
 .faq-item.open .faq-chevron {
   background: var(--navy);
   border-color: var(--navy);
-  color: var(--white);
+  color: #ffffff;
   transform: rotate(180deg)
 }
 
@@ -260,7 +260,7 @@
 }
 
 .faq-cta-text strong {
-  color: var(--white);
+  color: #ffffff;
   font-weight: 600;
   display: block;
   font-size: 15px;

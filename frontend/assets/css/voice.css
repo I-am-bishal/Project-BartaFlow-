@@ -37,7 +37,7 @@
 }
 
 .voice-left .section-label { color: var(--gold) }
-.voice-left .section-h { color: var(--white) }
+.voice-left .section-h { color: #ffffff }
 .voice-left .section-sub { color: rgba(255, 255, 255, .5) }
 
 .voice-features { display: flex; flex-direction: column; gap: 16px; margin-top: 32px }
@@ -101,7 +101,7 @@
   font-family: 'DM Mono', monospace
 }
 
-.cs-name { font-size: 15px; font-weight: 600; color: var(--white) }
+.cs-name { font-size: 15px; font-weight: 600; color: #ffffff }
 .cs-num { font-size: 11px; font-family: 'DM Mono', monospace; color: rgba(255, 255, 255, .4); margin-top: 2px }
 
 .cs-status {
@@ -179,7 +179,7 @@
 
 .cs-btn.mute { background: rgba(255, 255, 255, .07); color: rgba(255, 255, 255, .6) }
 .cs-btn.mute:hover { background: rgba(255, 255, 255, .12) }
-.cs-btn.hangup { background: var(--rose); color: var(--white) }
+.cs-btn.hangup { background: var(--rose); color: #ffffff }
 .cs-btn.hangup:hover { background: #e11d48 }
 .cs-btn.add { background: rgba(255, 255, 255, .07); color: rgba(255, 255, 255, .6) }
 .cs-btn.add:hover { background: rgba(255, 255, 255, .12) }

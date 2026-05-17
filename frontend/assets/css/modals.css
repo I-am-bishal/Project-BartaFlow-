@@ -61,14 +61,14 @@
   font-family: 'Playfair Display', serif;
   font-size: 16px;
   font-weight: 700;
-  color: var(--white)
+  color: #ffffff
 }
 
 .ds-meeting-title {
   font-family: 'Playfair Display', serif;
   font-size: 20px;
   font-weight: 700;
-  color: var(--white);
+  color: #ffffff;
   line-height: 1.2;
   margin-bottom: 8px
 }
@@ -198,8 +198,8 @@
   flex-shrink: 0
 }
 
-.ds-step.done { background: var(--green); border-color: var(--green); color: var(--white) }
-.ds-step.active { background: var(--navy); border-color: var(--navy); color: var(--white) }
+.ds-step.done { background: var(--green); border-color: var(--green); color: #ffffff }
+.ds-step.active { background: var(--navy); border-color: var(--navy); color: #ffffff }
 
 .ds-step-line { flex: 1; height: 1px; background: var(--border) }
 .ds-step-line.done { background: var(--green) }
@@ -246,7 +246,7 @@
 }
 
 .time-slot:hover { border-color: var(--navy); color: var(--navy); background: var(--smoke) }
-.time-slot.selected { border-color: var(--navy); background: var(--navy); color: var(--white) }
+.time-slot.selected { border-color: var(--navy); background: var(--navy); color: #ffffff }
 .time-slot.unavailable { opacity: .35; cursor: not-allowed; text-decoration: line-through }
 
 /* Mini calendar */
@@ -311,7 +311,7 @@
 }
 
 .cal-day:hover:not(.past):not(.empty) { background: var(--smoke2); color: var(--navy) }
-.cal-day.selected { background: var(--navy); color: var(--white) !important }
+.cal-day.selected { background: var(--navy); color: #ffffff !important }
 .cal-day.today { font-weight: 700; color: var(--gold) }
 .cal-day.past { color: var(--text3); cursor: not-allowed; opacity: .4 }
 .cal-day.empty { cursor: default }
@@ -354,7 +354,7 @@
   width: 100%;
   padding: 13px;
   background: var(--navy);
-  color: var(--white);
+  color: #ffffff;
   border: none;
   border-radius: 9px;
   font-size: 15px;

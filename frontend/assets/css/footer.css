@@ -127,7 +127,7 @@ footer {
 .cp-title {
   font-size: 16px;
   font-weight: 600;
-  color: var(--white);
+  color: #ffffff;
   font-family: 'DM Sans', sans-serif;
 }
 
@@ -148,7 +148,7 @@ footer {
 
 .cp-close:hover {
   background: rgba(255, 255, 255, 0.1);
-  color: var(--white);
+  color: #ffffff;
 }
 
 .cp-body {
@@ -170,7 +170,7 @@ footer {
 .cp-name {
   font-size: 14px;
   font-weight: 600;
-  color: var(--white);
+  color: #ffffff;
   margin-bottom: 4px;
 }
 
@@ -232,7 +232,7 @@ footer {
   flex: 1;
   padding: 12px;
   background: transparent;
-  color: var(--white);
+  color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
   font-size: 13px;

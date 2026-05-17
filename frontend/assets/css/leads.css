@@ -60,7 +60,7 @@
   font-family: 'Playfair Display', serif;
   font-size: 18px;
   font-weight: 700;
-  color: var(--white)
+  color: #ffffff
 }
 
 .lp-sub {
@@ -157,7 +157,7 @@
 .lp-export-btn {
   padding: 8px 16px;
   background: var(--navy);
-  color: var(--white);
+  color: #ffffff;
   border: none;
   border-radius: 7px;
   font-size: 12px;
@@ -312,7 +312,7 @@
 
 .lead-act-btn.primary {
   background: var(--navy);
-  color: var(--white);
+  color: #ffffff;
   border-color: var(--navy)
 }
 

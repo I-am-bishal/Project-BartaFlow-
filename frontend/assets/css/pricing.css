@@ -165,7 +165,7 @@
   cursor: pointer;
   border: none;
   background: var(--navy2);
-  color: var(--white);
+  color: #ffffff;
   transition: all .2s;
   margin-bottom: 40px;
   width: 100%;
@@ -381,7 +381,7 @@
 }
 
 [data-theme="dark"] .pricing-toggle button.active {
-  color: var(--white);
+  color: var(--text);
 }
 
 [data-theme="dark"] .pricing-toggle .toggle-bg {
@@ -400,7 +400,21 @@
 
 [data-theme="dark"] .price-tier,
 [data-theme="dark"] .price-amt {
-  color: var(--white) !important;
+  color: var(--text) !important;
+}
+
+[data-theme="dark"] .price-desc {
+  color: var(--text2) !important;
+}
+
+[data-theme="dark"] .price-btn {
+  background: var(--gold) !important;
+  color: var(--navy) !important;
+}
+
+[data-theme="dark"] .price-btn:hover {
+  background: var(--gold2) !important;
+  box-shadow: 0 8px 20px rgba(201, 168, 76, 0.25);
 }
 
 [data-theme="dark"] .price-feats {

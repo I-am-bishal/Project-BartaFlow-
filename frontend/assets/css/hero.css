@@ -63,7 +63,7 @@
   font-weight: 800;
   line-height: 1.06;
   letter-spacing: -1.5px;
-  color: var(--white);
+  color: #ffffff;
   margin-bottom: 20px;
   animation: fadeUp .7s ease .1s both;
 }

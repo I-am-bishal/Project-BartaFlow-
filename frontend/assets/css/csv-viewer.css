@@ -59,7 +59,7 @@
   font-family: 'Playfair Display', serif;
   font-size: 17px;
   font-weight: 700;
-  color: var(--white)
+  color: #ffffff
 }
 
 .csv-subtitle {
@@ -142,7 +142,7 @@
 .csv-export-btn {
   padding: 8px 14px;
   background: var(--navy);
-  color: var(--white);
+  color: #ffffff;
   border: none;
   border-radius: 7px;
   font-size: 12px;
@@ -292,7 +292,7 @@
 
 .csv-upload-btn {
   background: var(--navy);
-  color: var(--white);
+  color: #ffffff;
   border: none;
   padding: 10px 22px;
   border-radius: 8px;

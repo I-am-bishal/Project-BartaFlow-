@@ -59,7 +59,7 @@
   font-family: 'Playfair Display', serif;
   font-size: 18px;
   font-weight: 700;
-  color: var(--white)
+  color: #ffffff
 }
 
 .legal-close {
@@ -176,7 +176,7 @@
 
 .legal-done-btn {
   background: var(--navy);
-  color: var(--white);
+  color: #ffffff;
   padding: 10px 24px;
   border: none;
   border-radius: 8px;

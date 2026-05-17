@@ -55,7 +55,7 @@
   color: var(--navy);
 }
 
-[data-theme="dark"] .prof-title { color: var(--white); }
+[data-theme="dark"] .prof-title { color: var(--text); }
 
 .prof-close {
   background: transparent;
@@ -67,7 +67,7 @@
   line-height: 1;
 }
 
-[data-theme="dark"] .prof-close { color: var(--white); }
+[data-theme="dark"] .prof-close { color: var(--text); }
 .prof-close:hover { transform: rotate(90deg); }
 
 .prof-body {
@@ -108,7 +108,7 @@
   font-family: 'DM Sans', sans-serif;
   font-weight: 600;
 }
-[data-theme="dark"] .prof-info h3 { color: var(--white); }
+[data-theme="dark"] .prof-info h3 { color: var(--text); }
 
 .prof-info p {
   margin: 0;
@@ -149,7 +149,7 @@
   font-weight: 500;
   font-size: 14px;
 }
-[data-theme="dark"] .prof-item-left { color: var(--white); }
+[data-theme="dark"] .prof-item-left { color: var(--text); }
 
 .prof-item-icon {
   width: 36px;
@@ -185,7 +185,7 @@
   color: var(--navy);
   transition: all 0.2s;
 }
-[data-theme="dark"] .prof-btn { border-color: rgba(255,255,255,0.2); color: var(--white); }
+[data-theme="dark"] .prof-btn { border-color: rgba(255,255,255,0.2); color: var(--text); }
 .prof-btn:hover { background: rgba(0,0,0,0.05); }
 [data-theme="dark"] .prof-btn:hover { background: rgba(255,255,255,0.05); }
 
@@ -306,7 +306,7 @@
   color: var(--navy);
   margin: 0;
 }
-[data-theme="dark"] .settings-title { color: var(--white); }
+[data-theme="dark"] .settings-title { color: var(--text); }
 
 .settings-close {
   background: transparent;
@@ -319,7 +319,7 @@
 }
 [data-theme="dark"] .settings-close { color: rgba(255,255,255,0.4); }
 .settings-close:hover { color: var(--navy); transform: rotate(90deg); }
-[data-theme="dark"] .settings-close:hover { color: var(--white); }
+[data-theme="dark"] .settings-close:hover { color: var(--text); }
 
 .settings-layout {
   display: flex;
@@ -351,7 +351,7 @@
 }
 [data-theme="dark"] .settings-tab { color: rgba(255,255,255,0.6); }
 .settings-tab:hover { background: rgba(0,0,0,0.02); color: var(--navy); }
-[data-theme="dark"] .settings-tab:hover { background: rgba(255,255,255,0.02); color: var(--white); }
+[data-theme="dark"] .settings-tab:hover { background: rgba(255,255,255,0.02); color: var(--text); }
 .settings-tab.active { background: rgba(201, 168, 76, 0.1); color: var(--navy); font-weight: 600; }
 [data-theme="dark"] .settings-tab.active { background: rgba(201, 168, 76, 0.15); color: var(--gold); }
 
@@ -380,7 +380,7 @@
   margin-bottom: 8px;
   margin-top: 0;
 }
-[data-theme="dark"] .settings-panel h3 { color: var(--white); }
+[data-theme="dark"] .settings-panel h3 { color: var(--text); }
 
 .settings-panel p {
   font-size: 14px;
@@ -406,7 +406,7 @@
   color: var(--navy);
   margin-bottom: 8px;
 }
-[data-theme="dark"] .form-group label { color: var(--white); }
+[data-theme="dark"] .form-group label { color: var(--text); }
 
 .set-input {
   width: 100%;
@@ -423,7 +423,7 @@
 [data-theme="dark"] .set-input {
   background: rgba(0,0,0,0.2);
   border-color: rgba(255,255,255,0.1);
-  color: var(--white);
+  color: var(--text);
 }
 
 .set-input:focus {
@@ -497,7 +497,7 @@
   font-size: 14px;
   color: var(--navy);
 }
-[data-theme="dark"] .plan-stat { color: var(--white); }
+[data-theme="dark"] .plan-stat { color: var(--text); }
 
 .progress-bar-container {
   height: 6px;
@@ -544,7 +544,7 @@
   color: var(--navy);
   font-size: 14px;
 }
-[data-theme="dark"] .bill-date { color: var(--white); }
+[data-theme="dark"] .bill-date { color: var(--text); }
 
 .bill-desc {
   font-size: 13px;
@@ -563,7 +563,7 @@
   font-weight: 600;
   color: var(--navy);
 }
-[data-theme="dark"] .bill-amt { color: var(--white); }
+[data-theme="dark"] .bill-amt { color: var(--text); }
 
 .bill-dl-btn {
   background: transparent;
@@ -576,6 +576,6 @@
   cursor: pointer;
   transition: all 0.2s;
 }
-[data-theme="dark"] .bill-dl-btn { border-color: rgba(255,255,255,0.2); color: var(--white); }
+[data-theme="dark"] .bill-dl-btn { border-color: rgba(255,255,255,0.2); color: var(--text); }
 .bill-dl-btn:hover { background: rgba(0,0,0,0.05); }
 [data-theme="dark"] .bill-dl-btn:hover { background: rgba(255,255,255,0.05); }
