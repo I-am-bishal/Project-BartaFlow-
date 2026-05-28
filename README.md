@@ -1,46 +1,40 @@
-# 🤖 BartaFlow — Enterprise AI Chatbot & Voice Agent Platform
+# BartaFlow – Enterprise AI Chatbot & Voice Agent Platform
 
-BartaFlow is a high-performance, modular AI SaaS platform designed for sales automation and customer engagement. This repository follows a professional **Frontend/Backend separation** architecture.
+## Overview
+BartaFlow is a high‑performance, modular AI SaaS platform for sales automation and customer engagement. It features a clean separation between frontend and backend, modern UI/UX, and an extensible design system.
 
-## 📁 Project Structure
+## Features
+- **AI‑powered chatbot** with voice integration
+- **Landing page** with 3D hero (Three.js)
+- **Admin dashboard** with real‑time analytics (Chart.js)
+- **Design system**: glassmorphism, dark mode, responsive components
+- **Backend API** built with Express, CSV‑based storage (easy migration to SQL/NoSQL)
+- **Developer tools**: auditor, logger, watchdog
 
-### [frontend/](./frontend)
-The premium client-side experience.
-- **Landing Page**: Conversion-optimized UI with 3D Three.js hero.
-- **Admin Dashboard**: White-label management interface with real-time analytics (Chart.js).
-- **Design System**: Modular CSS with Glassmorphism and dark mode support.
+## Quick Start
 
-### [backend/](./backend)
-The robust API layer.
-- **Express Server**: Node.js API handling data persistence.
-- **Data Persistence**: File-based CSV storage for leads (convertible to SQL/NoSQL).
-- **Environment Support**: Pre-configured `.env` support for Meta/OpenAI keys.
+### Backend
+```bash
+cd backend
+npm install
+npm start   # runs on http://localhost:5000
+```
 
-### [debug/](./debug)
-Advanced developer tools for platform health.
-- **Auditor**: Automated DOM/UX health checks.
-- **Logger**: Persistent session-based error tracking.
+### Frontend
+Open `frontend/index.html` in a browser.
 
-## 🚀 Quick Start
+#### Admin Dashboard
+Visit `frontend/admin.html` (admin@gmail.com / Admin@123).
 
-1. **Start the Backend**:
-   ```bash
-   cd backend
-   npm install
-   npm start
-   ```
+## Tech Stack
+- **Frontend**: HTML, vanilla JS, Three.js, Chart.js, CSS (glassmorphism, dark mode)
+- **Backend**: Node.js, Express, CSV‑DB
+- **DevOps**: dotenv for environment variables, custom debug suite
 
-2. **Launch the Frontend**:
-   Open `frontend/index.html` in your browser.
+## Contributing
+1. Fork the repo
+2. Create a feature branch
+3. Submit a pull request
 
-3. **Admin Access**:
-   Access the dashboard via `frontend/admin.html`.
-   - **Credentials**: `admin@gmail.com` / `Admin@123`
-
-## 🛠️ Tech Stack
-- **Frontend**: Vanilla HTML/JS, Three.js, Chart.js.
-- **Backend**: Node.js, Express, CSV-DB.
-- **Tooling**: Custom Debug Suite, Watchdog Connectivity Check.
-
----
-© 2025 BartaFlow Technologies Pvt. Ltd.
+## License
+© 2025 BartaFlow Technologies Pvt. Ltd. All rights reserved.
