@@ -209,6 +209,10 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  background: transparent;
+  font-family: inherit;
+  width: 100%;
+  text-align: left;
 }
 
 [data-theme="dark"] .pay-method {

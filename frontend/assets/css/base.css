@@ -17,7 +17,7 @@
   --smoke2: #edf0f7;
   --text: #0a1628;
   --text2: #4a5878;
-  --text3: #8a96b0;
+  --text3: #5a6a85;
   --border: #dde2ee;
   --border2: #c8d0e0;
   --green: #10b981;
@@ -149,3 +149,15 @@ section {
 [data-theme="dark"] .section-h { color: #e8ecf4; }
 [data-theme="dark"] .section-sub { color: #8b9ab8; }
 [data-theme="dark"] .section-label { color: var(--gold); }
+
+/* Universal Visible Focus Styles for Keyboard Nav */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--gold) !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.2) !important;
+}

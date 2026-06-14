@@ -7,13 +7,23 @@
     items.forEach((item, i) => {
       const isTarget      = i === index;
       const isCurrentOpen = item.classList.contains('open');
-      if (!isTarget) return;
+      const btn           = item.querySelector('.faq-q');
+      if (!isTarget) {
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+        return;
+      }
       if (isCurrentOpen) {
         item.classList.remove('open');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
         openIndex = null;
       } else {
-        items.forEach(it => it.classList.remove('open'));
+        items.forEach(it => {
+          it.classList.remove('open');
+          const b = it.querySelector('.faq-q');
+          if (b) b.setAttribute('aria-expanded', 'false');
+        });
         item.classList.add('open');
+        if (btn) btn.setAttribute('aria-expanded', 'true');
         openIndex = index;
         setTimeout(() => {
           const rect = item.getBoundingClientRect();
@@ -28,7 +38,12 @@
   // Open first item after a short delay
   setTimeout(() => {
     const first = document.querySelector('.faq-item[data-index="0"]');
-    if (first && !first.classList.contains('open')) { first.classList.add('open'); openIndex = 0; }
+    if (first) {
+      first.classList.add('open');
+      openIndex = 0;
+      const btn = first.querySelector('.faq-q');
+      if (btn) btn.setAttribute('aria-expanded', 'true');
+    }
   }, 800);
 
   // Staggered scroll-reveal for FAQ items
@@ -74,6 +89,7 @@
     chatOpen = !chatOpen;
     box.style.display = chatOpen ? 'block' : 'none';
     btn.classList.toggle('open', chatOpen);
+    btn.setAttribute('aria-label', chatOpen ? 'Close chat' : 'Open chat');
     if (chatOpen && notif) notif.style.display = 'none';
   };
 
@@ -342,3 +358,24 @@ document.addEventListener('keydown', e => {
     if (faqSection && faqSection.classList.contains('show-all')) toggleFaqList();
   }
 });
+
+// Universal keydown handler for custom role="button" elements (space/enter triggers click)
+document.addEventListener('keydown', e => {
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.getAttribute('role') === 'button') {
+    e.preventDefault();
+    e.target.click();
+  }
+});
+
+// Initialize dynamic accessibility for bot cards on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.bot-card').forEach(card => {
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    const botName = card.querySelector('.bot-name');
+    if (botName) {
+      card.setAttribute('aria-label', `View live demo of ${botName.textContent}`);
+    }
+  });
+});
+

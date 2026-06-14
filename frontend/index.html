@@ -33,7 +33,7 @@
   <!-- ── NAV ── -->
   <nav id="nav">
     <a href="#home" class="nav-logo">
-      <div class="logo-box"><svg viewBox="0 0 24 24">
+      <div class="logo-box"><svg viewBox="0 0 24 24" aria-hidden="true">
           <path
             d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.418A9.966 9.966 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" />
         </svg></div>
@@ -50,8 +50,8 @@
     <div class="nav-right">
       <button class="admin-pill" id="admin-pill" onclick="openLeadsPanel()">📊 View Leads <span id="leads-count-badge"
           style="background:var(--gold);color:var(--navy);border-radius:10px;padding:1px 7px;font-size:10px;font-weight:700">0</span></button>
-      <a href="#" class="btn-ghost" onclick="openAuth('signin');return false">Sign In</a>
-      <a href="#" class="btn-solid" onclick="openDemoSched();return false">Request Demo</a>
+      <a href="#" role="button" class="btn-ghost" onclick="openAuth('signin');return false">Sign In</a>
+      <a href="#" role="button" class="btn-solid" onclick="openDemoSched();return false">Request Demo</a>
       <!-- ════ FEATURE 2 · DARK TOGGLE ════ -->
       <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode"
         aria-label="Toggle dark mode">☀️</button>
@@ -100,12 +100,12 @@
         <div class="hb"><span class="hb-check">✓</span>Complete sales automation — from inquiry to payment</div>
       </div>
       <div class="hero-ctas">
-        <a href="#" class="btn-gold-lg" onclick="openAuth('signup');return false">Start Free Trial <svg width="14"
+        <a href="#" role="button" class="btn-gold-lg" onclick="openAuth('signup');return false">Start Free Trial <svg aria-hidden="true" width="14"
             height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M3 8h10M9 4l4 4-4 4" />
           </svg></a>
-        <a href="#" class="btn-outline-white" onclick="openDemoSched();return false">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <a href="#" role="button" class="btn-outline-white" onclick="openDemoSched();return false">
+          <svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
             <circle cx="8" cy="8" r="6" />
             <path d="M6.5 6l3 2-3 2V6z" fill="currentColor" stroke="none" />
           </svg>
@@ -447,7 +447,7 @@
   <!-- DEMO MODAL -->
   <div class="modal-overlay" id="modal" onclick="closeModal(event)">
     <div class="demo-modal">
-      <button class="modal-close" onclick="closeModalDirect()">✕</button>
+      <button class="modal-close" onclick="closeModalDirect()" aria-label="Close demo">✕</button>
       <div class="modal-bot-header">
         <div class="modal-bot-icon" id="m-icon">🏠</div>
         <div>
@@ -457,7 +457,7 @@
       </div>
       <div class="demo-chat" id="demo-chat"></div>
       <div class="demo-input-row">
-        <input class="demo-input" id="demo-input" placeholder="Type your message..."
+        <input class="demo-input" id="demo-input" placeholder="Type your message..." aria-label="Type your message to the chatbot"
           onkeydown="if(event.key==='Enter')sendDemoMsg()">
         <button class="demo-send-btn" onclick="sendDemoMsg()">Send →</button>
       </div>
@@ -936,16 +936,16 @@
         <div class="faq-list" id="faq-list">
 
           <div class="faq-item" data-index="0">
-            <button class="faq-q" onclick="toggleFaq(0)">
+            <button class="faq-q" id="faq-q-0" aria-controls="faq-a-0" aria-expanded="false" onclick="toggleFaq(0)">
               <div class="faq-q-left">
                 <div class="faq-q-icon">💡</div>
                 <span class="faq-q-text">What does "BartaFlow" mean and why that name?</span>
               </div>
-              <div class="faq-chevron"><svg viewBox="0 0 24 24">
+              <div class="faq-chevron"><svg viewBox="0 0 24 24" aria-hidden="true">
                   <polyline points="6 9 12 15 18 9" />
                 </svg></div>
             </button>
-            <div class="faq-a-wrap">
+            <div class="faq-a-wrap" id="faq-a-0" role="region" aria-labelledby="faq-q-0">
               <div class="faq-a">
                 <strong>BartaFlow</strong> is inspired by the Bengali and Hindi word <strong>"বার্তা" (Barta)</strong>,
                 meaning <em>message</em> or <em>news</em>. Combined with <strong>Flow</strong> — representing seamless,
@@ -961,16 +961,16 @@
           </div>
 
           <div class="faq-item" data-index="1">
-            <button class="faq-q" onclick="toggleFaq(1)">
+            <button class="faq-q" id="faq-q-1" aria-controls="faq-a-1" aria-expanded="false" onclick="toggleFaq(1)">
               <div class="faq-q-left">
                 <div class="faq-q-icon">🚀</div>
                 <span class="faq-q-text">How quickly can I get my chatbot live?</span>
               </div>
-              <div class="faq-chevron"><svg viewBox="0 0 24 24">
+              <div class="faq-chevron"><svg viewBox="0 0 24 24" aria-hidden="true">
                   <polyline points="6 9 12 15 18 9" />
                 </svg></div>
             </button>
-            <div class="faq-a-wrap">
+            <div class="faq-a-wrap" id="faq-a-1" role="region" aria-labelledby="faq-q-1">
               <div class="faq-a">
                 Most clients go live within <strong>48 hours</strong>. After signing up, our onboarding team connects
                 your WhatsApp Business number via Meta's official Cloud API, loads your product/service data into the
@@ -981,16 +981,16 @@
           </div>
 
           <div class="faq-item" data-index="2">
-            <button class="faq-q" onclick="toggleFaq(2)">
+            <button class="faq-q" id="faq-q-2" aria-controls="faq-a-2" aria-expanded="false" onclick="toggleFaq(2)">
               <div class="faq-q-left">
                 <div class="faq-q-icon">🔒</div>
                 <span class="faq-q-text">Is this the official WhatsApp Business API?</span>
               </div>
-              <div class="faq-chevron"><svg viewBox="0 0 24 24">
+              <div class="faq-chevron"><svg viewBox="0 0 24 24" aria-hidden="true">
                   <polyline points="6 9 12 15 18 9" />
                 </svg></div>
             </button>
-            <div class="faq-a-wrap">
+            <div class="faq-a-wrap" id="faq-a-2" role="region" aria-labelledby="faq-q-2">
               <div class="faq-a">
                 Yes — BartaFlow uses <strong>Meta's official WhatsApp Cloud API</strong> exclusively. We never use
                 unofficial or grey-market tools. This means your account is fully compliant, protected from bans, and
@@ -1001,16 +1001,16 @@
           </div>
 
           <div class="faq-item" data-index="3">
-            <button class="faq-q" onclick="toggleFaq(3)">
+            <button class="faq-q" id="faq-q-3" aria-controls="faq-a-3" aria-expanded="false" onclick="toggleFaq(3)">
               <div class="faq-q-left">
                 <div class="faq-q-icon">🤖</div>
                 <span class="faq-q-text">What AI model powers the chatbot?</span>
               </div>
-              <div class="faq-chevron"><svg viewBox="0 0 24 24">
+              <div class="faq-chevron"><svg viewBox="0 0 24 24" aria-hidden="true">
                   <polyline points="6 9 12 15 18 9" />
                 </svg></div>
             </button>
-            <div class="faq-a-wrap">
+            <div class="faq-a-wrap" id="faq-a-3" role="region" aria-labelledby="faq-q-3">
               <div class="faq-a">
                 BartaFlow is powered by <strong>OpenAI's GPT-4o</strong> on Professional and Enterprise plans, and
                 GPT-3.5 Turbo on the Starter plan. The AI is fine-tuned with your business data — products, pricing,
@@ -1022,16 +1022,16 @@
           </div>
 
           <div class="faq-item" data-index="4">
-            <button class="faq-q" onclick="toggleFaq(4)">
+            <button class="faq-q" id="faq-q-4" aria-controls="faq-a-4" aria-expanded="false" onclick="toggleFaq(4)">
               <div class="faq-q-left">
                 <div class="faq-q-icon">💰</div>
                 <span class="faq-q-text">Can I resell BartaFlow to my own clients?</span>
               </div>
-              <div class="faq-chevron"><svg viewBox="0 0 24 24">
+              <div class="faq-chevron"><svg viewBox="0 0 24 24" aria-hidden="true">
                   <polyline points="6 9 12 15 18 9" />
                 </svg></div>
             </button>
-            <div class="faq-a-wrap">
+            <div class="faq-a-wrap" id="faq-a-4" role="region" aria-labelledby="faq-q-4">
               <div class="faq-a">
                 Absolutely. Our <strong>Enterprise plan</strong> includes full white-label rights — your logo, your
                 brand colors, your domain. You can onboard unlimited clients and charge them whatever you like. Many of
@@ -1043,16 +1043,16 @@
           </div>
 
           <div class="faq-item" data-index="5">
-            <button class="faq-q" onclick="toggleFaq(5)">
+            <button class="faq-q" id="faq-q-5" aria-controls="faq-a-5" aria-expanded="false" onclick="toggleFaq(5)">
               <div class="faq-q-left">
                 <div class="faq-q-icon">🌍</div>
                 <span class="faq-q-text">Which languages does BartaFlow support?</span>
               </div>
-              <div class="faq-chevron"><svg viewBox="0 0 24 24">
+              <div class="faq-chevron"><svg viewBox="0 0 24 24" aria-hidden="true">
                   <polyline points="6 9 12 15 18 9" />
                 </svg></div>
             </button>
-            <div class="faq-a-wrap">
+            <div class="faq-a-wrap" id="faq-a-5" role="region" aria-labelledby="faq-q-5">
               <div class="faq-a">
                 BartaFlow supports <strong>12+ languages</strong> with automatic detection. The AI reads the user's
                 first message, identifies the language, and responds natively — no setup needed. Supported:
@@ -1064,16 +1064,16 @@
           </div>
 
           <div class="faq-item" data-index="6">
-            <button class="faq-q" onclick="toggleFaq(6)">
+            <button class="faq-q" id="faq-q-6" aria-controls="faq-a-6" aria-expanded="false" onclick="toggleFaq(6)">
               <div class="faq-q-left">
                 <div class="faq-q-icon">📊</div>
                 <span class="faq-q-text">How do I see the leads and data from my chatbot?</span>
               </div>
-              <div class="faq-chevron"><svg viewBox="0 0 24 24">
+              <div class="faq-chevron"><svg viewBox="0 0 24 24" aria-hidden="true">
                   <polyline points="6 9 12 15 18 9" />
                 </svg></div>
             </button>
-            <div class="faq-a-wrap">
+            <div class="faq-a-wrap" id="faq-a-6" role="region" aria-labelledby="faq-q-6">
               <div class="faq-a">
                 Every lead captured by your chatbot — name, email, phone, industry, goal — is stored in your
                 <strong>BartaFlow admin dashboard</strong> in real time. You can search, filter by source, view AI lead
@@ -1085,16 +1085,16 @@
           </div>
 
           <div class="faq-item" data-index="7">
-            <button class="faq-q" onclick="toggleFaq(7)">
+            <button class="faq-q" id="faq-q-7" aria-controls="faq-a-7" aria-expanded="false" onclick="toggleFaq(7)">
               <div class="faq-q-left">
                 <div class="faq-q-icon">🛡️</div>
                 <span class="faq-q-text">Is my customer data secure and private?</span>
               </div>
-              <div class="faq-chevron"><svg viewBox="0 0 24 24">
+              <div class="faq-chevron"><svg viewBox="0 0 24 24" aria-hidden="true">
                   <polyline points="6 9 12 15 18 9" />
                 </svg></div>
             </button>
-            <div class="faq-a-wrap">
+            <div class="faq-a-wrap" id="faq-a-7" role="region" aria-labelledby="faq-q-7">
               <div class="faq-a">
                 Security is our top priority. All data is stored on <strong>AWS servers in India</strong>, encrypted at
                 rest and in transit. We are fully <strong>GDPR compliant</strong> and follow India's DPDP Act
@@ -1225,7 +1225,7 @@
     <div class="settings-modal">
       <div class="settings-header">
         <h2 class="settings-title">Account Settings</h2>
-        <button class="settings-close" onclick="closeSettings()">✕</button>
+        <button class="settings-close" onclick="closeSettings()" aria-label="Close settings">✕</button>
       </div>
       <div class="settings-layout">
         <div class="settings-sidebar">
@@ -1241,16 +1241,16 @@
             <p>Update your personal and company information.</p>
             <div class="settings-form">
               <div class="form-group">
-                <label>Email Address</label>
+                <label for="set-email">Email Address</label>
                 <input type="email" id="set-email" class="set-input" disabled>
                 <div class="field-hint">Email cannot be changed</div>
               </div>
               <div class="form-group">
-                <label>Full Name</label>
+                <label for="set-name">Full Name</label>
                 <input type="text" id="set-name" class="set-input">
               </div>
               <div class="form-group">
-                <label>Company Name</label>
+                <label for="set-company">Company Name</label>
                 <input type="text" id="set-company" class="set-input">
               </div>
               <button class="btn-solid" style="width:100%;margin-top:16px;" onclick="saveGeneralSettings()"
@@ -1358,15 +1358,15 @@
             <p>Update your password to keep your account secure.</p>
             <div class="settings-form">
               <div class="form-group">
-                <label>Current Password</label>
+                <label for="set-curr-pw">Current Password</label>
                 <input type="password" id="set-curr-pw" class="set-input">
               </div>
               <div class="form-group">
-                <label>New Password</label>
+                <label for="set-new-pw">New Password</label>
                 <input type="password" id="set-new-pw" class="set-input">
               </div>
               <div class="form-group">
-                <label>Confirm New Password</label>
+                <label for="set-conf-pw">Confirm New Password</label>
                 <input type="password" id="set-conf-pw" class="set-input">
               </div>
               <div id="set-sec-err" class="field-hint err" style="margin-top:-8px;margin-bottom:16px;"></div>
@@ -1391,7 +1391,7 @@
         </div>
         <div class="auth-title" id="auth-title">Welcome back</div>
         <div class="auth-sub" id="auth-sub">Sign in to your BartaFlow dashboard</div>
-        <button class="auth-close-btn" onclick="closeAuth()">✕</button>
+        <button class="auth-close-btn" onclick="closeAuth()" aria-label="Close authentication">✕</button>
       </div>
       <div class="auth-body">
         <div class="auth-tabs">
@@ -1403,18 +1403,18 @@
         <div class="auth-panel active" id="panel-signin">
           <div class="form-error" id="signin-error">Incorrect email or password. Please try again.</div>
           <div class="form-group">
-            <label class="form-label">Email Address</label>
+            <label for="si-email" class="form-label">Email Address</label>
             <input class="form-input" id="si-email" type="email" placeholder="you@company.com" autocomplete="email">
           </div>
           <div class="form-group">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px">
-              <label class="form-label" style="margin:0">Password</label>
+              <label for="si-password" class="form-label" style="margin:0">Password</label>
               <a href="#" class="forgot-link" onclick="showForgotPassword(event)">Forgot password?</a>
             </div>
             <div class="password-wrap">
               <input class="form-input" id="si-password" type="password" placeholder="••••••••"
                 autocomplete="current-password">
-              <button class="pw-toggle" onclick="togglePw('si-password',this)" tabindex="-1" type="button">👁</button>
+              <button class="pw-toggle" onclick="togglePw('si-password',this)" tabindex="-1" type="button" aria-label="Toggle password visibility">👁</button>
             </div>
           </div>
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px">
@@ -1463,18 +1463,18 @@
           <div class="form-error" id="signup-error">Please fill in all required fields correctly.</div>
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label">First Name *</label>
+              <label for="su-fname" class="form-label">First Name *</label>
               <input class="form-input" id="su-fname" type="text" placeholder="Rahul"
                 oninput="validateField(this,'name')" autocomplete="given-name">
               <div class="field-hint" id="hint-su-fname"></div>
             </div>
             <div class="form-group">
-              <label class="form-label">Last Name</label>
+              <label for="su-lname" class="form-label">Last Name</label>
               <input class="form-input" id="su-lname" type="text" placeholder="Sharma" autocomplete="family-name">
             </div>
           </div>
           <div class="form-group">
-            <label class="form-label">Gmail Address *
+            <label for="su-email" class="form-label">Gmail Address *
               <span class="gmail-badge">Gmail only</span>
             </label>
             <div style="position:relative">
@@ -1485,17 +1485,17 @@
             <div class="field-hint" id="hint-su-email">Must be a valid Gmail address (@gmail.com)</div>
           </div>
           <div class="form-group">
-            <label class="form-label">Company / Business Name *</label>
+            <label for="su-company" class="form-label">Company / Business Name *</label>
             <input class="form-input" id="su-company" type="text" placeholder="Acme Pvt. Ltd."
               oninput="validateField(this,'required')" autocomplete="organization">
             <div class="field-hint" id="hint-su-company"></div>
           </div>
           <div class="form-group">
-            <label class="form-label">Password *</label>
+            <label for="su-password" class="form-label">Password *</label>
             <div class="password-wrap">
               <input class="form-input" id="su-password" type="password" placeholder="Min. 8 chars + number"
                 oninput="validateField(this,'password');checkConfirmPw()">
-              <button class="pw-toggle" onclick="togglePw('su-password',this)" tabindex="-1" type="button">👁</button>
+              <button class="pw-toggle" onclick="togglePw('su-password',this)" tabindex="-1" type="button" aria-label="Toggle password visibility">👁</button>
             </div>
             <!-- Strength bar -->
             <div class="pw-strength-bar">
@@ -1504,11 +1504,11 @@
             <div class="field-hint" id="pw-strength-hint">Use 8+ characters with at least one number</div>
           </div>
           <div class="form-group">
-            <label class="form-label">Confirm Password *</label>
+            <label for="su-confirm-pw" class="form-label">Confirm Password *</label>
             <div class="password-wrap">
               <input class="form-input" id="su-confirm-pw" type="password" placeholder="Re-enter your password"
                 oninput="checkConfirmPw()">
-              <button class="pw-toggle" onclick="togglePw('su-confirm-pw',this)" tabindex="-1" type="button">👁</button>
+              <button class="pw-toggle" onclick="togglePw('su-confirm-pw',this)" tabindex="-1" type="button" aria-label="Toggle password visibility">👁</button>
             </div>
             <div class="field-hint" id="hint-su-confirm-pw"></div>
           </div>
@@ -1551,7 +1551,7 @@
                 and we'll send a 6-digit OTP within 2 minutes.</div>
             </div>
             <div class="form-group">
-              <label class="form-label">Gmail Address
+              <label for="fp-email" class="form-label">Gmail Address
                 <span class="gmail-badge">Gmail only</span>
               </label>
               <div style="position:relative">
@@ -1579,17 +1579,17 @@
             <div class="form-error" id="otp-error"></div>
             <div class="otp-row" id="otp-inputs">
               <input class="otp-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]*"
-                oninput="otpNext(this,0)">
+                oninput="otpNext(this,0)" aria-label="Digit 1 of OTP">
               <input class="otp-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]*"
-                oninput="otpNext(this,1)">
+                oninput="otpNext(this,1)" aria-label="Digit 2 of OTP">
               <input class="otp-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]*"
-                oninput="otpNext(this,2)">
+                oninput="otpNext(this,2)" aria-label="Digit 3 of OTP">
               <input class="otp-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]*"
-                oninput="otpNext(this,3)">
+                oninput="otpNext(this,3)" aria-label="Digit 4 of OTP">
               <input class="otp-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]*"
-                oninput="otpNext(this,4)">
+                oninput="otpNext(this,4)" aria-label="Digit 5 of OTP">
               <input class="otp-box" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]*"
-                oninput="otpNext(this,5)">
+                oninput="otpNext(this,5)" aria-label="Digit 6 of OTP">
             </div>
             <div style="font-size:11px;font-family:'DM Mono',monospace;color:var(--text3);margin-bottom:16px">
               Demo OTP: <strong style="color:var(--navy);letter-spacing:2px" id="demo-otp-hint"></strong>
@@ -1610,23 +1610,23 @@
             </div>
             <div class="form-error" id="newpw-error"></div>
             <div class="form-group">
-              <label class="form-label">New Password</label>
+              <label for="fp-newpw" class="form-label">New Password</label>
               <div class="password-wrap">
                 <input class="form-input" id="fp-newpw" type="password" placeholder="Min. 8 chars + number"
                   oninput="validateField(this,'password');checkFpConfirm()">
-                <button class="pw-toggle" onclick="togglePw('fp-newpw',this)" tabindex="-1" type="button">👁</button>
+                <button class="pw-toggle" onclick="togglePw('fp-newpw',this)" tabindex="-1" type="button" aria-label="Toggle password visibility">👁</button>
               </div>
               <div class="pw-strength-bar">
                 <div class="pw-strength-fill" id="fp-pw-fill"></div>
               </div>
             </div>
             <div class="form-group">
-              <label class="form-label">Confirm New Password</label>
+              <label for="fp-confirmpw" class="form-label">Confirm New Password</label>
               <div class="password-wrap">
                 <input class="form-input" id="fp-confirmpw" type="password" placeholder="Re-enter new password"
                   oninput="checkFpConfirm()">
                 <button class="pw-toggle" onclick="togglePw('fp-confirmpw',this)" tabindex="-1"
-                  type="button">👁</button>
+                  type="button" aria-label="Toggle password visibility">👁</button>
               </div>
               <div class="field-hint" id="hint-fp-confirmpw"></div>
             </div>
@@ -1695,7 +1695,7 @@
 
       <!-- Right panel -->
       <div class="ds-right">
-        <button class="ds-close-btn" onclick="closeDemoSched()">✕</button>
+        <button class="ds-close-btn" onclick="closeDemoSched()" aria-label="Close demo scheduler">✕</button>
 
         <!-- Step indicator -->
         <div class="ds-step-indicator">
@@ -1712,9 +1712,9 @@
           <div class="ds-panel-sub">Choose a slot that works for you. All times are in IST.</div>
           <div class="mini-cal">
             <div class="cal-header">
-              <button class="cal-nav-btn" onclick="changeMonth(-1)">‹</button>
+              <button class="cal-nav-btn" onclick="changeMonth(-1)" aria-label="Previous month">‹</button>
               <span class="cal-month" id="cal-month-label">April 2025</span>
-              <button class="cal-nav-btn" onclick="changeMonth(1)">›</button>
+              <button class="cal-nav-btn" onclick="changeMonth(1)" aria-label="Next month">›</button>
             </div>
             <div class="cal-days-header">
               <div class="cal-day-label">Su</div>
@@ -1741,24 +1741,24 @@
           <div class="ds-panel-sub">So we can prepare the demo for your specific business needs.</div>
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label">First Name *</label>
+              <label for="ds-fname" class="form-label">First Name *</label>
               <input class="form-input" id="ds-fname" type="text" placeholder="Rahul">
             </div>
             <div class="form-group">
-              <label class="form-label">Last Name *</label>
+              <label for="ds-lname" class="form-label">Last Name *</label>
               <input class="form-input" id="ds-lname" type="text" placeholder="Sharma">
             </div>
           </div>
           <div class="form-group">
-            <label class="form-label">Work Email *</label>
+            <label for="ds-email" class="form-label">Work Email *</label>
             <input class="form-input" id="ds-email" type="email" placeholder="rahul@company.com">
           </div>
           <div class="form-group">
-            <label class="form-label">Phone Number</label>
+            <label for="ds-phone" class="form-label">Phone Number</label>
             <input class="form-input" id="ds-phone" type="tel" placeholder="+91 98765 43210">
           </div>
           <div class="form-group">
-            <label class="form-label">Business Type *</label>
+            <label for="ds-industry" class="form-label">Business Type *</label>
             <select class="form-input" id="ds-industry" style="cursor:pointer;appearance:auto">
               <option value="">Select your industry...</option>
               <option>Real Estate</option>
@@ -1774,7 +1774,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-label">What's your main goal?</label>
+            <label for="ds-goal" class="form-label">What's your main goal?</label>
             <select class="form-input" id="ds-goal" style="cursor:pointer;appearance:auto">
               <option value="">Select a goal...</option>
               <option>Automate customer support</option>
@@ -2033,8 +2033,8 @@
 
         <!-- Type or mic input -->
         <div class="va-input-area">
-          <button class="va-mic-btn" id="va-mic-btn" onclick="toggleMic()" title="Hold to speak">🎙️</button>
-          <input class="va-text-input" id="va-text-input" placeholder="Type your message or click mic to speak..."
+          <button class="va-mic-btn" id="va-mic-btn" onclick="toggleMic()" title="Hold to speak" aria-label="Hold to speak">🎙️</button>
+          <input class="va-text-input" id="va-text-input" placeholder="Type your message or click mic to speak..." aria-label="Type message to voice agent"
             onkeydown="if(event.key==='Enter')sendVoiceMsg()">
           <button class="va-send-btn" onclick="sendVoiceMsg()">
             <svg viewBox="0 0 24 24">
@@ -2106,7 +2106,7 @@
             <div class="lp-sub" id="lp-sub-text">All captured contacts</div>
           </div>
         </div>
-        <button class="lp-close" onclick="closeLeadsPanel()">✕</button>
+        <button class="lp-close" onclick="closeLeadsPanel()" aria-label="Close leads panel">✕</button>
       </div>
       <div class="lp-stats">
         <div class="lp-stat">
@@ -2170,7 +2170,7 @@
         <button class="fch-qr" onclick="fchQuickReply('How does it work?')">⚡ How it works</button>
       </div>
       <div class="fch-input-row">
-        <input class="fch-input" id="fch-input" placeholder="Type a message..."
+        <input class="fch-input" id="fch-input" placeholder="Type a message..." aria-label="Type message to support"
           onkeydown="if(event.key==='Enter')fchSend()">
         <button class="fch-send" onclick="fchSend()" aria-label="Send message">
           <svg viewBox="0 0 24 24">
@@ -2300,7 +2300,7 @@
           <div class="pay-header-icon">💳</div>
           <div class="pay-title">Secure Checkout</div>
         </div>
-        <button class="pay-close" onclick="closePayment()">✕</button>
+        <button class="pay-close" onclick="closePayment()" aria-label="Close checkout">✕</button>
       </div>
       <div class="pay-body" id="pay-body">
         <!-- Order summary -->
@@ -2323,30 +2323,30 @@
           <span>💳</span> Payment Method
         </div>
         <div class="pay-methods">
-          <div class="pay-method selected" onclick="selectPayMethod(this,'card')"><span>💳</span> Card</div>
-          <div class="pay-method" onclick="selectPayMethod(this,'upi')"><span>📱</span> UPI</div>
-          <div class="pay-method" onclick="selectPayMethod(this,'netbanking')"><span>🏦</span> Net Banking</div>
-          <div class="pay-method" onclick="selectPayMethod(this,'wallet')"><span>👜</span> Wallets</div>
+          <button type="button" class="pay-method selected" onclick="selectPayMethod(this,'card')"><span>💳</span> Card</button>
+          <button type="button" class="pay-method" onclick="selectPayMethod(this,'upi')"><span>📱</span> UPI</button>
+          <button type="button" class="pay-method" onclick="selectPayMethod(this,'netbanking')"><span>🏦</span> Net Banking</button>
+          <button type="button" class="pay-method" onclick="selectPayMethod(this,'wallet')"><span>👜</span> Wallets</button>
         </div>
         <!-- Card form -->
         <div id="pay-card-form">
           <div class="pay-card-row">
             <span class="pay-card-icon-left">💳</span>
-            <input class="pay-card-input" placeholder="0000 0000 0000 0000" maxlength="19" oninput="formatCard(this)"
+            <input class="pay-card-input" placeholder="0000 0000 0000 0000" aria-label="Card Number" maxlength="19" oninput="formatCard(this)"
               id="card-number">
             <span class="pay-card-icon-right">🔒</span>
           </div>
           <div class="pay-form-grid">
-            <input class="pay-input" placeholder="MM / YY" maxlength="7" oninput="formatExpiry(this)" id="card-expiry">
-            <input class="pay-input" placeholder="CVV" maxlength="3" type="password" id="card-cvv">
+            <input class="pay-input" placeholder="MM / YY" aria-label="Expiry Date (MM / YY)" maxlength="7" oninput="formatExpiry(this)" id="card-expiry">
+            <input class="pay-input" placeholder="CVV" aria-label="Card Verification Value (CVV)" maxlength="3" type="password" id="card-cvv">
           </div>
           <div class="pay-form-grid">
-            <input class="pay-input full" placeholder="Name on card" id="card-name" style="grid-column:span 2">
+            <input class="pay-input full" placeholder="Name on card" aria-label="Name on card" id="card-name" style="grid-column:span 2">
           </div>
         </div>
         <!-- UPI form (hidden) -->
         <div id="pay-upi-form" style="display:none">
-          <input class="pay-input" placeholder="Enter UPI ID (e.g. name@upi)" id="upi-id"
+          <input class="pay-input" placeholder="Enter UPI ID (e.g. name@upi)" aria-label="UPI ID" id="upi-id"
             style="width:100%;margin-bottom:10px">
           <div style="font-size:11px;font-family:'DM Mono',monospace;color:var(--text3);padding:0 4px">
             Supported: GPay, PhonePe, Paytm, BHIM, Amazon Pay
@@ -2357,12 +2357,12 @@
           <span>📋</span> Billing Information
         </div>
         <div class="pay-form-grid">
-          <input class="pay-input" placeholder="Full Name" id="bill-name">
-          <input class="pay-input" placeholder="Phone Number" id="bill-phone">
-          <input class="pay-input full" placeholder="Email Address" id="bill-email" style="grid-column:span 2">
-          <input class="pay-input full" placeholder="Company / Business Name" id="bill-company"
+          <input class="pay-input" placeholder="Full Name" aria-label="Billing Full Name" id="bill-name">
+          <input class="pay-input" placeholder="Phone Number" aria-label="Billing Phone Number" id="bill-phone">
+          <input class="pay-input full" placeholder="Email Address" aria-label="Billing Email Address" id="bill-email" style="grid-column:span 2">
+          <input class="pay-input full" placeholder="Company / Business Name" aria-label="Billing Company or Business Name" id="bill-company"
             style="grid-column:span 2">
-          <input class="pay-input full" placeholder="GST Number (optional)" id="bill-gst" style="grid-column:span 2">
+          <input class="pay-input full" placeholder="GST Number (optional)" aria-label="GST Number (optional)" id="bill-gst" style="grid-column:span 2">
         </div>
         <div class="pay-error" id="pay-error">Please fill in all required fields.</div>
         <div class="pay-security">
@@ -2400,7 +2400,7 @@
     <div class="email-modal">
       <div class="email-header">
         <div class="em-title">📧 Email Preview</div>
-        <button class="em-close" onclick="closeEmailModal()">✕</button>
+        <button class="em-close" onclick="closeEmailModal()" aria-label="Close email preview">✕</button>
       </div>
       <div class="email-body">
         <div class="em-meta">
@@ -2439,7 +2439,7 @@
           <div class="legal-header-icon">📋</div>
           <div class="legal-title" id="legal-title">Terms of Service</div>
         </div>
-        <button class="legal-close" onclick="closeLegal()">✕</button>
+        <button class="legal-close" onclick="closeLegal()" aria-label="Close legal documents">✕</button>
       </div>
       <div class="legal-tabs">
         <button class="legal-tab active" id="ltab-tos" onclick="switchLegal('tos')">Terms of Service</button>
@@ -2454,10 +2454,10 @@
      COOKIE CONSENT BANNER & MODAL
 ══════════════════════════════════════ -->
   <div class="cookie-overlay" id="cookie-overlay" onclick="if(event.target.id==='cookie-overlay')closeCookiePrefs()">
-    <div class="cookie-prefs-modal">
+    <div class="cookie-prefs-modal" role="dialog" aria-modal="true" aria-labelledby="cp-title">
       <div class="cp-header">
-        <div class="cp-title">Cookie Preferences</div>
-        <button class="cp-close" onclick="closeCookiePrefs()">✕</button>
+        <div class="cp-title" id="cp-title">Cookie Preferences</div>
+        <button class="cp-close" onclick="closeCookiePrefs()" aria-label="Close cookie preferences">✕</button>
       </div>
       <div class="cp-body">
         <div class="cp-row">
@@ -2466,7 +2466,7 @@
             <div class="cp-desc">Required for the website to function securely. Cannot be disabled.</div>
           </div>
           <div class="cp-toggle">
-            <label class="cp-switch"><input type="checkbox" checked disabled><span class="cp-slider"></span></label>
+            <label class="cp-switch"><input type="checkbox" checked disabled aria-label="Strictly Necessary Cookies (Always Active)"><span class="cp-slider"></span></label>
           </div>
         </div>
         <div class="cp-row">
@@ -2476,7 +2476,7 @@
             </div>
           </div>
           <div class="cp-toggle">
-            <label class="cp-switch"><input type="checkbox" id="cp-analytics" checked><span
+            <label class="cp-switch"><input type="checkbox" id="cp-analytics" checked aria-label="Analytics & Performance Cookies"><span
                 class="cp-slider"></span></label>
           </div>
         </div>
@@ -2487,7 +2487,7 @@
             </div>
           </div>
           <div class="cp-toggle">
-            <label class="cp-switch"><input type="checkbox" id="cp-marketing"><span class="cp-slider"></span></label>
+            <label class="cp-switch"><input type="checkbox" id="cp-marketing" aria-label="Marketing & Advertising Cookies"><span class="cp-slider"></span></label>
           </div>
         </div>
       </div>
@@ -2498,7 +2498,7 @@
     </div>
   </div>
 
-  <div id="cookie-banner" class="cookie-full-banner">
+  <div id="cookie-banner" class="cookie-full-banner" role="region" aria-label="Cookie consent banner">
     <div class="ck-content">
       <div class="ck-title">Cookie consent</div>
       <div class="ck-text">

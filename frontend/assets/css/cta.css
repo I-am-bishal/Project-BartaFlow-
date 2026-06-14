@@ -48,7 +48,7 @@
 
 .cta-sub {
   font-size: 15px;
-  color: rgba(255, 255, 255, .5);
+  color: rgba(255, 255, 255, .7);
   font-weight: 300;
   line-height: 1.7;
   max-width: 500px;
@@ -94,7 +94,7 @@
   margin-top: 28px;
   font-size: 11px;
   font-family: 'DM Mono', monospace;
-  color: rgba(255, 255, 255, .25);
+  color: rgba(255, 255, 255, .6);
   letter-spacing: .4px;
   position: relative;
   z-index: 2

@@ -49,6 +49,11 @@ function renderCal() {
     d.className    = 'cal-day' + (isPast || isWknd ? ' past' : ' has-slots');
     if (thisDate.toDateString() === today.toDateString()) d.classList.add('today');
     d.textContent = i; d.disabled = isPast || isWknd;
+    
+    // Set descriptive aria-label for calendar day button
+    const dateStr = thisDate.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    d.setAttribute('aria-label', dateStr + (isPast || isWknd ? ' - Unavailable' : ''));
+
     if (!isPast && !isWknd) d.onclick = () => selectDay(d, thisDate);
     if (dsSelectedDate && thisDate.toDateString() === dsSelectedDate.toDateString()) d.classList.add('selected');
     grid.appendChild(d);
