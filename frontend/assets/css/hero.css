@@ -1,10 +1,9 @@
-/* ── HERO SECTION ───────────────────── */
 .hero {
   min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
-  padding: 100px 64px 60px;
+  padding: var(--section-padding-y) var(--section-padding-x);
   position: relative;
   overflow: hidden;
   background: var(--navy);
@@ -125,21 +124,24 @@
 
 .btn-gold-lg {
   background: var(--gold);
-  color: var(--navy);
+  color: var(--navy) !important;
   padding: 14px 30px;
-  border-radius: 9px;
+  border-radius: 10px;
   font-size: 15px;
   font-weight: 700;
   text-decoration: none;
-  transition: all .25s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  box-shadow: 0 4px 14px rgba(201, 168, 76, 0.25);
+  border: none;
+  cursor: pointer;
 }
 
 .btn-gold-lg:hover {
   background: var(--gold2);
-  box-shadow: 0 8px 32px rgba(201, 168, 76, .4);
+  box-shadow: 0 8px 20px rgba(201, 168, 76, 0.4);
   transform: translateY(-2px);
 }
 
@@ -356,7 +358,7 @@
 @media (max-width: 992px) {
   .hero {
     grid-template-columns: 1fr;
-    padding: 120px 24px 60px;
+    padding: calc(var(--section-padding-y) + 20px) var(--section-padding-x) var(--section-padding-y);
     text-align: center;
     min-height: auto;
     position: relative;

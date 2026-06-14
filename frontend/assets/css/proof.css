@@ -1,5 +1,5 @@
 #testimonials {
-  padding: 100px 64px;
+  padding: var(--section-padding-y) var(--section-padding-x);
   background: var(--navy);
   position: relative;
   z-index: 10;
@@ -7,7 +7,7 @@
 }
 
 [data-theme="light"] #testimonials {
-  background: #f8fafc !important;
+  background: var(--white) !important;
 }
 
 #testimonials .section-h {
@@ -108,7 +108,7 @@
 
 @media (max-width: 768px) {
   #testimonials {
-    padding: 60px 24px;
+    padding: var(--section-padding-y) var(--section-padding-x);
   }
   
   #testimonials .section-h br {

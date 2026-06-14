@@ -26,7 +26,6 @@
 [data-theme="dark"] .lead-name,
 [data-theme="dark"] .faq-brand-name,
 [data-theme="dark"] .btn-ghost,
-[data-theme="dark"] .btn-solid,
 [data-theme="dark"] .bot-demo-btn,
 [data-theme="dark"] .nav-links a:hover,
 [data-theme="dark"] .auth-tab.active,
@@ -77,10 +76,6 @@
   border-color: var(--border2);
 }
 
-[data-theme="dark"] .btn-solid {
-  background: var(--navy3) !important;
-  border: 1px solid var(--border2);
-}
 
 [data-theme="dark"] .price-card,
 [data-theme="dark"] .bot-card,

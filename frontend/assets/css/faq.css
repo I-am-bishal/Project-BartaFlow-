@@ -1,6 +1,6 @@
 /* ── FAQ SECTION ─────────────────────────────────────────────────────── */
 .faq-section {
-  padding: 100px 64px;
+  padding: var(--section-padding-y) var(--section-padding-x);
   background: var(--white);
   position: relative;
   z-index: 10
@@ -306,7 +306,7 @@
 
 @media (max-width: 768px) {
   .faq-section {
-    padding: 80px 24px;
+    padding: var(--section-padding-y) var(--section-padding-x);
   }
   
   .faq-brand-name {

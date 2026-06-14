@@ -1,10 +1,10 @@
-/* ── VOICE AGENT SECTION ─────────────────────────────────────────────── */
 .voice-section {
-  padding: 100px 64px;
-  background: var(--navy);
+  padding: var(--section-padding-y) var(--section-padding-x);
+  background: var(--smoke);
   position: relative;
   overflow: hidden;
-  z-index: 10
+  z-index: 10;
+  transition: background 0.3s ease;
 }
 
 .voice-grid {
@@ -19,7 +19,7 @@
 .vs-dots {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(255, 255, 255, .05) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(0, 0, 0, .04) 1px, transparent 1px);
   background-size: 28px 28px;
   pointer-events: none
 }
@@ -37,8 +37,8 @@
 }
 
 .voice-left .section-label { color: var(--gold) }
-.voice-left .section-h { color: #ffffff }
-.voice-left .section-sub { color: rgba(255, 255, 255, .5) }
+.voice-left .section-h { color: var(--navy) }
+.voice-left .section-sub { color: var(--text2) }
 
 .voice-features { display: flex; flex-direction: column; gap: 16px; margin-top: 32px }
 
@@ -47,14 +47,18 @@
   gap: 16px;
   align-items: flex-start;
   padding: 18px 20px;
-  background: rgba(255, 255, 255, .03);
-  border: 1px solid rgba(255, 255, 255, .07);
+  background: var(--white);
+  border: 1px solid var(--border);
   border-radius: 12px;
-  transition: all .2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: default
 }
 
-.vf:hover { background: rgba(201, 168, 76, .05); border-color: rgba(201, 168, 76, .2) }
+.vf:hover {
+  background: var(--smoke2);
+  border-color: var(--border2);
+  transform: translateY(-2px);
+}
 
 .vf-icon {
   width: 40px;
@@ -69,8 +73,43 @@
   flex-shrink: 0
 }
 
-.vf-title { font-size: 14px; font-weight: 600; color: rgba(255, 255, 255, .9); margin-bottom: 4px }
-.vf-desc { font-size: 12px; color: rgba(255, 255, 255, .4); font-weight: 300; line-height: 1.6 }
+.vf-title { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 4px }
+.vf-desc { font-size: 12px; color: var(--text3); font-weight: 300; line-height: 1.6 }
+
+/* ── DARK MODE OVERRIDES ── */
+[data-theme="dark"] .voice-section {
+  background: var(--navy);
+}
+
+[data-theme="dark"] .vs-dots {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, .05) 1px, transparent 1px);
+}
+
+[data-theme="dark"] .voice-left .section-h {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .voice-left .section-sub {
+  color: rgba(255, 255, 255, .5);
+}
+
+[data-theme="dark"] .vf {
+  background: rgba(255, 255, 255, .03);
+  border-color: rgba(255, 255, 255, .07);
+}
+
+[data-theme="dark"] .vf:hover {
+  background: rgba(201, 168, 76, .05);
+  border-color: rgba(201, 168, 76, .2);
+}
+
+[data-theme="dark"] .vf-title {
+  color: rgba(255, 255, 255, .9);
+}
+
+[data-theme="dark"] .vf-desc {
+  color: rgba(255, 255, 255, .4);
+}
 
 .voice-right { display: flex; flex-direction: column; gap: 20px }
 
@@ -242,7 +281,7 @@
 
 @media (max-width: 992px) {
   .voice-section {
-    padding: 80px 24px;
+    padding: var(--section-padding-y) var(--section-padding-x);
   }
   
   .voice-grid {
@@ -262,7 +301,7 @@
 
 @media (max-width: 768px) {
   .voice-section {
-    padding: 64px 20px;
+    padding: var(--section-padding-y) var(--section-padding-x);
   }
   
   .voice-grid {

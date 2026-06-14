@@ -1,6 +1,6 @@
 /* ── CTA SECTION ─────────────────────────────────────────────────────── */
 .cta-section {
-  padding: 100px 64px;
+  padding: var(--section-padding-y) var(--section-padding-x);
   background: var(--smoke);
   position: relative;
   z-index: 10
@@ -101,5 +101,5 @@
 }
 
 @media(max-width:768px) {
-  .cta-section { padding: 64px 24px }
+  .cta-section { padding: var(--section-padding-y) var(--section-padding-x) }
 }

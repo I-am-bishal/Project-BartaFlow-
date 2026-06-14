@@ -86,32 +86,42 @@ nav.scrolled {
 }
 
 .btn-ghost {
-  padding: 8px 18px;
-  border-radius: 7px;
-  font-size: 13px;
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--navy);
   text-decoration: none;
   border: 1px solid var(--border2);
-  transition: all .2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-ghost:hover {
   border-color: var(--navy);
+  transform: translateY(-2px);
+  background: var(--smoke);
 }
 
 .btn-solid {
-  padding: 8px 20px;
-  border-radius: 7px;
-  font-size: 13px;
-  font-weight: 600;
-  color: #ffffff;
-  background: var(--navy);
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+  background: var(--gold);
   text-decoration: none;
-  transition: all .2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 14px rgba(201, 168, 76, 0.25);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-solid:hover {
-  background: var(--navy3);
-  box-shadow: 0 4px 18px rgba(10, 22, 40, .25);
+  background: var(--gold2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(201, 168, 76, 0.4);
 }

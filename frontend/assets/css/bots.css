@@ -1,7 +1,7 @@
 /* ── TOP 10 BOTS ─────────────────────── */
 .bots-section {
-  padding: 100px 64px;
-  background: var(--smoke);
+  padding: var(--section-padding-y) var(--section-padding-x);
+  background: var(--white);
   position: relative;
   z-index: 10
 }
@@ -401,7 +401,7 @@
 
 @media (max-width: 768px) {
   .bots-section {
-    padding: 64px 20px;
+    padding: var(--section-padding-y) var(--section-padding-x);
   }
   
   .bots-header {

@@ -1,6 +1,6 @@
 /* ── FEATURES ────────────────────────── */
 .features-section {
-  padding: 100px 64px;
+  padding: var(--section-padding-y) var(--section-padding-x);
   background: var(--white);
   position: relative;
   z-index: 10
@@ -217,7 +217,7 @@
 
 @media (max-width: 768px) {
   .features-section {
-    padding: 64px 24px;
+    padding: var(--section-padding-y) var(--section-padding-x);
     text-align: center;
   }
   
