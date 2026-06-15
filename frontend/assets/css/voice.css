@@ -229,17 +229,21 @@
 .voice-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px }
 
 .vs-card {
-  background: rgba(255, 255, 255, .04);
-  border: 1px solid rgba(255, 255, 255, .07);
+  background: var(--white);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 16px;
   text-align: center;
   transition: all .2s
 }
 
-.vs-card:hover { background: rgba(201, 168, 76, .05); border-color: rgba(201, 168, 76, .2) }
+.vs-card:hover { background: var(--smoke2); border-color: var(--border2); }
 .vs-n { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--gold); letter-spacing: -1px }
-.vs-l { font-size: 10px; font-family: 'DM Mono', monospace; color: rgba(255, 255, 255, .35); margin-top: 4px; letter-spacing: .3px }
+.vs-l { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--text3); margin-top: 4px; letter-spacing: .3px }
+
+[data-theme="dark"] .vs-card { background: rgba(255, 255, 255, .04); border-color: rgba(255, 255, 255, .07); }
+[data-theme="dark"] .vs-card:hover { background: rgba(201, 168, 76, .05); border-color: rgba(201, 168, 76, .2); }
+[data-theme="dark"] .vs-l { color: rgba(255, 255, 255, .35); }
 
 /* Try strip */
 .va-try-strip {
@@ -254,8 +258,11 @@
   gap: 12px
 }
 
-.va-try-text { font-size: 13px; color: rgba(255, 255, 255, .65); line-height: 1.5 }
-.va-try-text strong { color: var(--gold); display: block; font-size: 14px; margin-bottom: 2px }
+.va-try-text { font-size: 13px; color: var(--text2); line-height: 1.5 }
+.va-try-text strong { color: var(--navy); display: block; font-size: 14px; margin-bottom: 2px }
+
+[data-theme="dark"] .va-try-text { color: rgba(255, 255, 255, .65); }
+[data-theme="dark"] .va-try-text strong { color: var(--gold); }
 
 /* Launch button */
 .va-launch-btn {
