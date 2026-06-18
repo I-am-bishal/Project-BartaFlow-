@@ -207,3 +207,13 @@
   color: var(--gold) !important;
 }
 
+/* ── SETTINGS MODAL CONTRAST OVERRIDES ── */
+[data-theme="dark"] .theme-text-white {
+  color: var(--text) !important;
+}
+
+[data-theme="dark"] .theme-text-gray {
+  color: var(--text2) !important;
+}
+
+
