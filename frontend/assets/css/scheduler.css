@@ -60,3 +60,9 @@
   background: rgba(16, 185, 129, .08);
   border-color: rgba(16, 185, 129, .2)
 }
+
+[data-theme="dark"] .cal-day.selected {
+  background: var(--gold) !important;
+  color: var(--navy) !important;
+}
+

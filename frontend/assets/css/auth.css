@@ -403,6 +403,59 @@
   opacity: 0.8;
   cursor: not-allowed;
 }
+
+/* ── OTP BOXES ── */
+.otp-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.otp-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--navy);
+  transition: all .2s;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.otp-box:focus {
+  outline: none;
+  border-color: var(--navy);
+  box-shadow: 0 0 0 4px rgba(10, 22, 40, 0.05);
+}
+
+.otp-box.filled {
+  border-color: var(--navy);
+  background: var(--smoke);
+}
+
+/* ── BACK BUTTON ── */
+.fp-back-btn {
+  background: transparent;
+  border: none;
+  color: var(--navy);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+  padding: 8px 16px;
+  transition: opacity .2s;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.fp-back-btn:hover {
+  opacity: 0.8;
+}
+
 @media (max-width: 480px) {
   .auth-overlay {
     padding: 0;

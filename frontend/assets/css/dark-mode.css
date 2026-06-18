@@ -38,10 +38,11 @@
 [data-theme="dark"] .legal-tab.active,
 [data-theme="dark"] .legal-close:hover,
 [data-theme="dark"] .auth-title,
-[data-theme="dark"] .auth-label,
-[data-theme="dark"] .auth-input,
+[data-theme="dark"] .form-label,
 [data-theme="dark"] .auth-left,
-[data-theme="dark"] .lp-val {
+[data-theme="dark"] .lp-val,
+[data-theme="dark"] .auth-logo-name,
+[data-theme="dark"] .auth-success-title {
   color: var(--text) !important;
 }
 
@@ -127,3 +128,82 @@
 .pl-bar, .wbar, .fch-typing-dot, .td, .live-dot, .sys-dot, .va-bar, .pw-strength-fill {
   transition: none !important
 }
+
+/* ── FORM CONTROL OVERRIDES ── */
+[data-theme="dark"] .form-input {
+  color: var(--text) !important;
+  background: var(--smoke) !important;
+  border-color: var(--border) !important;
+}
+
+[data-theme="dark"] .form-input:focus {
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.15) !important;
+}
+
+[data-theme="dark"] .form-input::placeholder {
+  color: var(--text3) !important;
+}
+
+[data-theme="dark"] .form-input:-webkit-autofill,
+[data-theme="dark"] .form-input:-webkit-autofill:hover, 
+[data-theme="dark"] .form-input:-webkit-autofill:focus, 
+[data-theme="dark"] .form-input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--smoke) inset !important;
+  -webkit-text-fill-color: var(--text) !important;
+}
+
+/* ── SUBMIT BUTTON & LINKS ── */
+[data-theme="dark"] .auth-submit-btn {
+  background: var(--gold) !important;
+  color: var(--navy) !important;
+}
+
+[data-theme="dark"] .auth-submit-btn:hover {
+  background: var(--gold2) !important;
+  box-shadow: 0 4px 12px rgba(201, 168, 76, 0.25) !important;
+}
+
+[data-theme="dark"] .auth-body a {
+  color: var(--gold) !important;
+}
+
+[data-theme="dark"] .auth-body a:hover {
+  color: var(--gold2) !important;
+}
+
+[data-theme="dark"] .fp-back-btn {
+  color: var(--gold) !important;
+}
+
+[data-theme="dark"] .fp-back-btn:hover {
+  color: var(--gold2) !important;
+}
+
+/* ── OTP BOX OVERRIDES ── */
+[data-theme="dark"] .otp-box {
+  background: var(--smoke) !important;
+  border-color: var(--border) !important;
+  color: var(--text) !important;
+}
+
+[data-theme="dark"] .otp-box:focus {
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.15) !important;
+}
+
+[data-theme="dark"] .otp-box.filled {
+  border-color: var(--gold) !important;
+  background: var(--smoke2) !important;
+}
+
+/* ── INLINE STYLE OVERRIDES inside Auth modal ── */
+[data-theme="dark"] .auth-overlay [style*="color:var(--navy)"] {
+  color: var(--text) !important;
+}
+
+[data-theme="dark"] #fp-email-display,
+[data-theme="dark"] #demo-otp-hint {
+  color: var(--gold) !important;
+}
+
