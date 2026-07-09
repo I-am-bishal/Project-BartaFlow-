@@ -342,6 +342,10 @@ window.checkAuthState = function () {
   const mmSignInBtn = document.querySelector('.mm-btn-ghost[onclick*="signin"]') || document.querySelector('.mm-btn-ghost[onclick*="openProfile"]');
   const pill = document.getElementById('admin-pill');
 
+  const ctaTitle = document.getElementById('cta-title');
+  const ctaSub = document.getElementById('cta-sub');
+  const ctaBtns = document.getElementById('cta-btns');
+
   if (user) {
     if (signInBtn) {
       signInBtn.innerHTML = '<div class="nav-avatar">' + (user.name || 'U').charAt(0).toUpperCase() + '</div> My Account';
@@ -353,6 +357,19 @@ window.checkAuthState = function () {
       mmSignInBtn.onclick = () => { openProfile(); closeMobileMenu(); };
     }
     if (pill) pill.classList.add('show');
+
+    if (ctaTitle) {
+      ctaTitle.innerHTML = `Ready to scale your business, ${user.name || 'User'}?`;
+    }
+    if (ctaSub) {
+      ctaSub.textContent = `You are signed in as ${user.email}. Head to your dashboard to view captured leads, manage chatbots, or view account details.`;
+    }
+    if (ctaBtns) {
+      ctaBtns.innerHTML = `
+        <a href="#" class="btn-primary btn-lg" onclick="openLeadsPanel();return false">Go to Dashboard →</a>
+        <a href="#" class="btn-outline-white" onclick="openProfile();return false">Manage Account</a>
+      `;
+    }
   } else {
     if (signInBtn) {
       signInBtn.textContent = 'Sign In';
@@ -364,6 +381,19 @@ window.checkAuthState = function () {
       mmSignInBtn.onclick = () => { openAuth('signin'); closeMobileMenu(); };
     }
     if (pill) pill.classList.remove('show');
+
+    if (ctaTitle) {
+      ctaTitle.innerHTML = 'Ready to automate your<br>business 24/7?';
+    }
+    if (ctaSub) {
+      ctaSub.textContent = '14-day free trial. No credit card. Go live in 48 hours. White-label ready from day one — resell to unlimited clients.';
+    }
+    if (ctaBtns) {
+      ctaBtns.innerHTML = `
+        <a href="#" class="btn-primary btn-lg" onclick="openAuth('signup');return false">Start Free Trial →</a>
+        <a href="#" class="btn-outline-white" onclick="openDemoSched();return false">Schedule a Demo</a>
+      `;
+    }
   }
 };
 
